@@ -1,6 +1,6 @@
-:: Beach [nobr]
+:: Beach
 
-<<set $outside to 1>><<set $location to "beach">><<effects>>
+<<location "beach">><<effects>>
 You are on the beach.
 <<if $daystate is "day">>
 	<<if $weather is "clear">>
@@ -48,18 +48,82 @@ You could go for a swim, but make sure to dress appropriately.
 <<if $exposed gte 1>>
 	<<exhibitionism "beach">>
 <</if>>
-<<if $arousal gte 10000>>
+<<if $arousal gte $arousalmax>>
 	<<orgasmbeach>>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	<<passoutbeach>>
 <<else>>
+	<<run getRobinLocation()>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
 	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
 		<<eventsbeach>>
-	<<elseif $NPCName[$NPCNameList.indexOf("Robin")].init is 0 and (($weekday is 7 and $hour gte 9 and $hour lte 16) or ($weekday is 1 and $hour gte 9 and $hour lte 16)) and $exposed lte 0 and $season isnot "winter" and $daystate is "day">>
-		<<set $NPCName[$NPCNameList.indexOf("Robin")].init to 1>><<set $robindebt to 0>><<set $robindebtlimit to 5>>
-		<<npc Robin>><<initnpc Robin>><<person1>>You see someone familiar working at a stand on the beach. <<He>> notices you at the same time. "Hey!" It's Robin. <<Hes>> another resident at the orphanage. <<Hes>> always looked up to you, despite being about the same age. <<He>> motions you over while cleaning a glass pitcher. <<He>> puts it down and hugs you when you approach.
+	<<elseif $robinReunionScene isnot undefined and _robin_location is "beach" and $exposed lte 0>>
+		<<npc Robin>><<person1>>
+		<<if $robinReunionScene is "dungeon">>
+			<<unset $robinReunionScene>><<set $robinPostMortem to true>>
+			You see Robin stood behind <<his>> lemonade stand. <<His>> mouth goes agape as <<he>> sees you, and <<he>> sprints towards you.
+			<br><br>
+
+			"I don't believe it!" <<he>> squeals as <<he>> buries <<himself>> in your chest. "I-I thought you were gone forever! We need to talk about this at home. When you're ready."
+			<br><br>
+
+			You're led back to their stand. A small picture of the two of you sits on top. Robin puts it away.
+			<br>
+			<<He>> fixes you a glass of lemonade and sends you on your way.
+			<br>
+			"Don't forget to see me later," <<he>> says with a worried expression. "I'm always here for you if you need to talk."
+			<br><br>
+
+			<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+			<br>
+		<<elseif $robinReunionScene is "asylum">>
+			<<unset $robinReunionScene>>
+			You see Robin stood behind <<his>> lemonade stand.
+
+			<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 40>>
+				<<He>> stares at you in disbelief.
+				<br><br>
+				
+				"Hi," <<he>> says quietly as you draw close. "I thought the doctors took you away. I would've tried to get you something had I known you were c-coming back," Robin's voice quivers.
+			<<else>>
+				<<He>> excitedly beckons you over when <<he>> sees you.
+				<br><br>
+				
+				"Hey, you're out!" <<he>> says as you draw close. "I thought you were staying at the doctor's for a while. I would've prepared something had I known you were coming back," Robin explains.
+			<</if>>
+			<br><br>
+
+			You shake your head, telling <<him>> that they weren't going to help you, so you "checked" out early. Robin seems confused, but <<he>> nods regardless. <<He>> gives you a hug.
+			<br>
+
+			<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 40>>
+				"Well, I'm glad you're free," <<he>> mumbles, holding you tight.
+			<<else>>
+				"Well, I'm happy to see you again! I hope you're feeling better."
+			<</if>>
+			<br>
+			The two of you make small talk for a bit. Eventually, Robin says <<he>> needs to get back to <<his>> stand.
+			
+			<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 40>>
+				<<He>> slowly shuffles away, <<his>> gaze glued to the floor.
+			<<else>>
+				<<He>> smiles and waves goodbye.
+			<</if>>
+			<br><br>
+
+			<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+			<br>
+		<<else>>
+			You spot Robin at <<his>> lemonade stand. <<His>> eyes pass over you momentarily, but <<he>> doesn't stare. It's as if <<he>> doesn't even recognise you.
+			<br><br>
+			
+			<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<elseif $NPCName[$NPCNameList.indexOf("Robin")].init is 0 and $season isnot "winter" and ($weekday is 7 or $weekday is 1) and between($hour, 9, 16) and $exposed lte 0>>
+		<<set $robindebt to 0>><<set $robindebtlimit to 5>>
+		<<npc Robin>><<person1>>You see someone familiar working at a stand on the beach. <<He>> notices you at the same time. "Hey!" It's Robin. <<Hes>> another resident at the orphanage. <<Hes>> always looked up to you, despite being about the same age. <<He>> motions you over while cleaning a glass pitcher. <<He>> puts it down and hugs you when you approach.
 		<br><br>
 		<<if $days is 0>>
 			"I got up early today, so I didn't see you this morning. Remember, <span class="gold">you can visit me in my room at home</span> anytime you want. I'll have something to show you tonight, I'm so excited!" <<He>> looks behind you, noticing customers approaching. "I've got to get back to work here. You're welcome to stay and help if you want. I'll be heading to the shopping centre later to pick up the surprise, so either way, I hope to see you later!" <<He>> gets back into position behind the stand.
@@ -73,54 +137,55 @@ You could go for a swim, but make sure to dress appropriately.
 	<<else>>
 		<<if $exposed lte 0>>
 			<<if $scienceproject is "ongoing" and $sciencephallusknown is 1 and $sciencephallus lt 10 and $daystate isnot "night" and $weather isnot "rain" and $weather isnot "snow" and $exposed lte 0>>
-				<<link [[Find participant for phallus project (0:15)|Beach Phallus]]>><<pass 15>><</link>>
+				<<ind>><<link [[Find participant for phallus project (0:15)|Beach Phallus]]>><<pass 15>><</link>>
 				<br>
 			<</if>>
-			<<link [[Go for a swim (0:02)|Sea Beach]]>><<pass 2>><</link>>
+			<<swimicon>><<link [[Go for a swim (0:02)|Sea Beach]]>><<pass 2>><</link>>
 			<br>
 		<<elseif $daystate is "night">>
-			<<link [[Go for a swim (0:02)|Sea Beach]]>><<pass 2>><</link>>
+			<<swimicon>><<link [[Go for a swim (0:02)|Sea Beach]]>><<pass 2>><</link>>
 			<br>
 		<</if>>
 		<<if $daystate is "day" and $weather is "clear">>
 			<<if $worn.under_lower.type.includes("swim") and ($worn.under_upper.type.includes("swim") or $worn.under_upper.type.includes("naked")) and ($worn.upper.type.includes("swim") or $worn.upper.type.includes("naked")) and ($worn.lower.type.includes("swim") or $worn.lower.type.includes("naked"))>>
-				<<link [[Tan on the beach (1:00)|Tanning]]>><<pass 60>><</link>><<lstress>>
+				<<ind>><<link [[Tan on the beach (1:00)|Tanning]]>><<pass 60>><</link>><<lstress>>
 				<br>
 			<</if>>
 			<<if def $milkshake and $milkshake gt 0>>
-				<<link [[Drink your milkshake (0:10)|Beach Milkshake]]>><<pass 10>><<set $milkshake -= 1>><<stress -5>><</link>><<lstress>>
+				<<ind>><<link [[Drink your milkshake (0:10)|Beach Milkshake]]>><<pass 10>><<set $milkshake -= 1>><<stress -5>><</link>><<lstress>>
 				<br>
 			<</if>>
 		<</if>>
-		<<link [[Changing Room|Changing Room]]>><</link>>
+		<<ind>><<link [[Changing room|Changing Room]]>><</link>>
 		<br>
 		<<if $exposed lte 0>>
-			<<if $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and $robinmissing isnot 1 and $NPCName[$NPCNameList.indexOf("Robin")].trauma lt 80 and $season isnot "winter">>
-				<<if $weekday is 7 and $hour gte 9 and $hour lte 16 or $weekday is 1 and $hour gte 9 and $hour lte 16>>
-				<<link [[Robin's Lemonade Stand|Robin's Lemonade]]>><</link>>
+			<<if _robin_location is "beach">>
+				<<ind>><<link [[Robin's lemonade stand|Robin's Lemonade]]>><</link>>
 				<br>
-				<</if>>
 			<</if>>
-			<<if $worn.feet.type.includes("heels")>>
-				<<link [[Take a walk in heels (0:30)|Beach Heel Walk]]>><</link>><<gtiredness>><<lstress>>
+			<<if $leftleg is "bound" or $rightleg is "bound">>
+				<<set $_boundType to ($leftleg is "bound" ? ($rightleg is "bound" ? "both legs" : "your left leg") : "your right leg")>>
+				You cannot go for a run with $_boundType bound.
+			<<elseif $worn.feet.type.includes("heels")>>
+				<<walkicon>><<link [[Take a walk in heels (0:30)|Beach Heel Walk]]>><</link>><<gtiredness>><<lstress>>
 			<<else>>
-				<<link [[Go for a run (0:30)|Beach Run]]>><<athletics 3>><</link>><<gtiredness>><<gathletics>><<lstress>>
+				<<runicon>><<link [[Go for a run (0:30)|Beach Run]]>><<athletics 3>><</link>><<gtiredness>><<gathletics>><<lstress>>
 			<</if>>
 			<br>
 		<</if>>
 		<<if $weather is "clear" and $daystate is "night" and $exposed lte 0>>
-			<<link [[Party|Beach Party]]>><</link>>
+			<<ind>><<link [[Party|Beach Party]]>><</link>>
 			<br>
 		<</if>>
 		<<if $weather is "clear" and $daystate isnot "night" and $exposed lte 0>>
-			<<link [[Volleyball|Beach Volleyball]]>><</link>>
+			<<ind>><<link [[Volleyball|Beach Volleyball]]>><</link>>
 			<br>
 			<<if $exhibitionism gte 75 and $beachstrip isnot 1>>
-				<<link [[Strip (0:20)|Beach Strip]]>><<pass 20>><</link>><<exhibitionist5>>
+				<<ind>><<link [[Strip (0:20)|Beach Strip]]>><<pass 20>><</link>><<exhibitionist5>>
 				<br>
 			<</if>>
 		<</if>>
-		<<customRest "beach">><<add_link "<br>Travel<br>">><<hideDisplay>>
+		<<customRest "beach">><<add_link "<br>이동<br>">><<hideDisplay>>
 		<<if $exposed lte 0 or $daystate is "night">>
 			<<cliff>>
 			<br>
@@ -135,9 +200,9 @@ You could go for a swim, but make sure to dress appropriately.
 <</if>>
 <<set $eventskip to 0>>
 
-:: Beach Party [nobr]
+:: Beach Party
 
-<<set $outside to 1>><<set $location to "beach">><<effects>>
+<<location "beach">><<effects>>
 You approach the teenagers. Several are dancing near a fire on a makeshift stage while others are drinking and chattering.
 <br><br>
 <<link [[Socialise (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<status 1>><<set $phase to 0>><</link>><<gcool>><<lstress>>
@@ -146,19 +211,19 @@ You approach the teenagers. Several are dancing near a fire on a makeshift stage
 <br><br>
 <<link [[Leave|Beach]]>><</link>>
 
-:: Beach Volleyball [nobr]
+:: Beach Volleyball
 
-<<set $outside to 1>><<set $location to "beach">><<effects>>
+<<location "beach">><<effects>>
 <<generatey1>><<generatey2>><<generatey3>><<generatey4>><<generatey5>>
 You approach a group playing volleyball. A <<person1>><<person>> sits on the sand and watches four of <<his>> friends play.
 <br><br>
-<<link [[Join In (0:30)|Beach Volleyball Play]]>><<pass 30>><<stress -6>><<tiredness 6>><<status 1>><<athletics 3>><</link>><<gcool>><<gathletics>><<lstress>><<gtiredness>>
+<<link [[Join in (0:30)|Beach Volleyball Play]]>><<pass 30>><<stress -6>><<tiredness 6>><<status 1>><<athletics 3>><</link>><<gcool>><<gathletics>><<lstress>><<gtiredness>>
 <br>
 <<link [[Leave|Beach]]>><<endevent>><</link>>
 
-:: Beach Volleyball Play [nobr]
+:: Beach Volleyball Play
 
-<<set $outside to 1>><<set $location to "beach">><<effects>>
+<<location "beach">><<effects>>
 The teenagers are happy to have a sixth player, particularly the <<person1>><<person>>.
 <br><br>
 <<physique 3>>
@@ -170,9 +235,9 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 		<<else>>
 			You are so focused on the opposing team you do not notice one of your own sneak up on you. A pair of hands grasp the rim of your $worn.lower.name.
 		<</if>>
-		<<if $worn.lower.skirt is 0 and $worn.lower.set isnot $worn.upper.set>>
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 0 and $worn.lower.set isnot $worn.upper.set>>
 			Before you can react, the <<person1>><<person>> has pulled them all the way to your knees,
-		<<elseif $worn.lower.skirt is 0 and $worn.lower.set is $worn.upper.set>>
+		<<elseif setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 0 and $worn.lower.set is $worn.upper.set>>
 			Before you can react, the <<person1>><<person>> has pulled it aside,
 		<<else>>
 			Before you can react, the <<person1>><<person>> has lifted it,
@@ -189,7 +254,7 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 			<</if>>
 		<<else>>
 			<<if $uncomfortable.underwear is false>>
-				exposing your $worn.under_lower.name. Laughter erupts from both teams, including you. It's just a $worn.under_lower.name, you're not embarrassed.
+				exposing your $worn.under_lower.name. Laughter erupts from both teams, including you. It's just <<if $worn.under_lower.plural is 0>>a <</if>>$worn.under_lower.name, you're not embarrassed.
 				<<gcool>><<status 5>><<garousal>><<gstress>>
 			<<else>>
 				exposing your $worn.under_lower.name. Laughter erupts from both teams and you hasten to protect your dignity.
@@ -261,9 +326,9 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 	<br><br>
 <</if>>
 
-:: Beach Party Chat [nobr]
+:: Beach Party Chat
 
-<<set $outside to 1>><<set $location to "beach">><<effects>>
+<<location "beach">><<effects>>
 
 <<if $phase is 0>>
 	You join the conversation.
@@ -288,7 +353,7 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 		<<if $eventcheck gte (9900 - ($allure))>>
 			<<generatey1>><<person1>>A <<person>> sits next to you and offers you a beverage.
 			<br><br>
-			<<link [[Drink (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<set $drunk += 60>><<set $phase to 1>><<status 1>><</link>><<gcool>><<lstress>>
+			<<link [[Drink (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<alcohol 60>><<set $phase to 1>><<status 1>><</link>><<gcool>><<lstress>>
 			<br>
 			<<link [[Just talk (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<set $phase to 1>><<status 1>><</link>><<gcool>><<lstress>>
 			<br>
@@ -303,9 +368,9 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 	<</if>>
 <<elseif $phase is 1>>
 	<<if $rng gte 21>>
-		You enjoy talking with the <<person>>. <<He>> <<admires>> your body when <<he>> thinks you aren't looking.
+		You enjoy talking with the <<person>>. <<He>> ?admires your body when <<he>> thinks you aren't looking.
 		<br><br>
-		<<link [[Drink (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<set $drunk += 60>><<set $phase to 1>><<status 1>><</link>><<gcool>><<lstress>>
+		<<link [[Drink (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<alcohol 60>><<set $phase to 1>><<status 1>><</link>><<gcool>><<lstress>>
 		<br>
 		<<link [[Just talk (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<set $phase to 1>><<status 1>><</link>><<gcool>><<lstress>>
 		<br>
@@ -337,9 +402,9 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 	<</if>>
 <</if>>
 
-:: Beach Party Dance [nobr]
+:: Beach Party Dance
 
-<<set $outside to 1>><<set $location to "beach">><<effects>>
+<<location "beach">><<effects>>
 <<danceeffects>>
 <<danceaudience>>
 <<danceactions>>
@@ -347,7 +412,7 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 <<if $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2>>
 	There's no way you can continue dancing while so exposed! Face reddening, you flee the scene.
 	<br><br>
-<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1>>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")>>
 	There's no way you can continue dancing while so exposed! Face reddening, you flee the scene.
 	<br><br>
 <</if>>
@@ -366,7 +431,7 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 	<</if>>
 <</if>>
 
-:: Beach Party Sex [nobr]
+:: Beach Party Sex
 
 <<if $sexstart is 1>>
 	<<set $sexstart to 0>>
@@ -379,7 +444,7 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 	<<He>> quietly takes your hand and leads you away from the group. You walk into the dunes until you're out of earshot, then <<he>> turns and embraces you.
 	<br><br>
 <</if>>
-<<effects>><<set $outside to 1>><<set $location to "beach">>
+<<location "beach">><<effects>>
 <<effectsman>><<man>>
 <<stateman>>
 <br><br>
@@ -392,7 +457,7 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 		<<else>>
 			No one comes to your aid.
 			<<set $alarm to 0>>
-			<<if $drugged gte 1>>The drugs inhibit you, you couldn't cry very convincingly.<</if>>
+			<<if $drugged gte 1>>약에 취한 상태로는, 당신의 비명소리는 별로 설득력 있게 들리지 않는다.<</if>>
 			<br><br>
 			<<if $enemyarousal gte $enemyarousalmax>>
 				<span id="next"><<link [[Next->Beach Party Sex Ejaculation]]>><</link>></span><<nexttext>>
@@ -411,7 +476,7 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 	<</if>>
 <</if>>
 
-:: Beach Party Rape [nobr]
+:: Beach Party Rape
 
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
@@ -420,7 +485,7 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 	<<neutral 1>>
 	<<molested>>
 	<<maninit>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 	<<hand_gag 0 left>>
 	<<set $NPCList[0].righthand to "arms">>
 	<<set $leftarm to "grappled">>
@@ -463,16 +528,16 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 	<span id="next"><<link [[Next->Beach Party Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Beach Party Rape Alarm [nobr]
+:: Beach Party Rape Alarm
 
 <<effects>><<set $rescued += 1>>
 <<He>> notices several heads turning in response to your cry. <<He>> looks at you with anger and shouts, "Crazy slut!" before heading back to <<his>> friends. <<tearful>> you gather yourself.
 <br><br>
 <<clotheson>>
 <<endcombat>>
-[[Next|Beach]]
+<<link [[Next|Beach]]>><</link>>
 
-:: Beach Party Rape Ejaculation [nobr]
+:: Beach Party Rape Ejaculation
 
 <<ejaculation>>
 <<if $enemyanger gte ($enemyangermax / 5) * 3>>
@@ -480,7 +545,7 @@ The teenagers are happy to have a sixth player, particularly the <<person1>><<pe
 <<violence 1>>
 <br><br>
 <<elseif $enemyanger gte 1>>
-Without a word, <<he>> heads back to his friends.
+Without a word, <<he>> heads back to <<his>> friends.
 <br><br>
 <<else>>
 Smiling, <<he>> leans closer, "Good <<girl>>." <<He>> leaves you lying on the sand.
@@ -494,9 +559,9 @@ Smiling, <<he>> leans closer, "Good <<girl>>." <<He>> leaves you lying on the sa
 
 <<endcombat>>
 
-[[Next|Beach]]
+<<link [[Next|Beach]]>><</link>>
 
-:: Beach Party Rape Escape [nobr]
+:: Beach Party Rape Escape
 <<effects>>
 
 <<He>> recoils in pain, giving you the chance you need. <<tearful>> you escape into the darkness.
@@ -505,9 +570,9 @@ Smiling, <<he>> leans closer, "Good <<girl>>." <<He>> leaves you lying on the sa
 <<clotheson>>
 <<endcombat>>
 
-[[Next|Beach]]
+<<link [[Next|Beach]]>><</link>>
 
-:: Beach Party Sex Ejaculation [nobr]
+:: Beach Party Sex Ejaculation
 <<ejaculation>>
 
 <<if $enemyanger gte ($enemyangermax / 5) * 3>>
@@ -529,9 +594,9 @@ Smiling, <<he>> kisses you on the cheek. <<He>> gets up and leaves you lying on 
 
 <<endcombat>>
 
-[[Next|Beach]]
+<<link [[Next|Beach]]>><</link>>
 
-:: Beach Party Sex Escape [nobr]
+:: Beach Party Sex Escape
 
 <<effects>>
 <<if $daystate isnot "night">>
@@ -543,16 +608,16 @@ Smiling, <<he>> kisses you on the cheek. <<He>> gets up and leaves you lying on 
 <</if>>
 <<clotheson>>
 <<endcombat>>
-[[Next|Beach]]
+<<link [[Next|Beach]]>><</link>>
 
-:: Beach Party Sex Finish [nobr]
+:: Beach Party Sex Finish
 
 The <<person>> leaves you. <<He>> looks dejected.
 <<clotheson>>
 <<endcombat>>
-[[Next|Beach]]
+<<link [[Next|Beach]]>><</link>>
 
-:: Beach Party Dance Rape [nobr]
+:: Beach Party Dance Rape
 
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
@@ -565,8 +630,7 @@ The <<person>> leaves you. <<He>> looks dejected.
 <</if>>
 <<effects>>
 <<effectsman>><<man>>
-<<audience>><!-- Added NPCDamage -->
-<<if $enemyhealth gt 0>><<npcdamage>><</if>>
+<<audience>>
 <<stateman>>
 <br><br>
 <<actionsman>>
@@ -575,7 +639,7 @@ The <<person>> leaves you. <<He>> looks dejected.
 	<<else>>
 		No one comes to your aid.
 		<<set $alarm to 0>>
-		<<if $drugged gte 1>>The drugs inhibit you, you couldn't cry very convincingly.<</if>>
+		<<if $drugged gte 1>>약에 취한 상태로는, 당신의 비명소리는 별로 설득력 있게 들리지 않는다.<</if>>
 		<br><br>
 		<<if $enemyarousal gte $enemyarousalmax>>
 			<span id="next"><<link [[Next->Beach Party Dance Rape Ejaculation]]>><</link>></span><<nexttext>>
@@ -593,7 +657,7 @@ The <<person>> leaves you. <<He>> looks dejected.
 	<span id="next"><<link [[Next->Beach Party Dance Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Beach Party Dance Rape Ejaculation [nobr]
+:: Beach Party Dance Rape Ejaculation
 
 <<ejaculation>>
 <<if $audience is 1>>
@@ -608,9 +672,9 @@ The <<person>> leaves you. <<He>> looks dejected.
 
 <<endcombat>>
 
-[[Next|Beach]]
+<<link [[Next|Beach]]>><</link>>
 
-:: Beach Party Dance Rape Escape [nobr]
+:: Beach Party Dance Rape Escape
 <<effects>>
 
 <<if $daystate isnot "night">>
@@ -624,10 +688,10 @@ The <<person>> leaves you. <<He>> looks dejected.
 <<clotheson>>
 <<endcombat>>
 
-[[Next|Beach]]
+<<link [[Next|Beach]]>><</link>>
 
-:: Beach Run [nobr]
-<<pass 30>><<set $outside to 1>><<set $location to "beach">><<effects>>
+:: Beach Run
+<<pass 30>><<location "beach">><<effects>>
 
 You run along the shore.
 <<if $daystate is "night">>
@@ -655,7 +719,7 @@ You run along the shore.
 		The cool weather makes for a pleasant jog.
 	<<elseif $weather is "snow">>
 		<<if $body_temperature is "comfy">>
-			Falling snow blows against your face as you job across the wet sand.
+			Falling snow blows against your face as you jog across the wet sand.
 		<<else>>
 			You shiver in the freezing wind.
 			<<gstress>><<stress 6>>
@@ -667,8 +731,8 @@ You run along the shore.
 
 <<link [[Next|Beach]]>><</link>>
 
-:: Beach Heel Walk [nobr]
-<<pass 30>><<set $outside to 1>><<set $location to "beach">><<effects>>
+:: Beach Heel Walk
+<<pass 30>><<location "beach">><<effects>>
 
 You walk along the shore.
 <<if $daystate is "night">>
@@ -698,23 +762,23 @@ You walk along the shore.
 
 <<link [[Next|Beach]]>><</link>>
 
-:: Beach Strip [nobr]
-<<set $outside to 1>><<set $location to "beach">><<effects>>
+:: Beach Strip
+<<location "beach">><<effects>>
 <<set $beachstrip to 1>>
 
 <<strip>>
 
 <<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
-Shivering with excitement you shuffle out of your clothes and bare your <<lewdness>> for the entire beach to see. People don't even realise how far you've stripped at first. A lot of people dress scanty here after all. But none are dressed quite as scanty as you, and people start to notice.
+Shivering with excitement you shuffle out of your clothes and bare your <<lewdness>> for the entire beach to see. People don't even realise how far you've stripped at first. A lot of people dress scantily here after all. But none are dressed quite as scantily as you, and people start to notice.
 <br><br>
 
 A <<person1>><<person>> looks at you and audibly gasps. A <<person2>><<person>> averts <<his>> eyes and avoids looking at you at all costs. A <<person3>><<person>> stares and looks like <<hes>> about to start drooling. You're pleased that this is the most common response. You're not ashamed of your <<genitals>>. You've everything to be proud of.
 <<exhibitionism5>>
 
 <<flaunting>> you stroll down the beach, drawing eyes wherever you go.
-<<if $peniexist is 1 and $vaginaexist is 1 and !$worn.genitals.type.includesAll("chastity", "hidden") and $rng % 2 == 0>>Many eyes fix on your genitals, awed by your uniqueness.
+<<if $player.penisExist and $player.vaginaExist and !$worn.genitals.type.includesAll("chastity", "hidden") and $rng % 2 == 0>>Many eyes fix on your genitals, awed by your uniqueness.
 <<elseif $breastsize gte 6 and $rng % 2 == 0>>Many eyes are drawn to your <<breasts>>.
-<<elseif $penisexist and $penissize gte 3 and !$worn.genitals.type.includesAll("chastity", "hidden")>>Many eyes fix on your <<penis>>.
+<<elseif $player.penisExist and $penissize gte 3 and !$worn.genitals.type.includesAll("chastity", "hidden")>>Many eyes fix on your <<penis>>.
 <<elseif $beauty gte (($beautymax / 7) * 5) and $rng % 3>>Some just stare, open-mouthed, blown away by your naked beauty.
 <<elseif $physique gte (($physiquesize / 7) * 5)>>Some marvel at seeing such a stunning physique so fully displayed.
 <<elseif $worn.genitals.type.includesAll("chastity", "hidden")>>Some stare with a curious look at your $worn.genitals.name.
@@ -734,7 +798,7 @@ Each breeze caressing your bare flesh is a reminder of your exposure. You feel s
 	<</if>>
 <</if>>
 
-:: Beach Strip Lifeguard [nobr]
+:: Beach Strip Lifeguard
 
 A whistle pierces the air. You turn and see a lifeguard running towards you.
 
@@ -752,8 +816,8 @@ A whistle pierces the air. You turn and see a lifeguard running towards you.
 <br>
 <</if>>
 
-:: Beach Strip Comply [nobr]
-<<set $outside to 1>><<set $location to "beach">><<effects>>
+:: Beach Strip Comply
+<<location "beach">><<effects>>
 
 You decide you've had enough fun for now and pick up your clothes.
 
@@ -767,8 +831,8 @@ You decide you've had enough fun for now and pick up your clothes.
 <<link [[Next|Beach]]>><</link>>
 <br>
 
-:: Beach Strip Refuse [nobr]
-<<set $outside to 1>><<set $location to "beach">><<effects>>
+:: Beach Strip Refuse
+<<location "beach">><<effects>>
 
 <<if $submissive gte 1150>>
 "But I should be seen," you say. "Don't you think I'm beautiful?" You flare your arms at your sides and twirl. "Everyone should be allowed to look." You skip away.
@@ -786,8 +850,8 @@ You spend an hour running across the sand and splashing through waves. The sun f
 <<link [[Next|Beach]]>><<clotheson>><</link>>
 <br>
 
-:: Beach Strip End [nobr]
-<<set $outside to 1>><<set $location to "beach">><<effects>>
+:: Beach Strip End
+<<location "beach">><<effects>>
 
 You run across the sand and splash through waves. The sun feels warm and gentle against your bare skin. After a while though, the wind starts to pick up and the cold makes you shiver. You decide to get dressed for now. There's always another day.
 <br><br>
@@ -796,7 +860,7 @@ You run across the sand and splash through waves. The sun feels warm and gentle 
 <<link [[Next|Beach]]>><<clotheson>><</link>>
 <br>
 
-:: Beach Strip Seduce [nobr]
+:: Beach Strip Seduce
 <<effects>>
 
 <<set $seductiondifficulty to 8000>>
@@ -829,33 +893,33 @@ You walk closer to the <<person>>. "I could get dressed," you say, leaning again
 
 <</if>>
 
-:: Beach Strip Camera [nobr]
+:: Beach Strip Camera
 
 You stroll across the sand and splash through waves. The sun feels warm and gentle against your bare skin.
 <br><br>
 <<generate1>><<person1>>
-On a slightly calmer part of the beach, your path takes you near a <<person>> scurrying to get <<his>> expensive looking camera ready.
+On a slightly calmer part of the beach, your path takes you near a <<person>> scurrying to get <<his>> expensive-looking camera ready.
 
 <br><br>
 <<if $uncomfortable.nude is true>>
-	<<link [[Take a Detour|Beach Strip End]]>><</link>>
+	<<link [[Take a detour|Beach Strip End]]>><</link>>
 	<br>
 <</if>>
 <<link [[Walk past|Beach Strip Camera Snap]]>><<set $phase to 0>><</link>>
 <br>
 <<if $uncomfortable.nude is false>>
-	<<link [[Stop and Pose|Beach Strip Camera Snap]]>><<set $phase to 1>><</link>><<exhibitionist5>>
+	<<link [[Stop and pose|Beach Strip Camera Snap]]>><<set $phase to 1>><</link>><<exhibitionist5>>
 	<br>
-	<<if $arousal gte 5000>>
-		<<link [[Stop and Pose Lewdly|Beach Strip Camera Snap]]>><<set $phase to 2>><</link>><<exhibitionist5>><<promiscuous1>>
+	<<if $arousal gte $arousalmax / 2>>
+		<<link [[Stop and pose lewdly|Beach Strip Camera Snap]]>><<set $phase to 2>><</link>><<exhibitionist5>><<promiscuous1>>
 		<br>
 	<</if>>
 <</if>>
 
-:: Beach Strip Camera Snap [nobr]
+:: Beach Strip Camera Snap
 
 <<if $phase is 0>>
-The <<person>> tries to get his camera ready, barely managing to control <<his>> shaking hands.
+The <<person>> tries to get <<his>> camera ready, barely managing to control <<his>> shaking hands.
 By the time you reach <<him>>, <<his>> camera is just about ready.
 <<if $uncomfortable.nude is false>>
 "W- Wait!" <<he>> gasps, as you parade past <<him>>.
@@ -907,10 +971,10 @@ The <<person>> tries to keep <<his>> camera steady, barely managing to control <
 	<<if $phase is 2>>
 		Your back still to the camera, you spread your legs and slowly bend over, giving <<him>> a good view of your <<genitals>> and asshole from behind.
 		The clicking of the camera intensifies.
-		<<if $vaginasemen gte 3>>
+		<<if $player.bodyliquid.vagina.semen gte 3>>
 			You feel semen dribbling out of your <<pussy>> and running down your leg.
 			<<garousal>><<arousal 200>>
-		<<elseif $anussemen gte 3>>
+		<<elseif $player.bodyliquid.anus.semen gte 3>>
 			You feel semen dribbling out of your anus and running down your leg.
 			<<garousal>><<arousal 200>>
 		<<else>>
@@ -918,11 +982,11 @@ The <<person>> tries to keep <<his>> camera steady, barely managing to control <
 		<</if>>
 		<br><br>
 
-		<<if $vaginaexist is 1>>
+		<<if $player.vaginaExist>>
 		You bend your neck to look behind you, and staring straight into the camera you suggest "Why don't you take some closeups?". You grab your <<bottom>> with both hands. Then, still gazing into the camera, you spread your <<pussy>>.
 		<br>
-		<<if $vaginasemen gte 2>>
-		Semen drips from your <<pussy>> onto the sand. The sight proves too much for the <<person>> and he drops <<his>> camera in the sand. Shaking excitedly, <<he>> quickly picks it up, and eagerly moves closer.
+		<<if $player.bodyliquid.vagina.semen gte 2>>
+		Semen drips from your <<pussy>> onto the sand. The sight proves too much for the <<person>> and <<he>> drops <<his>> camera in the sand. Shaking excitedly, <<he>> quickly picks it up, and eagerly moves closer.
 		<<else>>
 		The <<person>> is clearly shocked but eagerly moves closer.
 		<</if>>
@@ -939,7 +1003,7 @@ The <<person>> tries to keep <<his>> camera steady, barely managing to control <
 	<</if>>
 	<br><br>
 
-	As you walk away, <<he>> blurts out a quick "Thank you!", without interrupting <<his>> endless picture snapping.
+	As you walk away, <<he>> blurts out a quick "Thank you!" without interrupting <<his>> endless picture snapping.
 	<<fameexhibitionism 15>>
 <<else>>
 	You decide <<he>> has enough pictures, and blow a kiss to the camera.
@@ -954,7 +1018,7 @@ The <<person>> tries to keep <<his>> camera steady, barely managing to control <
 <<link [[Next|Beach Strip End]]>><</link>>
 <br>
 
-:: Beach Strip Sex [nobr]
+:: Beach Strip Sex
 <<if $sexstart is 1>>
 <<set $sexstart to 0>>
 <<consensual>>
@@ -969,8 +1033,7 @@ The <<person>> tries to keep <<his>> camera steady, barely managing to control <
 <<effects>>
 <<effectsman>><<man>>
 
-<<audience>><!-- Added NPCDamage -->
-<<if $enemyhealth gt 0>><<npcdamage>><</if>>
+<<audience>>
 
 <<stateman>>
 <br><br>
@@ -986,8 +1049,8 @@ The <<person>> tries to keep <<his>> camera steady, barely managing to control <
 	<span id="next"><<link [[Next|Beach Strip Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Beach Strip Sex Finish [nobr]
-<<set $outside to 1>><<set $location to "beach">><<effects>>
+:: Beach Strip Sex Finish
+<<location "beach">><<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
 <<ejaculation>>
@@ -1025,17 +1088,17 @@ It is getting cold though, so you decide to get dressed for now.
 <br><br>
 <<link [[Next|Beach]]>><</link>>
 
-:: Beach Exposed [nobr]
-<<set $outside to 1>><<set $location to "beach">><<effects>>
-<<fameexhibitionism 20>>
+:: Beach Exposed
+<<location "beach">><<effects>>
+<<fameexhibitionism 20 pic>>
 <<flaunting>> you emerge from the water, <<lewdness>> freely displayed. You're soon the centre of attention, surrounded by whistles, cheers and compliments. Some break into applause while others scramble for their cameras.
 
 <<if $uncomfortable.nude is false>>
 	You feel excited and aroused by the countless eyes
-	<<if $penisexist is 1 and $vaginaexist is 1 and !$worn.genitals.type.includesAll("chastity", "hidden") and $rng % 2 == 0>>gawking at your <<genitals>>.
+	<<if $player.penisExist and $player.vaginaExist and !$worn.genitals.type.includesAll("chastity", "hidden") and $rng % 2 == 0>>gawking at your <<genitals>>.
 	<<elseif $bottomsize gte 4 and $rng % 2 == 0>>leering at your swaying <<bottom>>
 	<<elseif $breastsize gte 6 and $rng % 2 == 0>>gawking at your <<breasts>>
-	<<elseif $penisexist and $penissize gte 3 and !$worn.genitals.type.includesAll("chastity", "hidden")>>gawking at your <<penissize>><<penis>>.
+	<<elseif $player.penisExist and $penissize gte 3 and !$worn.genitals.type.includesAll("chastity", "hidden")>>gawking at your <<penis>>.
 	<<elseif $beauty gte (($beautymax / 7) * 5) and $rng % 3>>admiring your beautiful naked body
 	<<elseif $physique gte (($physiquesize / 7) * 5)>>admiring your stunning physique so fully displayed
 	<<else>>leering at you
@@ -1044,9 +1107,9 @@ It is getting cold though, so you decide to get dressed for now.
 	<br><br>
 	You stroll into to the changing room. Teasingly slow, you close the door behind your back. Your body trembles briefly as your pulse returns to normal.
 <<elseif $uncomfortable.nude is true>>
-	<<if $penisexist is 1 and $vaginaexist is 1 and !$worn.genitals.type.includesAll("chastity", "hidden") and $rng % 2 == 0>>You feel embarrassed by the countless eyes ogling your <<genitals>>.
+	<<if $player.penisExist and $player.vaginaExist and !$worn.genitals.type.includesAll("chastity", "hidden") and $rng % 2 == 0>>You feel embarrassed by the countless eyes ogling your <<genitals>>.
 	<<elseif $breastsize gte 6 and $rng % 2 == 0>>You feel embarrassed by the countless eyes ogling your <<breasts>>.
-	<<elseif $penisexist and $penissize gte 3 and $rng % 2 == 0 and !$worn.genitals.type.includesAll("chastity", "hidden")>>You feel embarrassed by the countless eyes ogling your <<penis>>.
+	<<elseif $player.penisExist and $penissize gte 3 and $rng % 2 == 0 and !$worn.genitals.type.includesAll("chastity", "hidden")>>You feel embarrassed by the countless eyes ogling your <<penis>>.
 	<<elseif $beauty gte (($beautymax / 7) * 5) and $rng % 3>>Every inch of your naked body prickles as you feel countless eyes ogling your naked beauty.
 	<<elseif $physique gte (($physiquesize / 7) * 5)>>Every inch of your toned body prickles as you feel countless eyes ogling your stunning physique.
 	<<else>>Every inch of your naked body prickles as you feel countless eyes ogling you.
@@ -1065,7 +1128,7 @@ It is getting cold though, so you decide to get dressed for now.
 <<link [[Next|Changing Room]]>><</link>>
 <br>
 
-:: Beach Milkshake [nobr]
+:: Beach Milkshake
 
 <<effects>>
 You drink the milkshake you bought from the cafe. It's deliciously creamy, and each sip helps melt away the stress.

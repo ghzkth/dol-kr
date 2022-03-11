@@ -1,14 +1,14 @@
-:: School Toilets [nobr]
+:: School Toilets
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 당신은 학교 화장실 밖의 곁방에 있다.
 <br><br>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	<<link [[모든 것이 암흑 속으로 사라져간다...|School Passout]]>><</link>>
 <<else>>
-	<<maleicon>><<link [[남학생 화장실|School Boy's Toilets]]>>/*'>>*/<</link>>
+	<<maleicon>><<link [[남학생 화장실|School Boy's Toilets]]>><</link>>
 	<br>
-	<<femaleicon>><<link [[여학생 화장실|School Girl's Toilets]]>>/*'>>*/<</link>>
+	<<femaleicon>><<link [[여학생 화장실|School Girl's Toilets]]>><</link>>
 	<br><br>
 	<<if $historytrait gte 2 and $schooldrainintro isnot 1>>
 		<<link [[빗물 배수 시스템으로 향하는 비밀 통로 (0:02)|School Drain]]>><<pass 2>><</link>>
@@ -17,28 +17,30 @@
 		<<link [[빗물 배수 시스템으로 향하는 비밀 통로 (0:02)|Commercial Drain]]>><<pass 2>><</link>>
 		<br><br>
 	<</if>>
-	<<if $brothel_basement_intro is 1 and $promiscuity gte 55>>
-		<<link [[곁방에 글로리홀을 차린다|School Gloryhole Start]]>><</link>><<promiscuous4>>
-		<br><br>
+	<<if $brothel_basement_intro is 1>>
+		<<if $promiscuity gte 55>>
+			<<link [[곁방에 글로리홀을 차린다|School Gloryhole Start]]>><</link>><<promiscuous4>>
+			<br><br>
+		<</if>>
 	<</if>>
 	<<link [[화장실에서 나온다 (0:01)|Hallways]]>><<pass 1>><</link>>
 	<br>
 <</if>>
 
-:: School Toilets Hiss [nobr]
+:: School Toilets Hiss
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 당신은 <<beasttypePost "에게">> 쉭쉭거린다. <<bHePost "은">> 귀를 뒤로 눕히고는 뒷걸음질 친다. 당신은 녀석을 응시하며 최대한 낮은 목소리로 야옹거린다. <<bHePost "도">> 답하듯 그르렁거리나, 이전보다 긴장이 풀린 모습이다. <<bHePost "은">> 창틀 위로 뛰어올라가서는 그 뒤로 사라진다.
 <br><br>
 <<if $bus is "boys">>
-	<<link [[다음|School Boy's Toilets]]>>/*'>>*/<<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|School Boy's Toilets]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <<else>>
-	<<link [[다음|School Girl's Toilets]]>>/*'>>*/<<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|School Girl's Toilets]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
 
-:: School Toilets Cat [nobr]
+:: School Toilets Cat
 
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
@@ -66,7 +68,7 @@
 	<span id="next"><<link [[다음|School Toilets Cat]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: School Toilets Cat Finish [nobr]
+:: School Toilets Cat Finish
 
 <<set $outside to 0>><<set $location to "town">><<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
@@ -78,10 +80,10 @@
 	<<clotheson>>
 	<<endcombat>>
 	<<if $bus is "boys">>
-		<<link [[다음|School Boy's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[다음|School Girl's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $enemyhealth lte 0>>
@@ -92,15 +94,15 @@
 	<<clotheson>>
 	<<endcombat>>
 	<<if $bus is "boys">>
-		<<link [[다음|School Boy's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[다음|School Girl's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <</if>>
 
-:: School Toilets Encounter [nobr]
+:: School Toilets Encounter
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $phase is 1>>
@@ -120,7 +122,7 @@
 	<br>
 <</if>>
 
-:: School Toilets Sex [nobr]
+:: School Toilets Sex
 
 <<if $sexstart is 1>>
 	<<set $sexstart to 0>>
@@ -158,7 +160,7 @@
 	<span id="next"><<link [[다음|School Toilets Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: School Toilets Sex Finish [nobr]
+:: School Toilets Sex Finish
 
 <<effects>>
 <<if $finish is 1>>
@@ -167,10 +169,10 @@
 	<<clotheson>>
 	<<endcombat>>
 	<<if $bus is "boys">>
-		<<link [[다음|School Boy's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[다음|School Girl's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
@@ -185,10 +187,10 @@
 	<<clotheson>>
 	<<endcombat>>
 	<<if $bus is "boys">>
-		<<link [[다음|School Boy's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[다음|School Girl's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $enemyhealth lte 0>>
@@ -199,7 +201,7 @@
 	<<link [[다음|School Toilets]]>><<set $eventskip to 1>><</link>>
 <</if>>
 
-:: School Toilets Clothes [nobr]
+:: School Toilets Clothes
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $phase is 1>>
@@ -212,10 +214,10 @@
 	<br><br>
 	<<endevent>>
 	<<if $bus is "boys">>
-		<<link [[다음|School Boy's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[다음|School Girl's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $phase is 2>>
@@ -271,10 +273,10 @@
 	<br><br>
 	<<endevent>>
 	<<if $bus is "boys">>
-		<<link [[다음|School Boy's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[다음|School Girl's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $phase is 4>>
@@ -284,10 +286,10 @@
 	<br><br>
 	<<endevent>>
 	<<if $bus is "boys">>
-		<<link [[다음|School Boy's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[다음|School Girl's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $phase is 5>>
@@ -300,20 +302,20 @@
 	<br><br>
 	<<endevent>>
 	<<if $bus is "boys">>
-		<<link [[다음|School Boy's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[다음|School Girl's Toilets]]>>/*'>>*/<<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <</if>>
 
-:: School Boy's Toilets [nobr]
+:: School Boy's Toilets
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<set $bus to "boys">>
 당신은 남학생 화장실에 있다.
 <br><br>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	<<link [[모든 것이 암흑 속으로 사라져간다...|School Passout]]>><</link>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
@@ -321,16 +323,19 @@
 		<<eventsschooltoilets>>
 	<<else>>
 		<<storeactions "schoolboys">>
-		<<link [[자위한다|School Boy's Toilets Masturbation]]>>/*'>>*/<<set $masturbationstart to 1>><</link>>
+		<<link [[거울을 본다 (0:02)|Simple Mirror]]>><<pass 2>><<set $previousPassage = $passage>><</link>>
 		<br>
-		<<if $facesemen gte 1 or $facegoo gte 1 or $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen" or $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud" or $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-			<<link [[얼굴을 씻는다 (0:05)|School Boy's Wash]]>>/*'>>*/<<pass 5>><</link>>
+		<<link [[자위한다|School Boy's Toilets Masturbation]]>><<set $masturbationstart to 1>><</link>>
+		<br>
+		<<if $player.bodyliquid.face.semen gte 1 or $player.bodyliquid.face.goo gte 1 or $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen" or $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud" or $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
+			<<link [[얼굴을 씻는다 (0:05)|School Boy's Wash]]>><<pass 5>><</link>>
 			<br>
 		<</if>>
-		<<if $mouthsemen gte 1 or $mouthgoo gte 1>>
-		<<link [[입을 헹군다 (0:05)|School Boy's Rinse]]>>/*'>>*/<<pass 5>><</link>>
+		<<if $player.bodyliquid.mouth.semen gte 1 or $player.bodyliquid.mouth.goo gte 1>>
+		<<link [[입을 헹군다 (0:05)|School Boy's Rinse]]>><<pass 5>><</link>>
 		<br>
 		<</if>>
+		<<pregnancyTest "School Boy's Toilets">>
 		<<storeon "schoolboys" "check">>
 		<<if _store_check isnot 1>>
 			<<link [[나간다|Hallways]]>><</link>>
@@ -346,12 +351,12 @@
 <<set $eventskip to 0>>
 <<storecleanup>>
 
-:: School Girl's Toilets [nobr]
+:: School Girl's Toilets
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<set $bus to "girls">>
 당신은 여학생 화장실에 있다.
 <br><br>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	<<link [[모든 것이 암흑 속으로 사라져간다...|School Passout]]>><</link>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
@@ -359,16 +364,19 @@
 		<<eventsschooltoilets>>
 	<<else>>
 		<<storeactions "schoolgirls">>
-		<<link [[자위한다|School Girl's Toilets Masturbation]]>>/*'>>*/<<set $masturbationstart to 1>><</link>>
+		<<link [[거울을 본다 (0:02)|Simple Mirror]]>><<pass 2>><<set $previousPassage = $passage>><</link>>
 		<br>
-		<<if $facesemen gte 1 or $facegoo gte 1 or $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen" or $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud" or $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-			<<link [[얼굴을 씻는다 (0:05)|School Girl's Wash]]>>/*'>>*/<<pass 5>><</link>>
+		<<link [[자위한다|School Girl's Toilets Masturbation]]>><<set $masturbationstart to 1>><</link>>
+		<br>
+		<<if $player.bodyliquid.face.semen gte 1 or $player.bodyliquid.face.goo gte 1 or $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen" or $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud" or $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
+			<<link [[얼굴을 씻는다 (0:05)|School Girl's Wash]]>><<pass 5>><</link>>
 			<br>
 		<</if>>
-		<<if $mouthsemen gte 1 or $mouthgoo gte 1>>
-		<<link [[입을 헹군다 (0:05)|School Girl's Rinse]]>>/*'>>*/<<pass 5>><</link>>
+		<<if $player.bodyliquid.mouth.semen gte 1 or $player.bodyliquid.mouth.goo gte 1>>
+		<<link [[입을 헹군다 (0:05)|School Girl's Rinse]]>><<pass 5>><</link>>
 		<br>
 		<</if>>
+		<<pregnancyTest "School Girl's Toilets">>
 		<<storeon "schoolgirls" "check">>
 		<<if _store_check isnot 1>>
 			<<link [[나간다|Hallways]]>><</link>>
@@ -384,10 +392,10 @@
 <<set $eventskip to 0>>
 <<storecleanup>>
 
-:: School Boy's Wash [nobr]
+:: School Boy's Wash
 
 <<effects>>
-<<if $facesemen gte 1 or $facegoo gte 1>>
+<<if $player.bodyliquid.face.semen gte 1 or $player.bodyliquid.face.goo gte 1>>
 	<<if $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen">>
 		당신은 세면대에서 얼굴에 묻은 음란한 액체와 잉크를 씻어낸다.
 	<<elseif $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
@@ -406,19 +414,19 @@
 <</if>>
 <<wash_face>>
 <br><br>
-<<link [[다음|School Boy's Toilets]]>>/*'>>*/<</link>>
+<<link [[다음|School Boy's Toilets]]>><</link>>
 <br>
 
-:: School Girl's Wash [nobr]
+:: School Girl's Wash
 
 <<effects>>
-<<if $facesemen gte 1 or $facegoo gte 1>>
+<<if $player.bodyliquid.face.semen gte 1 or $player.bodyliquid.face.goo gte 1>>
 	<<if $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen">>
+		당신은 세면대에서 얼굴에 묻은 음란한 액체와 잉크를 씻어낸다.
 	<<elseif $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
 		Bending over the sink, you wash the lewd fluid and lipstick from your face.
 	<<elseif $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud">>
 		Bending over the sink, you wash the lewd fluid and mud from your face.
-		당신은 세면대에서 얼굴에 묻은 음란한 액체와 잉크를 씻어낸다.
 	<<else>>
 		당신은 세면대에서 얼굴에 묻은 음란한 액체를 씻어낸다.
 	<</if>>
@@ -431,10 +439,10 @@
 <</if>>
 <<wash_face>>
 <br><br>
-<<link [[다음|School Girl's Toilets]]>>/*'>>*/<</link>>
+<<link [[다음|School Girl's Toilets]]>><</link>>
 <br>
 
-:: School Boy's Rinse [nobr]
+:: School Boy's Rinse
 <<effects>>
 
 당신은 세면대 위로 몸을 굽히고는 입을 헹군다.
@@ -442,10 +450,10 @@
 <<wash_mouth>>
 <br><br>
 
-<<link [[다음|School Boy's Toilets]]>>/*'>>*/<</link>>
+<<link [[다음|School Boy's Toilets]]>><</link>>
 <br>
 
-:: School Girl's Rinse [nobr]
+:: School Girl's Rinse
 <<effects>>
 
 당신은 세면대 위로 몸을 굽히고는 입을 헹군다.
@@ -453,5 +461,5 @@
 <<wash_mouth>>
 <br><br>
 
-<<link [[다음|School Girl's Toilets]]>>/*'>>*/<</link>>
+<<link [[다음|School Girl's Toilets]]>><</link>>
 <br>

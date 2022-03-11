@@ -1,4 +1,4 @@
-:: Sewers Residential [nobr]
+:: Sewers Residential
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersresidential">>
 <<set $sewersevent -= 1>>
@@ -11,7 +11,7 @@ You are in the old sewers. A canal runs past, disappearing through a metal grate
 	There's a ladder leading up to the town's drain system.
 	<br><br>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -25,9 +25,12 @@ You are in the old sewers. A canal runs past, disappearing through a metal grate
 		<<morganhunt>>
 		<br><br>
 	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
 	<<link [[Tunnel filled with scrap (0:05)|Sewers Scrap]]>><<pass 5>><</link>>
 	<br>
-	<<link [[Tunnel filled with Wood (0:05)|Sewers Wood]]>><<pass 5>><</link>>
+	<<link [[Tunnel filled with wood (0:05)|Sewers Wood]]>><<pass 5>><</link>>
 	<br>
 	<<link [[Swim against the current (0:05)|Sewers Residential Swim]]>><<pass 5>><<tiredness 1>><</link>><<swimmingdifficulty 1 200>><<gtiredness>>
 	<br><br>
@@ -38,7 +41,7 @@ You are in the old sewers. A canal runs past, disappearing through a metal grate
 <</if>>
 <<set $eventskip to 0>>
 
-:: Sewers Commercial [nobr]
+:: Sewers Commercial
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewerscommercial">>
 <<set $sewersevent -= 1>>
@@ -51,7 +54,7 @@ You are in the old sewers. A canal runs past, disappearing into the dark. Piles 
 	There's a ladder leading up to the town's drain system.
 	<br><br>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -64,6 +67,9 @@ You are in the old sewers. A canal runs past, disappearing into the dark. Piles 
 	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
 		<<morganhunt>>
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
 	<</if>>
 	<<link [[Muddy tunnel (0:05)|Sewers Mud]]>><<pass 5>><</link>>
 	<br>
@@ -80,7 +86,7 @@ You are in the old sewers. A canal runs past, disappearing into the dark. Piles 
 <</if>>
 <<set $eventskip to 0>>
 
-:: Sewers Industrial [nobr]
+:: Sewers Industrial
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersindustrial">>
 <<set $sewersevent -= 1>>
@@ -93,7 +99,7 @@ You are in the old sewers. A canal runs past, disappearing into the dark. Much o
 	There's a ladder leading up to the town's drain system.
 	<br><br>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -106,6 +112,9 @@ You are in the old sewers. A canal runs past, disappearing into the dark. Much o
 	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
 		<<morganhunt>>
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
 	<</if>>
 	<<link [[Algae-coated tunnel (0:05)|Sewers Algae]]>><<pass 5>><</link>>
 	<br>
@@ -122,13 +131,13 @@ You are in the old sewers. A canal runs past, disappearing into the dark. Much o
 <</if>>
 <<set $eventskip to 0>>
 
-:: Sewers Waterfall [nobr]
+:: Sewers Waterfall
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewerswaterfall">>
 <<set $sewersevent -= 1>>
 You are in the old sewers. Torrents of water crash down from multiple breaches in the ceiling.
 <br><br>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -139,8 +148,13 @@ You are in the old sewers. Torrents of water crash down from multiple breaches i
 	<<eventssewers>>
 <<else>>
 	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
-		<<morganhunt>>
+		<<morganhunt>><<set _hideOption to true>>
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
 		<<link [[Hide behind the waterfalls|Sewers Waterfall Hide]]>><</link>>
 		<br>
 	<</if>>
@@ -151,7 +165,7 @@ You are in the old sewers. Torrents of water crash down from multiple breaches i
 <</if>>
 <<set $eventskip to 0>>
 
-:: Sewers Waterfall Hide [nobr]
+:: Sewers Waterfall Hide
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 <<set $sewerschased to 0>>
@@ -162,7 +176,7 @@ You are in the old sewers. Torrents of water crash down from multiple breaches i
 <<endevent>>
 <<destinationsewers>>
 
-:: Sewers Lake [nobr]
+:: Sewers Lake
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewerslake">>
 <<set $sewersevent -= 1>>
@@ -176,7 +190,7 @@ You are in a cavern near the old sewers, beside a pool of water. The pool stretc
 	A strange cylinder lies on the shore, clutched by a glove.
 	<br><br>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -189,6 +203,9 @@ You are in a cavern near the old sewers, beside a pool of water. The pool stretc
 	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
 		<<morganhunt>>
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
 	<</if>>
 	<<if $sewersspray isnot 1>>
 		<<link [[Take the cylinder|Sewers Lake Cylinder]]>><<set $sewersspray to 1>><<set $spraymax += 1>><<spray 5>><</link>><<gspraymax>>
@@ -203,21 +220,23 @@ You are in a cavern near the old sewers, beside a pool of water. The pool stretc
 <</if>>
 <<set $eventskip to 0>>
 
-:: Sewers Lake Cylinder [nobr]
+:: Sewers Lake Cylinder
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 It looks like a charge for your pepper spray, but with an exposed computer chip at the base. You put it in.
 <br><br>
+<span class="gold">You've gained an additional pepper spray charge.</span>
+<br><br>
 <<link [[Next|Sewers Lake]]>><</link>>
 <br>
 
-:: Sewers Scrap [nobr]
+:: Sewers Scrap
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersscrap">>
 <<set $sewersevent -= 1>>
 You are in the old sewers. The tunnel is full of metal scrap.
 <br><br>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -228,8 +247,13 @@ You are in the old sewers. The tunnel is full of metal scrap.
 	<<eventssewers>>
 <<else>>
 	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
-		<<morganhunt>>
+		<<morganhunt>><<set _hideOption to true>>
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
 		<<link [[Hide under scrap|Sewers Scrap Hide]]>><</link>>
 		<br>
 	<</if>>
@@ -239,7 +263,7 @@ You are in the old sewers. The tunnel is full of metal scrap.
 	<br><br>
 <</if>>
 
-:: Sewers Scrap Hide [nobr]
+:: Sewers Scrap Hide
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 <<set $sewerschased to 0>>
@@ -250,13 +274,13 @@ You are in the old sewers. The tunnel is full of metal scrap.
 <<endevent>>
 <<destinationsewers>>
 
-:: Sewers Wood [nobr]
+:: Sewers Wood
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewerswood">>
 <<set $sewersevent -= 1>>
 You are in the old sewers. Decaying logs litter the tunnel.
 <br><br>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -267,8 +291,13 @@ You are in the old sewers. Decaying logs litter the tunnel.
 	<<eventssewers>>
 <<else>>
 	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
-		<<morganhunt>>
+		<<morganhunt>><<set _hideOption to true>>
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
 		<<link [[Hide in a log|Sewers Wood Hide]]>><</link>>
 		<br>
 	<</if>>
@@ -278,7 +307,7 @@ You are in the old sewers. Decaying logs litter the tunnel.
 	<br><br>
 <</if>>
 
-:: Sewers Wood Hide [nobr]
+:: Sewers Wood Hide
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 <<set $sewerschased to 0>>
@@ -295,7 +324,7 @@ You are in the old sewers. Decaying logs litter the tunnel.
 	<<morganoptions>>
 <</if>>
 
-:: Sewers Webs [nobr]
+:: Sewers Webs
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewerswebs">>
 <<set $sewersevent -= 1>>
@@ -305,7 +334,7 @@ You are in the old sewers. The walls are covered in huge spider webs.
 	An antique candlestick is suspended in one.
 	<br><br>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -319,6 +348,9 @@ You are in the old sewers. The walls are covered in huge spider webs.
 		<<morganhunt>>
 		<br><br>
 	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
 	<<if $sewersantiquecandlestick isnot 1>>
 		<<link [[Take the candlestick|Sewers Candlestick]]>><</link>>
 		<br>
@@ -327,7 +359,7 @@ You are in the old sewers. The walls are covered in huge spider webs.
 	<br><br>
 <</if>>
 
-:: Sewers Candlestick [nobr]
+:: Sewers Candlestick
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 <<set $sewersantiquecandlestick to 1>>
@@ -341,7 +373,7 @@ You reach into the web and tug out the candlestick.
 <<link [[Next|Sewers Webs]]>><</link>>
 <br>
 
-:: Sewers Shrooms [nobr]
+:: Sewers Shrooms
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersshrooms">>
 <<set $sewersevent -= 1>>
@@ -351,7 +383,7 @@ You are in the old sewers. The walls and floor here are covered in fungus. Some 
 	A strange antique glints from behind several mushrooms. You'll need to squeeze through to reach.
 	<br><br>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -365,6 +397,9 @@ You are in the old sewers. The walls and floor here are covered in fungus. Some 
 		<<morganhunt>>
 		<br><br>
 	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
 	<<if $sewersantiquedildo isnot 1>>
 		<<link [[Take the antique|Sewers Dildo]]>><</link>>
 		<br>
@@ -373,7 +408,7 @@ You are in the old sewers. The walls and floor here are covered in fungus. Some 
 	<br><br>
 <</if>>
 
-:: Sewers Dildo [nobr]
+:: Sewers Dildo
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 <<set $sewersantiquedildo to 1>>
@@ -381,12 +416,12 @@ You are in the old sewers. The walls and floor here are covered in fungus. Some 
 You squeeze between the mushrooms and grasp the object. Even up close you've no clue what it is. A cucumber ornament?
 <br><br>
 You squeeze out of the mushroom forest and sneeze. You feel warm.
-<<set $drugged += 360>><<garousal>><<arousal 600>>
+<<drugs 360>><<garousal>><<arousal 600>>
 <br><br>
 <<link [[Next|Sewers Shrooms]]>><</link>>
 <br>
 
-:: Sewers Hole [nobr]
+:: Sewers Hole
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewershole">>
 <<set $sewersevent -= 1>>
@@ -398,7 +433,7 @@ You are in a cavern at the edge of the old sewers. A gaping pit has opened in th
 <</if>>
 A breeze emerges from the pit. It makes your <<genitals 1>> tingle.
 <br><br>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -412,6 +447,9 @@ A breeze emerges from the pit. It makes your <<genitals 1>> tingle.
 		<<morganhunt>>
 		<br><br>
 	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
 	<<if $sewersantiquehorn isnot 1>>
 		<<link [[Take the antique|Sewers Horn]]>><<arousal 1800>><</link>><<ggarousal>>
 		<br>
@@ -420,13 +458,13 @@ A breeze emerges from the pit. It makes your <<genitals 1>> tingle.
 	<br><br>
 <</if>>
 
-:: Sewers Horn [nobr]
+:: Sewers Horn
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
-<<if $arousal gte 10000>>
+<<if $arousal gte $arousalmax>>
 	Arms stretched out either side, you walk across the gap. A warm air gushes up from the pit and caresses you. It's too much. Your knees buckle.
 	<br><br>
-	<<orgasmpassage>>
+	<<orgasm>>
 	<br><br>
 	You fall from the walkway, plunging into dark water below.
 	<br><br>
@@ -444,7 +482,7 @@ A breeze emerges from the pit. It makes your <<genitals 1>> tingle.
 	<br>
 <</if>>
 
-:: Sewers Algae [nobr]
+:: Sewers Algae
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersalgae">>
 <<set $sewersevent -= 1>>
@@ -458,7 +496,7 @@ You are in the old sewers. You can't walk too fast, lest you slip on the algae c
 		<<smugglerdifficultytext>>
 	<</if>>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -469,8 +507,13 @@ You are in the old sewers. You can't walk too fast, lest you slip on the algae c
 	<<eventssewers>>
 <<else>>
 	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
-		<<morganhunt>>
+		<<morganhunt>><<set _hideOption to true>>
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
 		<<link [[Hide in the algae|Sewers Algae Hide]]>><</link>>
 		<br>
 	<</if>>
@@ -486,7 +529,7 @@ You are in the old sewers. You can't walk too fast, lest you slip on the algae c
 	<br><br>
 <</if>>
 
-:: Sewers Algae Hide [nobr]
+:: Sewers Algae Hide
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 <<set $sewerschased to 0>>
@@ -503,13 +546,13 @@ You are in the old sewers. You can't walk too fast, lest you slip on the algae c
 	<<morganoptions>>
 <</if>>
 
-:: Sewers Mud [nobr]
+:: Sewers Mud
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersmud">>
 <<set $sewersevent -= 1>>
 You are in the old sewers. You're up to your ankles in mud.
 <br><br>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -520,8 +563,13 @@ You are in the old sewers. You're up to your ankles in mud.
 	<<eventssewers>>
 <<else>>
 	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
-		<<morganhunt>>
+		<<morganhunt>><<set _hideOption to true>>
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
 		<<link [[Hide in the mud|Sewers Mud Hide]]>><</link>>
 		<br>
 	<</if>>
@@ -533,7 +581,7 @@ You are in the old sewers. You're up to your ankles in mud.
 	<br><br>
 <</if>>
 
-:: Sewers Mud Hide [nobr]
+:: Sewers Mud Hide
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 <<set $sewerschased to 0>>
@@ -550,13 +598,13 @@ You are in the old sewers. You're up to your ankles in mud.
 	<<morganoptions>>
 <</if>>
 
-:: Sewers Ruins [nobr]
+:: Sewers Ruins
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersruins">>
 <<set $sewersevent -= 1>>
 You are in the old sewers. The tunnels have collapsed here, revealing ancient stonework. A strange breeze blows.
 <br><br>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -567,8 +615,13 @@ You are in the old sewers. The tunnels have collapsed here, revealing ancient st
 	<<eventssewers>>
 <<else>>
 	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
-		<<morganhunt>>
+		<<morganhunt>><<set _hideOption to true>>
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
 		<<link [[Hide in the ruins|Sewers Ruins Hide]]>><</link>>
 		<br>
 	<</if>>
@@ -580,7 +633,7 @@ You are in the old sewers. The tunnels have collapsed here, revealing ancient st
 	<br><br>
 <</if>>
 
-:: Sewers Ruins Hide [nobr]
+:: Sewers Ruins Hide
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 <<set $sewerschased to 0>>
@@ -591,13 +644,13 @@ You are in the old sewers. The tunnels have collapsed here, revealing ancient st
 <<endevent>>
 <<destinationsewers>>
 
-:: Sewers Rubble [nobr]
+:: Sewers Rubble
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersrubble">>
 <<set $sewersevent -= 1>>
 You are in the old sewers. Rubble is strewn throughout this tunnel. The stone is different to that which makes up the walls and floor.
 <br><br>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -608,8 +661,13 @@ You are in the old sewers. Rubble is strewn throughout this tunnel. The stone is
 	<<eventssewers>>
 <<else>>
 	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
-		<<morganhunt>>
+		<<morganhunt>><<set _hideOption to true>>
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
 		<<link [[Hide behind rubble|Sewers Rubble Hide]]>><</link>>
 		<br>
 	<</if>>
@@ -619,7 +677,7 @@ You are in the old sewers. Rubble is strewn throughout this tunnel. The stone is
 	<br><br>
 <</if>>
 
-:: Sewers Rubble Hide [nobr]
+:: Sewers Rubble Hide
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 <<set $sewerschased to 0>>
@@ -636,7 +694,7 @@ You are in the old sewers. Rubble is strewn throughout this tunnel. The stone is
 	<<morganoptions>>
 <</if>>
 
-:: Sewers Workshop [nobr]
+:: Sewers Workshop
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersworkshop">>
 <<set $sewersevent -= 1>>
@@ -646,7 +704,7 @@ You are in the old sewers. You are surrounded by metal scrap, twisted into a par
 	You hear a faint ticking.
 	<br><br>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	It's too much for you. You pass out.
 	<br><br>
 	<<sewersend>>
@@ -660,6 +718,9 @@ You are in the old sewers. You are surrounded by metal scrap, twisted into a par
 		<<morganhunt>>
 		<br><br>
 	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
 	<<if $sewersantiquewatch isnot 1>>
 		<<link [[Investigate the ticking|Sewers Ticking]]>><</link>>
 		<br><br>
@@ -670,7 +731,7 @@ You are in the old sewers. You are surrounded by metal scrap, twisted into a par
 	<br><br>
 <</if>>
 
-:: Sewers Chute [nobr]
+:: Sewers Chute
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 You lower yourself into the chute, and slide down. You roll out at the bottom onto soft ground. That was fun.
@@ -679,7 +740,7 @@ You lower yourself into the chute, and slide down. You roll out at the bottom on
 <<link [[Next|Sewers Shrooms]]>><</link>>
 <br>
 
-:: Sewers Ticking [nobr]
+:: Sewers Ticking
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 <<set $sewersantiquewatch to 1>>
@@ -695,7 +756,7 @@ You type in the three numbers, but what of the fourth?
 <br><br>
 <<sewerscountdown>>
 
-:: Sewers Ticking Run [nobr]
+:: Sewers Ticking Run
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 
@@ -709,7 +770,7 @@ You wait. Nothing happens. You peek, then walk back to the safe. It's still lock
 <<link [[Next|Sewers Workshop]]>><</link>>
 <br>
 
-:: Sewers Ticking Number [nobr]
+:: Sewers Ticking Number
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 <<if $sewerswatchattempt is $sewerswatchnumber>>
@@ -775,12 +836,12 @@ You wait. Nothing happens. You peek, then walk back to the safe. It's still lock
 <</if>>
 <<set $sewerscountdown -= 1>>
 
-:: Sewers Residential Swim [nobr]
+:: Sewers Residential Swim
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<water>>
 <<set $swimmingdifficulty to random(1, 200)>>
 You lower yourself into the water and try to swim against the current.
-<<if $swimmingskill gte $swimmingdifficulty>>
+<<if currentSkillValue('swimmingskill') gte $swimmingdifficulty>>
 	<span class="green">You succeed,</span> and climb onto the bank some way up.
 	<br><br>
 	<<link [[Next|Sewers Commercial]]>><</link>>
@@ -792,12 +853,12 @@ You lower yourself into the water and try to swim against the current.
 	<br>
 <</if>>
 
-:: Sewers Commercial Swim [nobr]
+:: Sewers Commercial Swim
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<water>>
 <<set $swimmingdifficulty to random(1, 400)>>
 You lower yourself into the water and try to swim against the current.
-<<if $swimmingskill gte $swimmingdifficulty>>
+<<if currentSkillValue('swimmingskill') gte $swimmingdifficulty>>
 	<span class="green">You succeed,</span> and climb onto the bank some way up.
 	<br><br>
 	<<link [[Next|Sewers Industrial]]>><</link>>
@@ -809,12 +870,12 @@ You lower yourself into the water and try to swim against the current.
 	<br>
 <</if>>
 
-:: Sewers Industrial Swim [nobr]
+:: Sewers Industrial Swim
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>><<water>>
 <<set $swimmingdifficulty to random(1, 800)>>
 You lower yourself into the water and try to swim against the current.
-<<if $swimmingskill gte $swimmingdifficulty>>
+<<if currentSkillValue('swimmingskill') gte $swimmingdifficulty>>
 	<span class="green">You succeed,</span> and climb onto the bank some way up.
 	<br><br>
 	<<link [[Next|Sewers Waterfall]]>><</link>>

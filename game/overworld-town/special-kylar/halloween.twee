@@ -1,5 +1,46 @@
-:: Kylar Halloween [nobr]
+:: Kylar Halloween Start [widget]
+<<widget "halloweenkylar">>
+<<npc Kylar>><<person1>>
+<span class="blue">You feel like you're being watched.</span> You glance around, and see a figure creep from the shadows,
+<<if $pronoun is "m">>
+	wearing a gothic suit, and heavy makeup.
+<<else>>
+	wearing a gothic dress, and heavy makeup. <<if $NPCList[0].breastsize gte 1>>A tight corset pushes up <<his>> <<print $NPCList[0].breastsdesc>>.<</if>>
+<</if>>
+It takes a moment to recognise <<him>>. It's Kylar.
+<br><br>
+<<set $halloween_kylar_proposed to 1>>
+
+<<if $exposed gte 1>>
+	<<covered>> "Happy Halloween-" <<He>> begins, but stops when <<he>> notices your exposure. The dark had concealed you at first. <<His>> eyes flick over you, unsure where to look.
+	<br><br>
+
+	You hear a drunken shout from the nearby street. Kylar snaps out of <<his>> stupor, and throws an anxious look in the direction of the noise. "W-we need to get you covered," <<he>> says. "There are perverts out." <<He>> runs into the dark.
+	<br><br>
+
+	Less than a minute later <<he>> returns, carrying rolls of toilet paper. "On another night," <<he>> says. "This wouldn't do. But you could dress as a mummy and not look too out of place."
+	<br><br>
+
+	<<link [[Tell Kylar to look away|Kylar Halloween Look]]>><<npcincr Kylar dom -1>><</link>>
+	<br>
+	<<if $exhibitionism gte 35>>
+		<<link [[Let Kylar watch you dress|Kylar Halloween Watch]]>><<npcincr Kylar lust 5>><<npcincr Kylar love 1>><</link>><<exhibitionist2>><<gglust>><<glove>>
+		<br>
+	<</if>>
+
+<<else>>
+	"Happy Halloween," <<he>> says. <<He>> seems excited. "There's something I want to show you. This way."
+	<br><br>
+	<<link [[Go with Kylar (1:00)|Kylar Halloween]]>><<npcincr Kylar love 1>><<pass 10>><</link>><<glove>>
+	<br>
+	<<link [[Refuse|Kylar Halloween Refuse]]>><<npcincr Kylar love -1>><</link>><<llove>>
+	<br>
+<</if>>
+<</widget>>
+
+:: Kylar Halloween
 <<set $location to "town">><<effects>>
+<<set $dateCount.Total++>><<set $dateCount.Kylar++>>
 
 Kylar leads you through the park, and onto Nightingale Street. You pass by some delinquent students, but they're too drunk to recognise <<him>>.
 <br><br>
@@ -12,8 +53,7 @@ You pass the hospital, and walk down a small lane leading away from town. The tr
 <<link [[Hesitate|Kylar Halloween Hesitate]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Hesitate [nobr]
+:: Kylar Halloween Hesitate
 <<effects>>
 
 You stop at the edge of the road. Kylar turns. <<He>> hesitates <<himself>> before speaking. "I-It's not far," <<he>> says, holding out <<his>> hand.
@@ -24,18 +64,15 @@ You stop at the edge of the road. Kylar turns. <<He>> hesitates <<himself>> befo
 <<link [[Refuse|Kylar Halloween Forest Refuse]]>><<npcincr Kylar love -1>><</link>><<llove>>
 <br>
 
-
-:: Kylar Halloween Forest Refuse [nobr]
+:: Kylar Halloween Forest Refuse
 <<effects>>
-
 
 You turn and walk away. Kylar watches you go, stood alone at the edge of the forest.
 <br><br>
 
 <<link [[Next|Nightingale Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 
-
-:: Kylar Halloween Refuse [nobr]
+:: Kylar Halloween Refuse
 <<effects>>
 
 You turn and walk away. Kylar watches you go, stood alone in the park.
@@ -43,8 +80,7 @@ You turn and walk away. Kylar watches you go, stood alone in the park.
 
 <<link [[Next|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
 
-
-:: Kylar Halloween Watch [nobr]
+:: Kylar Halloween Watch
 <<effects>>
 
 You wrap the paper around your body. It takes a few attempts to manage without tearing it. Kylar watches all the while, <<his>> blush visible even in the dim light.
@@ -68,7 +104,7 @@ You ask Kylar if it looks okay. <<He>> nods, but <<his>> leering suggests it's s
 <<link [[Refuse|Kylar Halloween Refuse]]>><<npcincr Kylar love -1>><</link>><<llove>>
 <br>
 
-:: Kylar Halloween Look [nobr]
+:: Kylar Halloween Look
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -79,7 +115,6 @@ You ask Kylar if it looks okay. <<He>> nods, but <<his>> leering suggests it's s
 	"I can't dress with you watching," you say.
 <</if>>
 <br><br>
-
 
 <<if $worn.upper.exposed gte 1>>
 	<<upperwear 65>>
@@ -101,10 +136,8 @@ You ask Kylar if it looks okay. <<He>> nods, but <<his>> leering suggests it's s
 <<link [[Refuse|Kylar Halloween Refuse]]>><<npcincr Kylar love -1>><</link>><<llove>>
 <br>
 
-
-
-:: Kylar Halloween Walk [nobr]
-<<set $location to "forest">><<effects>>
+:: Kylar Halloween Walk
+<<location "forest">><<effects>>
 <<pass 15>>
 You enter the forest with Kylar. There's no path that you can see in the gloom, but <<he>> seems to know where <<hes>> going.
 <br><br>
@@ -117,9 +150,7 @@ The trees become denser, until they at once give way, opening onto the cemetery.
 <<link [[Get angry|Kylar Halloween Angry]]>><<npcincr Kylar love -1>><</link>><<llove>>
 <br>
 
-
-
-:: Kylar Halloween Angry [nobr]
+:: Kylar Halloween Angry
 <<effects>>
 
 You shake Kylar's hand away.
@@ -135,17 +166,15 @@ You shake Kylar's hand away.
 Kylar looks at <<his>> feet. "S-sorry," <<he>> says. "I-I thought we could be alone a-and do something fun."
 <br><br>
 
-
 <<link [[Walk to the manor|Kylar Halloween Continue Walk]]>><<npcincr Kylar love 1>><</link>><<glove>>
 <br>
 <<link [[Insist on leaving|Kylar Halloween Leave]]>><<npcincr Kylar love -1>><</link>><<llove>>
 <br>
 
-
-:: Kylar Halloween Leave [nobr]
+:: Kylar Halloween Leave
 <<effects>>
 
-You turn and march back into the forest. Kylar hurries after, stammering apologies. "I-I'm sorry. Pl-please don't be mad at me."
+You turn and march back into the forest. Kylar hurries after, stammering apologies. "I-I'm sorry. P-please don't be mad at me."
 <br><br>
 
 <<link [[Keep marching|Kylar Halloween March]]>><</link>>
@@ -153,7 +182,7 @@ You turn and march back into the forest. Kylar hurries after, stammering apologi
 <<link [[Kiss|Kylar Halloween Kiss]]>><</link>><<promiscuous1>>
 <br>
 
-:: Kylar Halloween March [nobr]
+:: Kylar Halloween March
 <<effects>>
 <<pass 15>>
 
@@ -165,8 +194,7 @@ You continue marching through the forest, with Kylar in tow. You soon see light 
 <<link [[No|Kylar Halloween No]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 5>><</link>><<llove>><<ggksuspicion>>
 <br>
 
-
-:: Kylar Halloween Yes [nobr]
+:: Kylar Halloween Yes
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -184,9 +212,7 @@ Kylar sighs with relief. You walk onto Wolf Street. You look behind you, but Kyl
 <<link [[Next|Nightingale Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
-
-
-:: Kylar Halloween No [nobr]
+:: Kylar Halloween No
 <<effects>>
 
 You ignore Kylar, and walk around <<him>> onto Wolf Street. You look behind you, but Kylar is no longer there.
@@ -195,15 +221,16 @@ You ignore Kylar, and walk around <<him>> onto Wolf Street. You look behind you,
 <<link [[Next|Nightingale Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Kiss [nobr]
+:: Kylar Halloween Kiss
 <<effects>>
 
-You turn and wrap your arms around Kylar, pulling <<him>> into a kiss. <<He>> leans into you for a moment, as if unable to support <<his>> own weight.
+You turn and wrap your arms around Kylar, pulling <<him>> into a kiss. <<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>> <<He>> leans into you for a moment, as if unable to support <<his>> own weight.
 <br><br>
 
 You pull away, leaving <<him>> with a blissful smile and smudged makeup.
+<<if _npcKissVirginTemp>>
+	"Th-that was my first kiss," <<he>> whispers, <<his>> eyes shining. "It was better than I could've ever dreamed."
+<</if>>
 <br><br>
 
 <<link [[Walk back to town|Kylar Halloween Town]]>><</link>>
@@ -213,10 +240,10 @@ You pull away, leaving <<him>> with a blissful smile and smudged makeup.
 	<br>
 <</if>>
 
-:: Kylar Halloween Town [nobr]
+:: Kylar Halloween Town
 <<effects>>
 
-You hold Kylar's hand the rest of the way back to town.
+You hold Kylar's hand the rest of the way back to town. <<takeHandholdingVirginity "Kylar" "romantic">>
 
 <<if $submissive gte 1150>>
 	"I-I thought you just wanted me in the forest for privacy," you say. "Sorry if I was rude."
@@ -236,10 +263,8 @@ You hold Kylar's hand the rest of the way back to town.
 <<link [[Next|Wolf Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
-
-:: Kylar Halloween Sex [nobr]
-<<effects>>
-
+:: Kylar Halloween Sex
+<<NPCStatusCheck "Kylar">>
 <<if $sexstart is 1>>
 	<<set $sexstart to 0>>
 	<<consensual>>
@@ -265,13 +290,25 @@ You hold Kylar's hand the rest of the way back to town.
 	<span id="next"><<link [[Next|Kylar Halloween Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
-
-:: Kylar Halloween Sex Finish [nobr]
-
+:: Kylar Halloween Sex Finish
 <<set $outside to 0>><<effects>>
+<<NPCStatusCheck "Kylar">>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
-	<<He>> lies on the ground beside you, <<his>> costume disheveled. <<tearful>> you climb to your feet. Kylar does likewise.
+	<<He>> lies on the ground beside you, <<his>> costume disheveled. <<tearful>> you climb to your feet.
+	<<if $orgasmcurrent is 0 and !$worn.genitals.type.includes("chastity")>>
+		<<if _kylarStatus.includes("Rage")>>
+			Kylar rises to <<his>> knees and faces your <<genitals>>. "You didn't cum," <<he>> murmurs. "Was I... not good enough?" <<He>> shakes <<his>> head violently. "I'll make up for it. I'll show you."
+		<<else>>
+			Kylar rises to <<his>> knees and faces your <<genitals>>. "You didn't get to cum," <<he>> murmurs. "That's not fair to you. Not after you made me. Here, I'll make it up."
+		<</if>>
+		<br><br>
+
+		<<kylarFinish>>
+		<<He>> stands up, wiping grass stains off <<his>> <<if $pronoun is "m">>suit<<else>>dress<</if>>.
+	<<else>>
+		Kylar does likewise, wiping grass stains off <<his>> <<if $pronoun is "m">>suit<<else>>dress<</if>>.
+	<</if>>
 	<br><br>
 	<<clothesonplant>>
 	<<endcombat>>
@@ -281,7 +318,7 @@ You hold Kylar's hand the rest of the way back to town.
 		<br><br>
 	<</if>>
 
-	You hold Kylar's hand the rest of the way back to town. "I need to go," <<he>> says once on Wolf Street. "Thank you." <<He>> gives you a lingering hug, then scurries away.
+	You hold Kylar's hand the rest of the way back to town. <<takeHandholdingVirginity "Kylar" "romantic">> "I need to go," <<he>> says once on Wolf Street. "Thank you." <<He>> gives you a lingering hug, then scurries away.
 	<br><br>
 
 	<<link [[Next|Wolf Street]]>><<endevent>><<set $eventskip to 1>><</link>>
@@ -307,15 +344,14 @@ You hold Kylar's hand the rest of the way back to town.
 		<br><br>
 	<</if>>
 
-	You hold Kylar's hand the rest of the way back to town. "I need to go," <<he>> says once on Wolf Street. "Thank you." <<He>> gives you a lingering hug, then scurries away.
+	You hold Kylar's hand the rest of the way back to town. <<takeHandholdingVirginity "Kylar" "romantic">> "I need to go," <<he>> says once on Wolf Street. "Thank you." <<He>> gives you a lingering hug, then scurries away.
 	<br><br>
 
 	<<link [[Next|Wolf Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
 
-
-:: Kylar Halloween Continue Walk [nobr]
+:: Kylar Halloween Continue Walk
 <<effects>>
 
 Despite your misgivings, you march past Kylar and into the cemetery. <<He>> hurries to catch up.
@@ -324,8 +360,7 @@ Despite your misgivings, you march past Kylar and into the cemetery. <<He>> hurr
 <<link [[Next|Kylar Halloween Continue]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Continue [nobr]
+:: Kylar Halloween Continue
 <<effects>>
 <<pass 10>>
 
@@ -341,9 +376,7 @@ Kylar pushes in a key, and turns it. The door clicks open.
 <<link [[Next|Kylar Halloween Mansion]]>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Mansion [nobr]
+:: Kylar Halloween Mansion
 <<set $outside to 0>><<effects>>
 
 Kylar uses <<his>> phone as a torch, lighting up the interior. Each step agitates a cloud of dust. There are doors to the left and right, leading to deeper rooms, while a staircase leads to the next floor.
@@ -361,9 +394,7 @@ You hear a floorboard creak in the previous room, and climb down after Kylar.<<g
 <<link [[Next|Kylar Halloween Mansion 2]]>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Mansion 2 [nobr]
+:: Kylar Halloween Mansion 2
 <<effects>>
 
 You follow Kylar into the dark basement, past several wine racks. They're mostly empty, though a few hold empty bottles.
@@ -384,7 +415,7 @@ There's a strange purple fruit on the label.
 	You're sure Kylar knows that as well.
 	<br><br>
 
-	<<link [[Drink it anyway|Kylar Halloween Known Drink]]>><<set $drunk += 60>><<set $drugged += 60>><<set $hallucinogen += 60>><</link>>
+	<<link [[Drink it anyway|Kylar Halloween Known Drink]]>><<alcohol 60>><<drugs 60>><<set $hallucinogen += 60>><</link>>
 	<br>
 	<<link [[Refuse|Kylar Halloween Unknown Refuse]]>><<set $phase to 1>><</link>>
 	<br>
@@ -394,14 +425,13 @@ There's a strange purple fruit on the label.
 	It looks familiar, <span class="red">but you can't place it.</span> It smells sweet.
 	<br><br>
 
-	<<link [[Drink|Kylar Halloween Unknown Drink]]>><<set $drunk += 60>><<set $drugged += 60>><<set $hallucinogen += 60>><</link>>
+	<<link [[Drink|Kylar Halloween Unknown Drink]]>><<alcohol 60>><<drugs 60>><<set $hallucinogen += 60>><</link>>
 	<br>
 	<<link [[Refuse|Kylar Halloween Unknown Refuse]]>><<set $phase to 0>><<npcincr Kylar love -1>><</link>><<llove>>
 	<br>
 <</if>>
 
-
-:: Kylar Halloween Known Drink [nobr]
+:: Kylar Halloween Known Drink
 <<effects>>
 
 You take a swig from the bottle. It's sweet. A warmth spreads through your body, and you feel a little dizzy, but otherwise normal. It's not a love potion.
@@ -415,7 +445,7 @@ Kylar watches, a hopeful expression on <<his>> face.
 <<link [[Just hand Kylar the bottle|Kylar Halloween Known Hand]]>><</link>>
 <br>
 
-:: Kylar Halloween Known Pretend [nobr]
+:: Kylar Halloween Known Pretend
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -435,8 +465,7 @@ Kylar's breath quickens. "I-it worked," <<he>> says. "I-I mean... D-do you want 
 <<link [[Scare Kylar|Kylar Halloween Known Scare]]>><<npcincr Kylar rage -10>><<trauma -6>><</link>><<lllksuspicion>><<ltrauma>>
 <br>
 
-
-:: Kylar Halloween Known Go [nobr]
+:: Kylar Halloween Known Go
 <<effects>>
 
 You throw your arms around Kylar, and smother <<him>> with kisses. <<He>> wraps <<his>> arms around you in turn, and you tumble together to the ground.
@@ -445,11 +474,8 @@ You throw your arms around Kylar, and smother <<him>> with kisses. <<He>> wraps 
 <<link [[Next|Kylar Halloween Mansion Sex]]>><<set $sexstart to 1>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Mansion Sex [nobr]
-<<effects>>
-
+:: Kylar Halloween Mansion Sex
+<<NPCStatusCheck "Kylar">>
 <<if $sexstart is 1>>
 	<<set $sexstart to 0>>
 	<<consensual>>
@@ -474,8 +500,8 @@ You throw your arms around Kylar, and smother <<him>> with kisses. <<He>> wraps 
 	<span id="next"><<link [[Next|Kylar Halloween Mansion Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Kylar Halloween Mansion Sex Finish [nobr]
-
+:: Kylar Halloween Mansion Sex Finish
+<<NPCStatusCheck "Kylar">>
 <<set $outside to 0>><<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
@@ -487,8 +513,27 @@ You throw your arms around Kylar, and smother <<him>> with kisses. <<He>> wraps 
 	<<else>>
 		"I don't know what came over me," you say.
 	<</if>>
+<br><br>
+
+	"I didn't mind it," Kylar says through a blissful smile.
 	<br><br>
+
 	<<tearful>> you rise to your feet.
+	<<if $orgasmcurrent is 0 and !$worn.genitals.type.includes("chastity")>>
+		<<if _kylarStatus.includes("Rage")>>
+			Kylar rises to <<his>> knees and faces your <<genitals>>. "You didn't cum," <<he>> murmurs. "Don't you love me?" <<He>> shakes <<his>> head violently. "I'll make up for it. I'll show you."
+		<<else>>
+			Kylar rises to <<his>> knees and faces your <<genitals>>. "You didn't get to cum," <<he>> murmurs. "That's not fair to you. Not after you made me. Here, I'll make it up."
+		<</if>>
+		<br><br>
+
+		<<kylarFinish>>
+		<<He>> stands up, dusting off <<his>> <<if $pronoun is "m">>suit<<else>>dress<</if>>.
+
+	<<else>>
+		Kylar does likewise, dusting off <<his>> <<if $pronoun is "m">>suit<<else>>dress<</if>>.
+	<</if>>
+
 	<br><br>
 	<<clothesontowel>>
 	<<endcombat>>
@@ -532,7 +577,7 @@ You climb from the cellar, and return to the front doors.
 <<link [[Next|Kylar Halloween Exit]]>><</link>>
 <br>
 
-:: Kylar Halloween Known Scare [nobr]
+:: Kylar Halloween Known Scare
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -555,8 +600,7 @@ Kylar gulps. "We-we will be together," <<he>> says. "J-just put the bottle down.
 <<link [[Next|Kylar Halloween Known Chase]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Known Chase [nobr]
+:: Kylar Halloween Known Chase
 <<effects>>
 
 You follow Kylar up the ladder. <<Hes>> already fled the kitchen by the time you reach the top. You listen for the front door, but don't hear it. <<Hes>> still in the mansion.
@@ -571,8 +615,7 @@ It might not have been a love potion, but you can feel the wine working some dev
 <<link [[Look beneath the sheet|Kylar Halloween Known Sheet]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Known Curtain [nobr]
+:: Kylar Halloween Known Curtain
 <<effects>>
 
 You creep towards the curtain, grasp it, and throw it back. Kylar isn't there.
@@ -584,8 +627,7 @@ You hear a creak, then a scrambling of limbs. Kylar emerges from beneath the tab
 <<link [[Next|Kylar Halloween Known Front]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Known Sheet [nobr]
+:: Kylar Halloween Known Sheet
 <<effects>>
 
 You creep towards the sheet, grasp the hem, and lift it. Kylar's face greets you. <<He>> scrambles away and emerges from the other side of the table.
@@ -594,9 +636,7 @@ You creep towards the sheet, grasp the hem, and lift it. Kylar's face greets you
 <<link [[Next|Kylar Halloween Known Front]]>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Known Front [nobr]
+:: Kylar Halloween Known Front
 <<effects>>
 
 Laughing, you chase <<him>> into the front hall. <<He>> runs for the door, but it's locked. <<His>> shaking fingers fumble the key. You jump on top of <<him>> as <<he>> reaches for it, bringing <<him>> to the ground.
@@ -610,8 +650,7 @@ You straddle <<him>>, and raise the bottle above your head. <<He>> screams and p
 <<link [[Come clean|Kylar Halloween Known Clean]]>><<npcincr Kylar love -3>><</link>><<lllove>>
 <br>
 
-
-:: Kylar Halloween Known Dumb [nobr]
+:: Kylar Halloween Known Dumb
 <<effects>>
 
 "Where am I?" you say, looking around. You put the bottle down as Kylar peers between <<his>> fingers. "Wha-" you look around. "Weren't we downstairs? Why do you look so frightened?"
@@ -625,27 +664,31 @@ Kylar's eyes close, and <<he>> breathes a sigh of relief.
 <<link [[Stand up|Kylar Halloween Known Stand]]>><</link>>
 <br>
 
-:: Kylar Halloween Known Stand [nobr]
+:: Kylar Halloween Known Stand
 <<effects>>
 
 You climb to your feet, releasing Kylar. <<He>> searches for the key in the dust.
 <br><br>
 
-
 <<link [[Next|Kylar Halloween Exit]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Known Kiss [nobr]
+:: Kylar Halloween Known Kiss
 <<effects>>
 
-You rest your hands on Kylar's shoulders, and plant a kiss of <<his>> lips. <<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>><<He>> wraps <<his>> arms around yours in turn, and tugs you back down. <<His>> pulse races.<<promiscuity1>>
+You rest your hands on Kylar's shoulders, and plant a kiss of <<his>> lips. <<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>>
+<<if _npcKissVirginTemp>>
+	<<His>> breath hitches, and <<he>> wraps <<his>> arms around yours in turn, tugging you back down.
+<<else>>
+	<<He>> wraps <<his>> arms around yours in turn, and tugs you back down.
+<</if>>
+<<His>> pulse races.
+<<promiscuity1>>
 
 <<link [[Next|Kylar Halloween Known Sex]]>><<set $sexstart to 1>><</link>>
 <br>
 
-
-:: Kylar Halloween Known Clean [nobr]
+:: Kylar Halloween Known Clean
 <<effects>>
 
 You laugh more naturally as the bottle thuds to the ground. Kylar peers through <<his>> fingers, looking confused.
@@ -667,8 +710,8 @@ Kylar's eye close, and <<he>> breathes a sigh of relief.
 <<link [[Stand up|Kylar Halloween Known Stand]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Known Sex [nobr]
+:: Kylar Halloween Known Sex
+<<NPCStatusCheck "Kylar">>
 <<if $sexstart is 1>>
 	<<set $sexstart to 0>>
 	<<consensual>>
@@ -693,13 +736,26 @@ Kylar's eye close, and <<he>> breathes a sigh of relief.
 	<span id="next"><<link [[Next|Kylar Halloween Known Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Kylar Halloween Known Sex Finish [nobr]
-
+:: Kylar Halloween Known Sex Finish
+<<NPCStatusCheck "Kylar">>
 <<set $outside to 0>><<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 	Kylar falls back, now panting even harder. <<tearful>> you climb to your feet.
+	<<if $orgasmcurrent is 0 and !$worn.genitals.type.includes("chastity")>>
+		<<if _kylarStatus.includes("Rage")>>
+			Kylar rises to <<his>> knees and faces your <<genitals>>. "You didn't cum," <<he>> murmurs. "Don't you love me?" <<He>> shakes <<his>> head violently. "I'll make up for it. I'll show you."
+		<<else>>
+			Kylar rises to <<his>> knees and faces your <<genitals>>. "You didn't get to cum," <<he>> murmurs. "That's not fair to you. Not after you made me. Here, I'll make it up."
+		<</if>>
+		<br><br>
 
+		<<kylarFinish>>
+		<<He>> stands up, dusting off <<his>> <<if $pronoun is "m">>suit<<else>>dress<</if>>.
+
+	<<else>>
+		Kylar does likewise, dusting off <<his>> <<if $pronoun is "m">>suit<<else>>dress<</if>>.
+	<</if>>
 	<br><br>
 	<<clothesontowel>>
 	<<endcombat>>
@@ -720,12 +776,7 @@ Kylar's eye close, and <<he>> breathes a sigh of relief.
 <<link [[Next|Kylar Halloween Exit]]>><</link>>
 <br>
 
-
-
-
-
-
-:: Kylar Halloween Known Hand [nobr]
+:: Kylar Halloween Known Hand
 <<effects>>
 
 You hand Kylar the bottle. <<He>> looks disappointed, but takes a swig.
@@ -737,8 +788,7 @@ You climb from the cellar, and walk back to the front door.
 <<link [[Next|Kylar Halloween Exit]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Known Angry [nobr]
+:: Kylar Halloween Known Angry
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -763,12 +813,10 @@ Kylar shakes <<his>> heads. "N-no," <<he>> says. "That's not-"
 "I-I-I-" Kylar manages between breaths. <<He>> turns and runs.
 <br><br>
 
-
 <<link [[Next|Kylar Halloween Rough Exit]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Unknown Drink [nobr]
+:: Kylar Halloween Unknown Drink
 <<effects>>
 
 You take a swig. It's sweet, and not a little sour. A strange warmth spreads through you, and you feel a little dizzy.
@@ -783,10 +831,7 @@ You and Kylar leave the cellar.
 <<link [[Next|Kylar Halloween Exit]]>><</link>>
 <br>
 
-
-
-
-:: Kylar Halloween Unknown Refuse [nobr]
+:: Kylar Halloween Unknown Refuse
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -810,8 +855,7 @@ You and Kylar leave the cellar.
 <<link [[Refuse again|Kylar Halloween Unknown Refuse 2]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Unknown Refuse 2 [nobr]
+:: Kylar Halloween Unknown Refuse 2
 <<effects>>
 
 Kylar takes another swig, and handles it better this time. <<He>> looks disappointed, but doesn't push.
@@ -823,8 +867,7 @@ You and Kylar leave the cellar.
 <<link [[Next|Kylar Halloween Exit]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Exit [nobr]
+:: Kylar Halloween Exit
 <<effects>>
 <<pass 5>>
 
@@ -844,7 +887,7 @@ You and Kylar leave the cellar.
 	<span class="red">A pale hand protrudes from the earth,</span> and clutches Kylar's ankle. <<He>> shakes it free, just as another erupts and gropes after <<him>>.<<ggawareness>><<awareness 12>>
 	<br><br>
 
-	More hands emerge around you. Kylar grasps your hand, and together you run for the forest.
+	More hands emerge around you. Kylar grasps your hand, and together you run for the forest. <<takeHandholdingVirginity "Kylar" "romantic">>
 	<br><br>
 
 	<<link [[Next|Kylar Halloween Skulduggery 2]]>><</link>>
@@ -852,7 +895,7 @@ You and Kylar leave the cellar.
 
 <</if>>
 
-:: Kylar Halloween Rough Exit [nobr]
+:: Kylar Halloween Rough Exit
 <<effects>>
 <<pass 5>>
 
@@ -882,7 +925,7 @@ You and Kylar leave the cellar.
 
 <</if>>
 
-:: Kylar Halloween Exit 2 [nobr]
+:: Kylar Halloween Exit 2
 <<effects>>
 
 <<He>> pokes around for a few minutes. "Can't do it," <<he>> says, frustrated. "Never seen a lock like this." <<He>> shines <<his>> torch around the edge of the hall, looking for windows. They're all locked.
@@ -898,15 +941,12 @@ You and Kylar leave the cellar.
 <<link [[Search upstairs|Kylar Halloween Upstairs]]>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Pick [nobr]
+:: Kylar Halloween Pick
 <<effects>>
-
 
 <<set $lock to 1000>>
 You peer into the lock.
-<<if $skulduggery gte $lock>>
+<<if currentSkillValue('skulduggery') gte $lock>>
 	It's like nothing you've seen before, <span class="green">and you relish the challenge.</span> You place your ear against the door while you poke around, trying to fathom its inner workings.
 	<br><br>
 
@@ -930,9 +970,7 @@ You peer into the lock.
 
 <</if>>
 
-
-
-:: Kylar Halloween Skulduggery [nobr]
+:: Kylar Halloween Skulduggery
 <<effects>>
 
 You and Kylar escape the manor, bathed in red moonlight. <<He>> starts giggling. "That was fun," <<he>> says. "We should do this again some-" <<he>> almost trips as something catches <<his>> foot. Then <<he>> screams.
@@ -947,8 +985,7 @@ More hands emerge around you. Kylar grasps your arm, and together you run for th
 <<link [[Next|Kylar Halloween Skulduggery 2]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Skulduggery 2 [nobr]
+:: Kylar Halloween Skulduggery 2
 <<effects>>
 
 You keep running, unbothered by fatigue, until you see the lights of town up ahead. Kylar stops and leans against you, panting. <<His>> costume and hair are disheveled, and <<he>> lost a few accessories during your flight.
@@ -962,19 +999,22 @@ You keep running, unbothered by fatigue, until you see the lights of town up ahe
 <<link [[Pull away|Kylar Halloween Skulduggery Pull]]>><<npcincr Kylar love -1>><</link>><<llove>>
 <br>
 
-
-:: Kylar Halloween Skulduggery Kiss [nobr]
+:: Kylar Halloween Skulduggery Kiss
 <<effects>>
 
-You lean forward, and plant a kiss on Kylar's lips. <<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>><<He>> pulls you to the forest floor.
+You lean forward, and plant a kiss on Kylar's lips. <<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>>
+<<if _npcKissVirginTemp>>
+	<<His>> breath hitches, and <<he>>
+<<else>>
+	<<He>>
+<</if>>
+pulls you to the forest floor.
 <<promiscuity1>>
 
 <<link [[Next|Kylar Halloween Sex]]>><<set $sexstart to 1>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Skulduggery Pull [nobr]
+:: Kylar Halloween Skulduggery Pull
 <<effects>>
 
 You pull away.
@@ -993,12 +1033,7 @@ Kylar looks away. You continue towards town. You turn when you arrive on Wolf St
 <<link [[Next|Wolf Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
-
-
-
-
-
-:: Kylar Halloween Upstairs [nobr]
+:: Kylar Halloween Upstairs
 <<effects>>
 
 You peer up the staircase, into the gloom above. Kylar points <<his>> torch up, revealing more grey sheets lining the walls. They might be covering paintings.
@@ -1023,8 +1058,7 @@ You follow <<him>> up the creaky staircase, and into the closest room. Several t
 	<br>
 <</if>>
 
-
-:: Kylar Halloween Upstairs Dodge [nobr]
+:: Kylar Halloween Upstairs Dodge
 <<effects>>
 
 The rest of the tall sheet-covered furniture comes to life, screeching as you and Kylar back into a corner. Now that they're moving, you see human outlines beneath. One of them rushes forward, but stops as Kylar readies <<his>> pepper spray.
@@ -1043,9 +1077,7 @@ Kylar seems no less terrified. <<His>> eyes dart around the room, searching for 
 <<link [[Get Angry|Kylar Halloween Upstairs Angry]]>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Upstairs Applaud [nobr]
+:: Kylar Halloween Upstairs Applaud
 <<effects>>
 
 You laugh.
@@ -1076,7 +1108,7 @@ Kylar grips the pepper spray, <<his>> knuckles white.
 <<link [[Refuse|Kylar Halloween Kneel Refuse]]>><</link>>
 <br>
 
-:: Kylar Halloween Upstairs Angry [nobr]
+:: Kylar Halloween Upstairs Angry
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -1106,8 +1138,7 @@ Kylar grips the pepper spray, <<his>> knuckles white.
 <<link [[Refuse|Kylar Halloween Kneel Refuse]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Kneel Refuse [nobr]
+:: Kylar Halloween Kneel Refuse
 <<effects>>
 
 <<endevent>><<npc Whitney>><<person1>><<generatey2>>
@@ -1125,8 +1156,7 @@ The three of them retreat into the corner. Whitney gestures again, but <<his>> r
 <<link [[Next|Kylar Halloween Kneel Refuse 2]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Kneel Refuse 2 [nobr]
+:: Kylar Halloween Kneel Refuse 2
 <<effects>>
 
 <<endevent>><<npc Kylar>><<person1>><<generatey2>>
@@ -1148,8 +1178,7 @@ Kylar pulls you behind <<him>>, keeping a grip on your arm as you both walk to t
 	<br>
 <</if>>
 
-
-:: Kylar Halloween Kneel Run [nobr]
+:: Kylar Halloween Kneel Run
 <<effects>>
 <<pass 15>>
 <<endevent>><<npc Whitney>><<person1>>
@@ -1165,8 +1194,7 @@ You run for a couple more minutes, then take cover behind a tree, and listen. Yo
 <<link [[Next|Forest]]>><<endevent>><<set $eventskip to 1>><<set $forest to 0>><</link>>
 <br>
 
-
-:: Kylar Halloween Kneel Help [nobr]
+:: Kylar Halloween Kneel Help
 <<effects>>
 <<pass 15>>
 <<endevent>><<npc Whitney>><<person1>>
@@ -1174,7 +1202,7 @@ You run for a couple more minutes, then take cover behind a tree, and listen. Yo
 	You grasp Whitney's arms, <span class="green">and pull <<him>> away from Kylar.</span> Together, you escape down the stairs and through the now-open front doors, into the red moonlight. You run into the forest.<<ldom>><<npcincr Whitney dom -1>>
 	<br><br>
 	<<endevent>><<npc Kylar>><<person1>>
-	Kylar stops and leans against a tree and pants amount, before lunging forward and throwing <<his>> arms around you. "You shouldn't have risked it," <<he>> says.<<glove>><<llksuspicion>><<npcincr Kylar love 1>><<npcincr Kylar rage -5>>
+	Kylar stops and leans against a tree and pants for a moment, before lunging forward and throwing <<his>> arms around you. "You shouldn't have risked it," <<he>> says.<<glove>><<llksuspicion>><<npcincr Kylar love 1>><<npcincr Kylar rage -5>>
 	<br><br>
 
 	<<link [[Kiss|Kylar Halloween Skulduggery Kiss]]>><<npcincr Kylar love 3>><<npcincr Kylar lust 10>><</link>><<promiscuous1>><<gglove>><<gglust>>
@@ -1192,18 +1220,16 @@ You run for a couple more minutes, then take cover behind a tree, and listen. Yo
 	<br>
 <</if>>
 
-
-
-:: Kylar Halloween Kneel Spray [nobr]
+:: Kylar Halloween Kneel Spray
 <<effects>>
 
 <<endevent>><<npc Whitney>><<person1>>
 You point your pepper spray above Kylar's head, and unload it into Whitney's eyes. <<He>> staggers backward, clutching <<his>> face.
 
-Kylar grasps your hand, and together you escape down the stairs and through the now-open front doors, into the red moonlight. You run into the forest.<<ldom>><<npcincr Whitney dom -1>>
+Kylar grasps your hand, and together you escape down the stairs and through the now-open front doors, into the red moonlight. <<takeHandholdingVirginity "Kylar" "romantic">> You run into the forest.<<ldom>><<npcincr Whitney dom -1>>
 <br><br>
 <<endevent>><<npc Kylar>><<person1>>
-Kylar stops and leans against a tree and pants amount, before lunging forward and throwing <<his>> arms around you. "You shouldn't have risked it," <<he>> says.<<glove>><<llksuspicion>><<npcincr Kylar love 1>><<npcincr Kylar rage -5>>
+Kylar stops and leans against a tree and pants for a moment, before lunging forward and throwing <<his>> arms around you. "You shouldn't have risked it," <<he>> says.<<glove>><<llksuspicion>><<npcincr Kylar love 1>><<npcincr Kylar rage -5>>
 <br><br>
 
 <<link [[Kiss|Kylar Halloween Skulduggery Kiss]]>><<npcincr Kylar love 3>><<npcincr Kylar lust 10>><</link>><<promiscuous1>><<gglove>><<gglust>>
@@ -1211,12 +1237,8 @@ Kylar stops and leans against a tree and pants amount, before lunging forward an
 <<link [[Pull away|Kylar Halloween Skulduggery Pull]]>><<npcincr Kylar love -1>><</link>><<llove>>
 <br>
 
-
-
-:: Kylar Halloween Kneel [nobr]
+:: Kylar Halloween Kneel
 <<effects>>
-
-
 
 <<if $phase is 0>>
 	<<endevent>><<npc Whitney>><<person1>>
@@ -1253,7 +1275,6 @@ Kylar stops and leans against a tree and pants amount, before lunging forward an
 		<<glust>><<npcincr Whitney lust 5>><<promiscuity4>>
 	<</if>>
 
-
 	<<endevent>><<npc Kylar>><<person1>>
 	Kylar tries to intervene, but Whitney's friends restrain <<him>>. They hold <<his>> head back, forcing <<him>> to watch.<<gggksuspicion>><<npcincr Kylar rage 20>>
 	<br><br>
@@ -1264,10 +1285,8 @@ Kylar stops and leans against a tree and pants amount, before lunging forward an
 	<br>
 <</if>>
 
-
-:: Kylar Halloween Caught [nobr]
+:: Kylar Halloween Caught
 <<effects>>
-
 
 The rest of the tall sheet-covered furniture comes to life, screeching as they rush toward Kylar. Now that they're moving, you see human outlines beneath. They grasp, <<his>> arms, and force <<him>> to <<his>> knees.
 <br><br>
@@ -1282,10 +1301,8 @@ Kylar struggles forward in a desperate attempt to reach you, but another of Whit
 <<link [[Next|Kylar Halloween Forced Kneel]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Forced Kneel [nobr]
+:: Kylar Halloween Forced Kneel
 <<effects>>
-
 
 <<endevent>><<person1>><<npc Whitney>>
 <<if $NPCList[0].penis isnot "none">>
@@ -1308,7 +1325,7 @@ Kylar struggles forward in a desperate attempt to reach you, but another of Whit
 <<link [[Refuse|Kylar Halloween Lick Refuse]]>><</link>>
 <br>
 
-:: Kylar Halloween Lick Refuse [nobr]
+:: Kylar Halloween Lick Refuse
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -1334,11 +1351,10 @@ Kylar's expression is blank. "D-don't do it."
 <<link [[Refuse|Kylar Halloween Lick Refuse 2]]>><<stress 24>><</link>><<gggstress>>
 <br>
 
-:: Kylar Halloween Lick Refuse 2 [nobr]
+:: Kylar Halloween Lick Refuse 2
 <<effects>>
 
-
-You shake your head. "Are you fucking serious?" Whitney says. "Fucking fine." <<He>> shoves you to the ground, and marches toward Kylar. "Give me that," <<he>> says to the <<person2>><<person>>. <<He>> looks at the knife, <span class="green">then discards it.</span><<llstress>><<stress -12>>
+You shake your head. "Are you fucking serious?" Whitney says. "Fucking fine." <<He>> shoves you to the ground, and marches toward Kylar. "Give me that," <<he>> says to the <<person2>><<person>>. <<person1>><<He>> looks at the knife, <span class="green">then discards it.</span><<llstress>><<stress -12>>
 <br><br>
 
 Instead, <<he>> pulls back <<his>> hand, and punches Kylar's nose. Kylar falls backwards, unmoving. "We're done here," Whitney says. <<He>> marches from the room, and <<his>> friends follow.<<lldom>><<npcincr Whitney dom -3>>
@@ -1347,8 +1363,7 @@ Instead, <<he>> pulls back <<his>> hand, and punches Kylar's nose. Kylar falls b
 <<link [[Next|Kylar Halloween End]]>><<endevent>><</link>>
 <br>
 
-
-:: Kylar Halloween End [nobr]
+:: Kylar Halloween End
 <<effects>>
 
 <<endevent>><<npc Kylar>><<person1>>
@@ -1369,9 +1384,8 @@ Without warning, <<he>> lunges, wrapping <<his>> arms tight around you.
 <<link [[Pull away|Kylar Halloween Skulduggery Pull]]>><<npcincr Kylar love -1>><</link>><<llove>>
 <br>
 
-:: Kylar Halloween Lick [nobr]
+:: Kylar Halloween Lick
 <<effects>>
-
 
 <<if $phase is 0>>
 	<<endevent>><<npc Whitney>><<person1>>
@@ -1394,7 +1408,6 @@ Without warning, <<he>> lunges, wrapping <<his>> arms tight around you.
 		<<gglust>><<npcincr Whitney lust 5>><<promiscuity4>>
 	<</if>>
 
-
 	<<endevent>><<npc Kylar>><<person1>>
 	One of Whitney's friends holds Kylar's head back, forcing <<him>> to watch.<<gggksuspicion>><<npcincr Kylar rage 20>>
 	<br><br>
@@ -1405,12 +1418,7 @@ Without warning, <<he>> lunges, wrapping <<his>> arms tight around you.
 	<br>
 <</if>>
 
-
-
-:: Kylar Halloween Oral [nobr]
-<<effects>>
-
-
+:: Kylar Halloween Oral
 <<if $sexstart is 1>>
 	<<set $sexstart to 0>>
 	<<consensual>>
@@ -1446,7 +1454,7 @@ Kylar watches with a blank expression.
 	<span id="next"><<link [[Next|Kylar Halloween Oral]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Kylar Halloween Oral Finish [nobr]
+:: Kylar Halloween Oral Finish
 
 <<set $outside to 0>><<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
@@ -1478,9 +1486,7 @@ Kylar watches with a blank expression.
 	<<link [[Next|Kylar Halloween Bed]]>><</link>>
 <</if>>
 
-
-
-:: Kylar Halloween Bed [nobr]
+:: Kylar Halloween Bed
 <<effects>>
 
 <<npc Whitney>><<person1>>
@@ -1497,8 +1503,7 @@ Whitney's friends surround you, groping and probing, but Whitney interrupts. "Wh
 <<link [[Next|Kylar Halloween Bed 2]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Bed 2 [nobr]
+:: Kylar Halloween Bed 2
 <<effects>>
 
 <<endevent>><<npc Whitney>><<person1>>
@@ -1515,14 +1520,13 @@ You follow the hallway in the direction of the scream, and find a <<person>> lyi
 <<link [[Next|Kylar Halloween Bed 3]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Bed 3 [nobr]
+:: Kylar Halloween Bed 3
 <<effects>>
 
 <<generatey3>><<person3>>
 "I-I'm done," a <<person>> says, <<his>> voice trembling. "They say the place is haunt-"
 <br>
-Whitney interrupts <<him>> with a smack to the face. "Don't be a fucking coward,"
+Whitney interrupts <<him>> with a smack to the face. "Don't be a fucking coward,"<<person1>>
 <<he>> says, crouching beside the body. "It's just that creep, hiding in the shadows and playing with those stolen tranqs." <<He>> feels the <<person2>><<persons>> neck. "<<Hes>> fine. Someone help <<him>> up."
 <br><br>
 
@@ -1532,8 +1536,7 @@ Whitney interrupts <<him>> with a smack to the face. "Don't be a fucking coward,
 <<link [[Next|Kylar Halloween Bed 4]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Bed 4 [nobr]
+:: Kylar Halloween Bed 4
 <<effects>>
 
 "I know you're in here, freak," Whitney says. "Come out now, and I'll let you join the train." No response. <<His>> friends seem afraid to even move.
@@ -1551,8 +1554,7 @@ The door opens, and <<his>> friends tumble out. They flee down the stairs, the p
 <<link [[Next|Kylar Halloween Bed 5]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Bed 5 [nobr]
+:: Kylar Halloween Bed 5
 <<effects>>
 
 <<endevent>><<npc Whitney>><<person1>>
@@ -1569,8 +1571,7 @@ You spot Kylar, hiding in the shadows beside the door frame, <<his>> eyes intens
 <<link [[Warn Whitney|Kylar Halloween Warn]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Wait [nobr]
+:: Kylar Halloween Wait
 <<effects>>
 
 Whitney steps into the corridor, <span class="blue">and Kylar strikes.</span> <<He>> steps forward, and presses something into Whitney's neck.
@@ -1586,9 +1587,7 @@ Whitney spins and shoves Kylar, sending <<him>> sprawling to the ground.
 <<link [[Next|Kylar Halloween Escape]]>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Escape [nobr]
+:: Kylar Halloween Escape
 <<effects>>
 <<pass 15>>
 Kylar jumps to <<his>> feet, and grasps your arm. You dodge a weak grasp by Whitney, and together escape down the stairs and into the red moonlight.
@@ -1597,7 +1596,6 @@ Kylar jumps to <<his>> feet, and grasps your arm. You dodge a weak grasp by Whit
 You keep running when you reach the forest, until Kylar stops to rest against a tree. <<His>> clothes and hair are disheveled, but <<hes>> smiling. "I-I won," <<he>> says, throwing <<his>> arms around you. "You're all mine."<<lllksuspicion>><<npcincr Kylar rage -20>>
 <br><br>
 
-
 <<link [[Ask about Kylar's tricks|Kylar Halloween Tricks]]>><</link>>
 <br>
 <<link [[Kiss|Kylar Halloween Skulduggery Kiss]]>><<npcincr Kylar love 3>><<npcincr Kylar lust 10>><</link>><<promiscuous1>><<gglove>><<gglust>>
@@ -1605,7 +1603,7 @@ You keep running when you reach the forest, until Kylar stops to rest against a 
 <<link [[Pull away|Kylar Halloween Skulduggery Pull]]>><<npcincr Kylar love -1>><</link>><<llove>>
 <br>
 
-:: Kylar Halloween Tricks [nobr]
+:: Kylar Halloween Tricks
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -1617,7 +1615,7 @@ You keep running when you reach the forest, until Kylar stops to rest against a 
 <</if>>
 <br><br>
 
-Kylar's expression doesn't change. "That wasn't me," <<he>> says. "I just used my tranquilizers."<<gstress>><<stress 6>>
+Kylar's expression doesn't change. "That wasn't me," <<he>> says. "I just used my tranquilisers."<<gstress>><<stress 6>>
 <br><br>
 
 <<He>> pulls you closer, seeming unbothered.
@@ -1629,9 +1627,7 @@ Kylar's expression doesn't change. "That wasn't me," <<he>> says. "I just used m
 <<link [[Pull away|Kylar Halloween Skulduggery Pull]]>><<npcincr Kylar love -1>><</link>><<llove>>
 <br>
 
-
-
-:: Kylar Halloween Warn [nobr]
+:: Kylar Halloween Warn
 <<effects>>
 
 <<endevent>><<npc Kylar>><<person1>>
@@ -1647,8 +1643,7 @@ Kylar crashes into the floorboards below, but manages to stagger to <<his>> feet
 <<link [[Next|Kylar Halloween Whitney]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Whitney [nobr]
+:: Kylar Halloween Whitney
 <<effects>>
 
 <<endevent>><<npc Whitney>><<person1>>
@@ -1663,8 +1658,7 @@ Whitney walks back into the room with the moving furniture, now silent. Through 
 <<link [[Walk back alone|Kylar Halloween Alone]]>><</link>>
 <br>
 
-
-:: Kylar Halloween Accompany [nobr]
+:: Kylar Halloween Accompany
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -1697,8 +1691,7 @@ Whitney walks back into the room with the moving furniture, now silent. Through 
 	<br>
 <</if>>
 
-
-:: Kylar Halloween Thank [nobr]
+:: Kylar Halloween Thank
 <<effects>>
 <<pass 15>>
 <<if $submissive gte 1150>>
@@ -1710,7 +1703,7 @@ Whitney walks back into the room with the moving furniture, now silent. Through 
 <</if>>
 <br><br>
 
-"It's fine," Whitney says. "I've got places to be. Gonna give those cowards a talking to, for one." <<He>> hesitates, then leans forward and kisses you.
+"It's fine," Whitney says. "I've got places to be. Gonna give those cowards a talking to, for one." <<He>> hesitates, then leans forward and kisses you. <<takeKissVirginity "Whitney" `($whitneyromance is 1?"loveInterest":"romantic")`>>
 <br><br>
 You try to hold <<him>> closer, but <<he>> steps back and looks away. <<He>> opens <<his>> mouth as if to speak, but instead turns and strides into town.
 <br><br>
@@ -1718,8 +1711,7 @@ You try to hold <<him>> closer, but <<he>> steps back and looks away. <<He>> ope
 <<link [[Next|Wolf Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
-
-:: Kylar Halloween Ask [nobr]
+:: Kylar Halloween Ask
 <<effects>>
 <<pass 15>>
 <<if $submissive gte 1150>>
@@ -1741,12 +1733,10 @@ Whitney raises a hand to your chest, and pushes you against a tree. "What the fu
 <<link [[Remain silent|Kylar Halloween Whitney Silent]]>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Whitney Kiss [nobr]
+:: Kylar Halloween Whitney Kiss
 <<effects>>
 
-Whitney leans close, close enough that you can lean forward and plant a kiss on <<his>> lips. <<takeKissVirginity "Whitney" `($kylarenglish gte 1?"loveInterest":"romantic")`>>
+Whitney leans close, close enough that you can lean forward and plant a kiss on <<his>> lips. <<takeKissVirginity "Whitney" `($whitneyromance is 1?"loveInterest":"romantic")`>>
 <<promiscuity1>>
 
 <<He>> steps back as if struck. <<He>> opens <<his>> mouth to speak, but instead turns and strides into town.
@@ -1755,8 +1745,7 @@ Whitney leans close, close enough that you can lean forward and plant a kiss on 
 <<link [[Next|Wolf Street]]>><<set $eventskip to 1>><<endevent>><</link>>
 <br>
 
-
-:: Kylar Halloween Whitney Apologise [nobr]
+:: Kylar Halloween Whitney Apologise
 <<effects>>
 
 <<if $submissive gte 1150>>
@@ -1764,7 +1753,7 @@ Whitney leans close, close enough that you can lean forward and plant a kiss on 
 <<elseif $submissive lte 850>>
 	"Stop overreacting," you say. "I'm sorry, okay?"
 <<else>>
-	"Sorry," you say. "I didn't meant to upset you."
+	"Sorry," you say. "I didn't mean to upset you."
 <</if>>
 <br><br>
 
@@ -1777,9 +1766,7 @@ Whitney releases <<his>> grip. "I'm not upset," <<he>> says. "But I might have o
 <<link [[Next|Wolf Street]]>><<set $eventskip to 1>><<endevent>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Whitney Silent [nobr]
+:: Kylar Halloween Whitney Silent
 <<effects>>
 
 Whitney glares at you a moment, then lets <<his>> hand fall. <<He>> turns and strides into town.
@@ -1788,9 +1775,7 @@ Whitney glares at you a moment, then lets <<his>> hand fall. <<He>> turns and st
 <<link [[Next|Wolf Street]]>><<set $eventskip to 1>><<endevent>><</link>>
 <br>
 
-
-
-:: Kylar Halloween Alone [nobr]
+:: Kylar Halloween Alone
 <<effects>>
 
 You walk into the red moonlight. Whitney strides away, glancing back to make sure you're not following.
@@ -1798,5 +1783,3 @@ You walk into the red moonlight. Whitney strides away, glancing back to make sur
 
 <<link [[Next|Churchyard]]>><<endevent>><</link>>
 <br>
-
-

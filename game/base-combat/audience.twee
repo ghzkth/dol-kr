@@ -1,5 +1,5 @@
 :: Widgets Audience [widget]
-<<widget "audiencecamera">><<nobr>>
+<<widget "audiencecamera">>
 <<exposure>>
 <<if $audienceselector is 1>>
 	<<set $audiencedesc to "흥분한">>
@@ -25,12 +25,12 @@
 	<<audiencecameraswarm>>
 <<elseif $rng gte 81 and $facepic isnot 1>>
 	<<set $facepic to 1>>
-	$audiencedesc <<putpost $audiencecamera "이">> 카메라를 당신의 얼굴로 향했다. 플래시가 터지고, <<ahe>>는 사진을 찍었다.
+	$audiencedesc <<putpost $audiencecamera "이">> 카메라를 당신의 얼굴로 향했다. 플래시가 터지고, <<ahe "은">> 사진을 찍었다.
 	<<if $vaginastate is "penetrated">>
 		<<if $enemytype is "beast">>
 			<<if $orgasmdown gte 1>>
 				<<if $face is "covered">>
-					"<<pShesPost "이">> 동물 자지가 보지에 넣어진 채 가 버렸어! 말도 안 돼."
+					"<<pShesPost "이">> 짐승 자지가 보지에 넣어진 채 가 버렸어! 말도 안 돼."
 				<<else>>
 					"<<beasttypePost "이">> 공공장소에서 널 따먹고 있는데, 넌 오르가즘을 느꼈어. 어떻게 이 부끄러움을 견딜 수 있지?"
 				<</if>>
@@ -105,7 +105,7 @@
 			<<if $face is "covered">>
 				"네 자지가 괴롭혀져서 가 버리는 것은 정상이야. 부끄러워 할 필요 없어."
 			<<else>>
-				"<<pshePost "가">> 가 버릴 때 귀여운 모습을 봐! 좀 더 <<phimPost "을">> 따먹어."
+				"<<pshePost "이">> 가 버릴 때 귀여운 모습을 봐! 좀 더 <<phimPost "을">> 따먹어."
 			<</if>>
 		<<else>>
 			<<if $face is "covered">>
@@ -249,7 +249,7 @@
 			<<if $face is "covered">>
 				"원한다면 얼굴은 가려도 되지만, 엉망진창으로 가 버리고 있다는 건 모두 알 수 있을 거야."
 			<<else>>
-				"<<pShes "이">> <<pherPost "의">> 엉덩이 끝을 눌리는 것만으로 엉망으로 가 버렸어."
+				"<<pShesPost "이">> <<pherPost "의">> 엉덩이 끝을 눌리는 것만으로 엉망으로 가 버렸어."
 			<</if>>
 		<<else>>
 			<<if $face is "covered">>
@@ -352,64 +352,106 @@
 		<<if $enemytype is "beast">>
 			<<if $orgasmdown gte 1>>
 				<<if $face is "covered">>
-					"<<pShes>> cumming from getting a face full of <<beasttype>> pussy. No wonder <<pshes>> shy about it."
+					"<<pShe_ga>> <<beasttype_yi>> 보지에 얼굴을 파묻은 채로 가버리고 있어. <<pshe_ga>> 부끄러워하는 것도 당연하지."
 				<<else>>
-					"<<pShes>> cumming from getting a face full of <<beasttype>> pussy. Wow."
+					"<<pShe_ga>> <<beasttype_yi>> 보지에 얼굴을 파묻은 채로 가버리고 있어. 우와."
 				<</if>>
 			<<else>>
 				<<if $face is "covered">>
-					"Don't be shy. I bet you love eating <<beasttype>> pussy."
+					"부끄러워 하지 말라고. 네가 <<beasttype_yi>> 보지를 빨아먹는 것을 좋아하는 것 다 아니까."
 				<<else>>
-					"Can't believe <<pshes>> got <<pher>> face all up in <<beasttype>> pussy."
+					"<<pshe_ga>> <<beasttype_yi>> 보지에 얼굴을 파묻고 있다니 믿어지지 않아."
 				<</if>>
 			<</if>>
 		<<else>>
 			<<if $orgasmdown gte 1>>
 				<<if $face is "covered">>
-					"Don't be shy. Let's see your face as you get off on eating that pussy."
+					"부끄러워 하지 말라고. 그 보지를 빨아먹고 있는 네 얼굴을 보고 싶으니까."
 				<<else>>
-					"<<pShes>> cumming just from being all up in that pussy."
+					"<<pShe_ga>> 저 보지로 끝장나게 가버리고 있어."
 				<</if>>
 			<<else>>
 				<<if $face is "covered">>
-					"<<pShes>> hiding <<pher>> face so we can't see how much <<pshe>> loves having a face full of pussy."
+					"<<pShe_ga>> 얼굴을 가리고 있어서 <<pshe_ga>> 얼마나 보지에 얼굴을 파묻고 있는 것을 좋아하는지 볼 수가 없잖아."
 				<<else>>
-					"Rub it in <<pher>> face. I bet <<pshe>> loves having <<pher>> face used."
+					"<<pher_yi>> 얼굴을 비벼봐. <<pher_yi>> 얼굴이 그렇게 쓰여지는 것을 <<pshe_ga>> 좋아할 거라고 내가 장담하지."
 				<</if>>
 			<</if>>
 		<</if>>
-	<<elseif $mouthstate is "facesit">>
+	<<elseif $mouthuse is "facesit" and $mouthstate is "vagina">>
 		<<if $orgasmdown gte 1>>
 			<<switch random(3)>>
 				<<case 0>>
-					"Look how much <<pshes>> loving being sat on."
+					"<<pher_yi>> 얼굴에 앉는 것을 <<pshe_ga>> 얼마나 좋아하는지 보라고."
 				<<case 1>>
-					"Aw. You almost can't see <<pher>> orgasm face whilst it's being sat on."
+					"이런. 얼굴에 앉아있어서 <<pher_yi>> 가버리는 얼굴을 잘 볼 수가 없잖아."
 				<<case 2>>
-					"That pussy isn't hiding how excited <<pshe>> looks. <<pShe>>'s cumming from face sitting."
+					"저 보지를 보면 <<pshe_ga>> 얼마나 흥분했는지 알 수 있지. <<pShe_nun>> 얼굴에 누가 앉아있는 것으로도 가버리는걸."
 				<<case 3>>
-					"Wait until I show my friends how much <<pshe>> loves having <<pher>> face sat on."
+					"<<pshe_ga>> 얼마나 <<pher_yi>> 얼굴에 누군가 앉는 것을 좋아하는지 보여줄 때까지 기다릴 수가 없어."
 			<</switch>>
 		<<else>>
 			<<if $enemyanger gte 30>>
 				<<switch random(2)>>
 					<<case 0>>
-						"<<pShes>> really getting buried in there."
+						"<<pShe_ga>> 저기 진짜로 파묻히려고 하네."
 					<<case 1>>
-						"Aw, <<pher>> face is going red! Keep sitting on <<phim>>!"
+						"이런, <<pher_yi>> 얼굴이 벌개지고 있어! 계속 <<phim_ul>> 앉혀놓으라고!"
 					<<case 2>>
-						"You liking your face being sat on, slut?"
+						"네 얼굴 위에 누군가를 앉히는 것을 좋아하지, <<slut_a>>?"
 				<</switch>>
 			<<else>>
 				<<switch random(2)>>
 					<<case 0>>
-						"The best seat in the house."
+						"집에서 가장 좋은 의자로군."
 					<<case 1>>
-						"<<pHer>> face looks like the perfect throne."
+						"<<pHer_yi>> 얼굴은 완벽한 왕좌인 것 같아."
 					<<case 2>>
-						"You look like you're enjoying it under there."
+						"너는 거기 아래 있는 것을 즐기는 것 같구나."
 				<</switch>>
 			<</if>>
+		<</if>>
+	<<elseif $mouthuse is "facesit" and $mouthstate is "anal">>
+		<<if $orgasmdown gte 1>>
+			<<if $mouthactiondefault is "anallick">>
+				<<switch random(2)>>
+					<<case 0>>
+						"<<pShe_ga>> 엉덩이를 핥는 것 만으로 가버렸어. 착한 <<girl_iya>>."
+					<<case 1>>
+						"봐! <<pShe_ga>> <<pher_yi>> 입으로 저 항문을 핥는 것 만으로 오르가즘을 느꼈어."
+					<<case 2>>
+						"<<pShe_ga>> 엉덩이를 핥는 것 만으로 가버렸어. 다른 사람에게도 알려주고 싶어."
+				<</switch>>
+			<<elseif $mouthactiondefault is "analkiss">>
+				<<switch random(2)>>
+					<<case 0>>
+						"엉덩이에 키스하는 것 만으로도 <<pshe_ga>> 가버렸어. 참 순종적인 <<slut_iya>>."
+					<<case 1>>
+						"항문에 키스하는 것 만으로도 가버렸다고? 그렇게 되도록 몸이 적응되어 있구나, <<bitch_ya>>!"
+					<<case 2>>
+						"<<pShe_ga>> 엉덩이에 키스하는 것 만으로도 가버렸어. <<phimPost>>에게 계속 하게 해!"
+				<</switch>>
+			<<else>>
+				"네 입에 있는 항문 만으로도 가 버리기에 충분한가 보지? 부인하지 말라고!"
+			<</if>>
+		<<elseif $enemyanger gte 30>>
+			<<switch random(2)>>
+				<<case 0>>
+					"착한 <<slut_i>> 되어 그 엉덩이를 핥으라고."
+				<<case 1>>
+					"계속 해, 그 엉덩이에 키스하라고, 그래야 하는 걸 알잖아, <<slut_a>>."
+				<<case 2>>
+					"<<pShe_nun>> 그 엉덩이 밑에서 짓눌러지고 있고, <<pshe_ga>> 분명 그걸 좋아하고 있을 거야."
+			<</switch>>
+		<<else>>
+			<<switch random(2)>>
+				<<case 0>>
+					"이 변태 <<bitch_nun>> <<pher_yi>> 입 위에 누가 앉는 것을 분명 좋아하고 있을 거야."
+				<<case 1>>
+					"그 항문이 맛있기를 바라."
+				<<case 2>>
+					"<<pHer_yi>> 얼굴이 엉덩이로 전부 가려졌어. 이걸 주변에 당장이라도 보여주고 싶어."
+			<</switch>>
 		<</if>>
 	<<elseif $vaginastate is "othermouth">>
 		<<if $orgasmdown gte 1>>
@@ -506,7 +548,7 @@
 			<<if $face is "covered">>
 				"손 치워 <<bitchPost "아">>, 엉덩이가 혀로 괴롭혀질 때 네가 어떻게 느끼는지 보고 싶다고."
 			<<else>>
-				"<<pherPost "의">> 엉덩이를 더 깊숙히 괴롭혀, <<pshePost "이">> 좋아하는 것 같아."
+				"<<pherPost "의">> 엉덩이를 더 깊숙이 괴롭혀, <<pshePost "이">> 좋아하는 것 같아."
 			<</if>>
 		<</if>>
 	<<elseif $anusstate is "othermouthimminent">>
@@ -520,7 +562,7 @@
 			<<if $face is "covered">>
 				"손 치워 <<bitchPost "아">>, 엉덩이가 혀로 괴롭혀질 때 네가 어떻게 느끼는지 보고 싶다고."
 			<<else>>
-				"<<pherPost "의">> 엉덩이를 더 깊숙히 괴롭혀, <<pshePost "이">> 좋아하는 것 같아."
+				"<<pherPost "의">> 엉덩이를 더 깊숙이 괴롭혀, <<pshePost "이">> 좋아하는 것 같아."
 			<</if>>
 		<</if>>
 	<<elseif $anusstate is "othermouthentrance">>
@@ -534,7 +576,7 @@
 			<<if $face is "covered">>
 				"손 치워 <<bitchPost "아">>, 엉덩이가 혀로 괴롭혀질 때 네가 어떻게 느끼는지 보고 싶다고."
 			<<else>>
-				"<<pherPost "의">> 엉덩이를 더 깊숙히 괴롭혀, <<pshePost "이">> 좋아하는 것 같아."
+				"<<pherPost "의">> 엉덩이를 더 깊숙이 괴롭혀, <<pshePost "이">> 좋아하는 것 같아."
 			<</if>>
 		<</if>>
 	<<elseif $mouthstate is "kiss">>
@@ -616,7 +658,7 @@
 	<</if>>
 <<elseif $rng gte 61 and $breastpic isnot 1>>
 	<<set $breastpic to 1>>
-	$audiencedesc <<putpost $audiencecamera "이">> 카메라를 당신의 <<breastsPost "으로">> 향했다. 플래시가 터지고, <<ahe>>는 사진을 찍었다.
+	$audiencedesc <<putpost $audiencecamera "이">> 카메라를 당신의 <<breastsPost "으로">> 향했다. 플래시가 터지고, <<ahe "은">> 사진을 찍었다.
 	<<set $rng to random(1, 100)>>
 	<<if $breastsize is 0>>
 		<<if $player.gender_appearance is "m">>
@@ -625,6 +667,8 @@
 					"남자아이들은 이런 귀여운 젖꼭지를 가지고 있구나."
 				<<elseif $rng gte 33>>
 					"매끈한 가슴이 참 아름다워."
+				<<elseif $rng gte 20 and $anusdoubletarget isnot undefined and $NPCList[$anustarget].penis is "anusdouble" and $NPCList[$anusdoubletarget].penis is "anusdouble">>
+					"<<pHer_yi>> 딱딱한 <<nipples_ga>> 모든 것을 말해주네. 이 소년은 항문에 딱딱한 두 자지가 들어오는 것을 좋아하고 있어!"
 				<<else>>
 					"부끄러워하지 마. 네 젖꼭지는 야한 게 아니야."
 				<</if>>
@@ -644,6 +688,12 @@
 					<<insecurity "breasts_tiny" 1>><<ginsecurity "breasts_tiny">>
 				<<elseif $rng gte 33>>
 					"<<pherPost "의">> 가슴은 너무 납작해서 남자아이라고 해도 믿겠어."
+					<<insecurity "breasts_tiny" 1>><<ginsecurity "breasts_tiny">>
+				<<elseif $rng gte 20 and $anusdoubletarget isnot undefined and $NPCList[$anustarget].penis is "anusdouble" and $NPCList[$anusdoubletarget].penis is "anusdouble">>
+					"<<pHer_yi>> 소년 <<nipples_ga>> 정말 딱딱해! 이 절벽 <<bitch_nun>> 항문에 딱딱한 두 자지가 들어오는 것을 좋아하고 있어!"
+					<<insecurity "breasts_tiny" 1>><<ginsecurity "breasts_tiny">>
+				<<elseif $rng gte 20 and $vaginadoubletarget isnot undefined and $NPCList[$vaginatarget].penis is "vaginadouble" and $NPCList[$vaginadoubletarget].penis is "vaginadouble">>
+					"<<pHer_yi>> <<nipples_ga>> 정말 딱딱해! 이 절벽 <<bitch_nun>> 자지 둘이 찔러대는 것을 좋아하고 있어!"
 					<<insecurity "breasts_tiny" 1>><<ginsecurity "breasts_tiny">>
 				<<else>>
 					"내가 그녀의 귀여운 가슴 사진을 찍었다는 것이 중요하지. 나중에 필요할지도 몰라."
@@ -690,6 +740,10 @@
 				<<elseif $rng gte 33>>
 					"이제 네 가슴이 커지더라도, 작고 귀여웠을 때의 증거는 내가 가지고 있을 거야."
 					<<insecurity "breasts_small" 1>><<ginsecurity "breasts_small">>
+				<<elseif $rng gte 20 and $anusdoubletarget isnot undefined and $NPCList[$anustarget].penis is "anusdouble" and $NPCList[$anusdoubletarget].penis is "anusdouble">>
+					"<<pHer_yi>> <<nipples_ga>> 정말 단단해! 이 <<bitch_ga>> 동시 삽입을 좋아하는가 봐!"
+				<<elseif $rng gte 20 and $vaginadoubletarget isnot undefined and $NPCList[$vaginatarget].penis is "vaginadouble" and $NPCList[$vaginadoubletarget].penis is "vaginadouble">>
+					"<<pHer_yi>> <<nipples_ga>> 정말 단단해! 이 <<bitch_ga>> 동시 삽입을 좋아하는가 봐!"
 				<<else>>
 					"네 작은 가슴을 부끄러워하지 마, 네 가슴은 사랑스러워."
 					<<insecurity "breasts_small" 1>><<ginsecurity "breasts_small">>
@@ -738,6 +792,12 @@
 			<<elseif $rng gte 33>>
 				"아주 인상적인 가슴이야."
 				<<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">>
+			<<elseif $rng gte 20 and $anusdoubletarget isnot undefined and $NPCList[$anustarget].penis is "anusdouble" and $NPCList[$anusdoubletarget].penis is "anusdouble">>
+				"나는 그들의 자지가 <<pher_yi>> <<slutPost>> 항문을 유린할 때 <<pher_yi>> 유방이 어떻게 흔들리는지 보는 게 좋아!"
+				<<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">>
+			<<elseif $rng gte 20 and $vaginadoubletarget isnot undefined and $NPCList[$vaginatarget].penis is "vaginadouble" and $NPCList[$vaginadoubletarget].penis is "vaginadouble">>
+				"나는 그들의 자지가 <<pher_yi>> <<slutPost>> 보지를 유린할 때 <<pher_yi>> 유방이 어떻게 흔들리는지 보는 게 좋아!"
+				<<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">>
 			<<else>>
 				"부끄러워하지 마, 큰 가슴에 자신감을 가져."
 				<<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">>
@@ -781,7 +841,7 @@
 	<</if>>
 <<elseif $rng gte 41 and $bottompic isnot 1>>
 	<<set $bottompic to 1>>
-	$audiencedesc <<putpost $audiencecamera "이">> 카메라를 당신의 <<bottomPost "으로">> 향했다. 플래시가 터지고, <<ahe>>는 사진을 찍었다.
+	$audiencedesc <<putpost $audiencecamera "이">> 카메라를 당신의 <<bottomPost "으로">> 향했다. 플래시가 터지고, <<ahe "은">> 사진을 찍었다.
 	<<set $rng to random(1, 100)>>
 	<<if $anusstate is "penetrated">>
 		<<if $enemytype is "beast">>
@@ -800,13 +860,13 @@
 	<<elseif $anusstate is "imminent">>
 		<<if $enemytype is "beast">>
 			<<if $orgasmdown gte 1>>
-				"<<pShesPost "이">> 벌써 가 버렸어, <<pshePost "이">> <<beasttypePost "의">> 제대로 된 후장 섹스를 어떻게 견딜지 궁금한걸."
+				"<<pShesPost "이">> 벌써 가 버렸어, <<pshePost "이">> <<beasttypePost "의">> 제대로 된 항문 섹스를 어떻게 견딜지 궁금한걸."
 			<<else>>
 				"그게 <<phimPost "을">> 제대로 따먹기 시작할 때의 모습을 보고 싶은걸."
 			<</if>>
 		<<else>>
 			<<if $orgasmdown gte 1>>
-				"<<pShesPost "이">> 벌써 가 버렸어, <<pshePost "이">> 제대로 된 후장 섹스를 어떻게 견딜지 궁금한걸."
+				"<<pShesPost "이">> 벌써 가 버렸어, <<pshePost "이">> 제대로 된 항문 섹스를 어떻게 견딜지 궁금한걸."
 			<<else>>
 				"그게 <<pherPost "의">> 엉덩이에 제대로 들어갈 때의 모습을 보고 싶은걸."
 			<</if>>
@@ -829,7 +889,7 @@
 		<<if $orgasmdown gte 1>>
 			"<<pShesPost "이">> 자기 엉덩이가 핥아지는 것에 반응하고 있어."
 		<<else>>
-			"완전히 깊숙히 넣은 모양인데."
+			"완전히 깊숙이 넣은 모양인데."
 		<</if>>
 	<<elseif $anusstate is "othermouthimminent">>
 		<<if $orgasmdown gte 1>>
@@ -843,11 +903,31 @@
 		<<else>>
 			"<<pherPost "의">> 엉덩이를 맛볼 생각이야?"
 		<</if>>
+	<<elseif $anusstate isnot 0 and $anusstate.startsWith("double")>>
+		<<if $NPCList[$anustarget].penis is "anusdouble" and $NPCList[$anusdoubletarget].penis is "anusdouble">>
+			<<if $orgasmdown gte 1>>
+				"이건 베스트 샷이야! <<phim_i>> <<pher_yi>> 항문에 자지 두 개를 넣고 경련하는 걸 봐!"
+			<<else>>
+				<<set _myrng to random(1,2)>>
+				<<switch _myrng>>
+					<<case 1>>
+						"<<pher_yi>> 항문에 동시 삽입하는 멋진 클로즈업 사진을 찍었어. 대단한 <<slut_iya>>!"
+					<<case 2>>
+						"그래 바로 그거야, 그 자지 두 개를 받아들여, 지저분한 <<slut_a>>! 카메라는 너를 사랑한다고!"
+				<</switch>>
+			<</if>>
+		<<else>>
+			<<if $orgasmdown gte 1>>
+				"<<pShe_ga>> 벌써 가버리고 있어, 어떻게 <<pshe_ga>> 항문 동시 삽입을 제대로 받아들이는지 궁금해."
+			<<else>>
+				"나는 자지 두 개가 <<pher_yi>> 항문 안에 들어가는 장면을 잡고 싶어."
+			<</if>>
+		<</if>>
 	<<else>>
 		<<if $orgasmdown gte 1>>
 			<<if $worn.lower.exposed gte 2 and $worn.under_lower.exposed gte 1>>
 				<<if $rng gte 67>>
-					"<<pherPost "의">> 훌륭한 맨 엉덩이 사진 한 장 찍었어."
+					"<<pherPost "의">> 훌륭한 맨 엉덩이 사진을 한 장 찍었어."
 				<<elseif $rng gte 33>>
 					"이렇게 때리기 좋은 엉덩이는 처음 보는데."
 				<<else>>
@@ -867,7 +947,7 @@
 				<<if $rng gte 67>>
 					"엉덩이가 이렇게 드러나서 부끄럽니?"
 				<<elseif $rng gte 33>>
-					"<<pherPost "의">> 훌륭한 엉덩이 사진 한 장 찍었어."
+					"<<pherPost "의">> 훌륭한 엉덩이 사진을 한 장 찍었어."
 				<<else>>
 					"<<pherPost "의">> 발가벗은 엉덩이는 너무 야해."
 				<</if>>
@@ -885,7 +965,7 @@
 
 <<elseif $rng gte 21 and $genitalpic isnot 1>>
 	<<set $genitalpic to 1>>
-	$audiencedesc <<putpost $audiencecamera "이">> 카메라를 당신의 <<genitalsPost "으로">> 향했다. 플래시가 터지고, <<ahe>>는 사진을 찍었다.
+	$audiencedesc <<putpost $audiencecamera "이">> 카메라를 당신의 <<genitalsPost "으로">> 향했다. 플래시가 터지고, <<ahe "은">> 사진을 찍었다.
 	<<set $rng to random(1, 100)>>
 	<<if $vaginastate is "penetrated">>
 		<<if $enemytype is "beast">>
@@ -918,15 +998,35 @@
 	<<elseif $vaginastate is "entrance">>
 		<<if $enemytype is "beast">>
 			<<if $orgasmdown gte 1>>
-				"<<pShesPost "는">> 작은 자극에도 가 버리고 있어. <<beasttypePost "과">> 섹스하는 건 <<phimPost "을">> 완전히 망가뜨릴지도 몰라."
+				"<<pShesPost "은">> 작은 자극에도 가 버리고 있어. <<beasttypePost "과">> 섹스하는 건 <<phimPost "을">> 완전히 망가뜨릴지도 몰라."
 			<<else>>
 				"네 보지는 곧 받아야 하는 대접을 받게 될 거야."
 			<</if>>
 		<<else>>
 			<<if $orgasmdown gte 1>>
-				"<<pShesPost "는">> 작은 자극에도 가 버리고 있어. <<pherPost "의">> 보지를 따먹는 건 <<phimPost "을">> 완전히 망가뜨릴지도 몰라."
+				"<<pShesPost "은">> 작은 자극에도 가 버리고 있어. <<pherPost "의">> 보지를 따먹는 건 <<phimPost "을">> 완전히 망가뜨릴지도 몰라."
 			<<else>>
 				"네 보지는 곧 받아야 하는 대접을 받게 될 거야."
+			<</if>>
+		<</if>>
+	<<elseif $vaginastate isnot 0 and $vaginastate.startsWith("double")>>
+		<<if $NPCList[$vaginatarget].penis is "vaginadouble" and $NPCList[$vaginadoubletarget].penis is "vaginadouble">>
+			<<if $orgasmdown gte 1>>
+				"이건 베스트 샷이야! <<phim_i>> <<pher_yi>> 항문에 자지 두 개를 넣고 경련하는 걸 봐!"
+			<<else>>
+				<<set _myrng to random(1,2)>>
+				<<switch _myrng>>
+					<<case 1>>
+						"<<pher_yi>> 보지에 동시 삽입하는 멋진 클로즈업 사진을 찍었어. 대단한 <<slut_iya>>!"
+					<<case 2>>
+						"그래 바로 그거야, 그 자지 두 개를 받아들여, 지저분한 <<slut_a>>! 카메라는 너를 사랑한다고!"
+				<</switch>>
+			<</if>>
+		<<else>>
+			<<if $orgasmdown gte 1>>
+				"<<pShe_ga>> 벌써 가버리고 있어, 어떻게 <<pshe_ga>> 보지 동시 삽입을 제대로 받아들이는지 궁금해."
+			<<else>>
+				"나는 자지 두 개가 <<pher_yi>> 보지 안에 들어가는 장면을 잡고 싶어."
 			<</if>>
 		<</if>>
 	<<elseif $penisstate is "penetrated">>
@@ -969,7 +1069,7 @@
 		<<if $orgasmdown gte 1>>
 			"<<pherPost "의">> 보지는 기쁘게 떨리고 있어."
 		<<else>>
-			"혀를 완전히 깊숙히 넣었구나."
+			"혀를 완전히 깊숙이 넣었구나."
 		<</if>>
 	<<elseif $vaginastate is "othermouthimminent">>
 		<<if $orgasmdown gte 1>>
@@ -1011,7 +1111,7 @@
 				<<else>>
 					"가 버리면서 움찔거리는거야?"
 				<</if>>
-			<<elseif $penisexist is 1>>
+			<<elseif $player.penisExist>>
 				<<if $devstate gte 1 and $orgasmcount lt 24>>
 					<<if $rng gte 67>>
 						"허공으로 흩뿌린 <<pherPost "의">> 애액 사진으로 찍었어."
@@ -1038,8 +1138,8 @@
 			<</if>>
 		<<else>>
 			<<if $worn.genitals.type.includes("chastity")>>
-				<<if $rng gte 90 and $anusstate is "penetrated">>
-					"애널 쉴드를 했어야지, 안에 싼다."
+				<<if $rng gte 90 and ($anusstate is "penetrated" or $anusstate is "doublepenetrated")>>
+					"애널 보호대를 했어야지, 안에 싼다."
 				<<elseif $rng gte 67>>
 					"그게 순결을 유지하는 데 도움이 될지."
 				<<elseif $rng gte 33>>
@@ -1048,7 +1148,7 @@
 					"저 장치 밑에 뭐가 있는지 볼 수 없다는 게 아쉽네."
 				<</if>>
 			<<elseif $worn.under_lower.exposed gte 1 and $worn.lower.exposed gte 2>>
-				<<if $penisexist is 1>>
+				<<if $player.penisExist>>
 					<<if $penisuse is "cover">>
 						<<if $rng gte 67>>
 							"손 치워, 네 자지를 보고 싶다고."
@@ -1174,8 +1274,8 @@
 	<</if>>
 <<elseif $bodypic isnot 1>>
 	<<set $bodypic to 1>>
-	$audiencedesc <<putpost $audiencecamera "이">> <<ahis>> 카메라가 모든 장면을 한 번에 담을 수 있도록 뒤로 몸을 기울인다. 플래시가 터지고, <<ahe>>는 사진을 찍었다.
-	<<if $vaginastate is "penetrated">>
+	$audiencedesc <<putpost $audiencecamera "이">> <<ahis>> 카메라가 모든 장면을 한 번에 담을 수 있도록 뒤로 몸을 기울인다. 플래시가 터지고, <<ahe "은">> 사진을 찍었다.
+	<<if $vaginastate is "penetrated" or $vaginastate is "doublepenetrated">>
 		<<if $enemytype is "beast">>
 			<<if $orgasmdown gte 1>>
 				<<if $face is "covered">>
@@ -1201,7 +1301,7 @@
 				<<if $face is "covered">>
 					"얼굴 그만 가리고 카메라를 향해 웃어봐."
 				<<else>>
-					"이 걸레에게 <<pshesPost "가">> 뭘 잘하는지 보여줘."
+					"이 걸레에게 <<pshesPost "이">> 뭘 잘하는지 보여줘."
 				<</if>>
 			<</if>>
 		<</if>>
@@ -1265,6 +1365,39 @@
 				<</if>>
 			<</if>>
 		<</if>>
+	<<elseif $vaginastate is "doubleentrance" or $vaginastate is "doubleimminent">>
+		/* Neither dick in */
+		<<if $vaginadoubletarget isnot undefined and $NPCList[$vaginatarget].penis isnot "vaginadouble" and $NPCList[$vaginadoubletarget].penis isnot "vaginadouble">>
+			<<if $orgasmdown gte 1>>
+				<<if $face is "covered">>
+					"<<pherPost "의">> 보지에 넣지도 않았는데 벌써 가 버렸어."
+				<<else>>
+					"이제 못 빠져나간다, 이 걸레야."
+				<</if>>
+			<<else>>
+				<<if $face is "covered">>
+					"얼굴 그만 가려, 두 자지가 들어갈 때의 네 표정을 담고 싶다고."
+				<<else>>
+					"뭘 기다리는 거야? <<phimPost "을">> 따먹어."
+				<</if>>
+			<</if>>
+		/* One dick in, the other at entrance */
+		<<elseif $vaginadoubletarget isnot undefined and (($NPCList[$vaginatarget].penis is "vaginadouble" and $NPCList[$vaginadoubletarget].penis isnot "vaginadouble")
+			or ($NPCList[$vaginatarget].penis isnot "vaginadouble" and $NPCList[$vaginadoubletarget].penis is "vaginadouble"))>>
+			<<if $orgasmdown gte 1>>
+				<<if $face is "covered">>
+					"<<pHer_yi>> 보지에 두 자지가 들어갈 거라는 생각만으로 가버리고 있어!"
+				<<else>>
+					"이제 자지 둘로 채워지게 될거아, <<slut_a>>."
+				<</if>>
+			<<else>>
+				<<if $face is "covered">>
+					"얼굴 그만 가려, 두 자지가 들어갈 때의 네 표정을 담고 싶다고."
+				<<else>>
+					"뭘 기다리고 있는 거야? 이제 <<phimPost>>에게 같이 찔러넣으라고."
+				<</if>>
+			<</if>>
+		<</if>>
 	<<elseif $penisstate is "penetrated">>
 		<<if $orgasmdown gte 1>>
 			<<if $face is "covered">>
@@ -1310,13 +1443,13 @@
 	<<elseif $penisstate is "otheranus">>
 		<<if $orgasmdown gte 1>>
 			<<if $face is "covered">>
-				"Look at <<pher>> body writhe."
+				"<<pshe_ga>> 온 몸을 비틀어대는 것 좀 봐."
 			<<else>>
 				"<<phimPost "을">> 절정까지 박아 댔어, 계속해봐."
 			<</if>>
 		<<else>>
 			<<if $face is "covered">>
-				"<<pShes>> so shy and cute."
+				"<<pShe_nun>> 정말 수줍어하고 귀여운 것 같아."
 			<<else>>
 				"이 육변기에게 <<pshesPost "이">> 뭘 잘하는지 가르쳐 줘."
 			<</if>>
@@ -1355,7 +1488,7 @@
 				<<if $face is "covered">>
 					"엉덩이에 <<beasttypesPost>>의 자지를 박으면서, 무슨 품위를 지키겠다는거야?"
 				<<else>>
-					"그래, 그 동물 자지에 박혀서 가 버려. 네가 어떤 <<bitchPost>>인지 보여줘."
+					"그래, 그 짐승 자지에 박혀서 가 버려. 네가 어떤 <<bitchPost>>인지 보여줘."
 				<</if>>
 			<<else>>
 				<<if $face is "covered">>
@@ -1379,7 +1512,7 @@
 				<</if>>
 			<</if>>
 		<</if>>
-	<<elseif $anusstate is "imminent">>
+	<<elseif $anusstate is "imminent" or $anusstate is "doubleimminent">>
 		<<if $enemytype is "beast">>
 			<<if $orgasmdown gte 1>>
 				<<if $face is "covered">>
@@ -1409,7 +1542,7 @@
 				<</if>>
 			<</if>>
 		<</if>>
-	<<elseif $anusstate is "entrance">>
+	<<elseif $anusstate is "entrance" or $anusstate is "doubleentrance">>
 		<<if $enemytype is "beast">>
 			<<if $orgasmdown gte 1>>
 				<<if $face is "covered">>
@@ -1437,6 +1570,20 @@
 				<<else>>
 					"<<phimPost "을">> 따먹어서 싸게 만들어."
 				<</if>>
+			<</if>>
+		<</if>>
+	<<elseif $anusstate is "doublepenetrated">>
+		<<if $orgasmdown gte 1>>
+			<<if $face is "covered">>
+				"너는 자지 두 개를 항문에 넣고 가버리고 있는데, 네가 지킬 만한 존엄성이 얼마나 남아 있다고 생각하는 거야?
+			<<else>>
+				"바로 그거야, 그 자지들로 가버리라고. 온 세상에 네가 얼마나 대단한 <<slutPost>> 인지 보여주라고."
+			<</if>>
+		<<else>>
+			<<if $face is "covered">>
+				"<<phimPost>>에게 더 세게 박아버려! 이 <<bitch_nun>> 너희 둘 다 받아들일 수 있으니까!"
+			<<else>>
+				"이 <<girl_yi>> 항문을 계속 유린해, 나는 더 많은 사진을 찍고 싶다고."
 			<</if>>
 		<</if>>
 	<<elseif $mouthstate is "penetrated">>
@@ -1529,37 +1676,37 @@
 				<</if>>
 			<</if>>
 		<</if>>
-	<<elseif $mouthstate is "facesit">>
+	<<elseif $mouthuse is "facesit">>
 		<<if $orgasmdown gte 1>>
 			<<switch random(2)>>
 				<<case 0>>
-					"This slut really loves having <<pher>> face sat on. <<pShes>> cumming."
+					"이 <<slut_un>> 정말 <<pher_yi>> 얼굴에 누군가 앉히는 것을 좋아하나본데. <<pShe_ga>> 가버리고 있어."
 				<<case 1>>
-					"Such a submissive little bitch, if <<pshe>> gets off on having <<pher>> face abused like this."
+					"정말 순종적인 조그마한 <<bitch_iya>>, <<pher_yi>> 얼굴을 이렇게 학대당하면서도 흥분하는 것을 보면 말이지."
 				<<case 2>>
-					"<<pShes>> getting off on being sat on. Sit on <<phim>> harder!"
+					"<<pShe_nun>> 얼굴에 누군가 앉히고 흥분하고 있어. <<phim_ul>> 더 세게 앉히라고!"
 			<</switch>>
 		<<elseif $enemyanger gte 30>>
 			<<switch random(4)>>
 				<<case 0>>
-					"Smother that loser's face under you."
+					"네 밑에 있는 그 패배자의 얼굴을 눌러 질식시켜 버리라고."
 				<<case 1>>
-					"Put <<phim>> in <<pher>> place, beneath you."
+					"<<phim_ul>> <<pher_yi>> 자리로 보내라고, 네 아래 말이야."
 				<<case 2>>
-					"Go on, fuck <<pher>> face."
+					"시작하라고, <<pher_yi>> 얼굴에 박아버려."
 				<<case 3>>
-					"Smother that slut in pussy and ass."
+					"보지와 항문으로 그 <<slut_ul>> 질식시켜 버려."
 				<<case 4>>
-					"Show that fucktoy <<pher>> place."
+					"그 육변기에게 <<pher_yi>> 주제를 알게 해 줘."
 			<</switch>>
 		<<else>>
 			<<switch random(2)>>
 				<<case 0>>
-					"At least this slut knows <<pher>> place."
+					"최소한 이 <<slut_un>> <<pher_yi>> 주제를 알고 있군."
 				<<case 1>>
-					"Sit that ass down on <<pher>> face."
+					"<<pher_yi>> 얼굴에 그 엉덩이를 대고 앉으라고."
 				<<case 2>>
-					"I love seeing a <<girl>> get <<pher>> face sat on."
+					"<<girl_i>> <<pher_yi>> 얼굴에 누군가 앉히는 것을 보는 게 좋다니까."
 			<</switch>>
 		<</if>>
 	<<elseif $vaginastate is "othermouth">>
@@ -1644,6 +1791,20 @@
 				"<<phimPost "을">> 잘 핥아줘."
 			<<else>>
 				"<<phimPost "이">> 네 얼굴에 싸는 사진을 찍고 싶어."
+			<</if>>
+		<</if>>
+	<<elseif $penisstate is "otherpenis">>
+		<<if $orgasmdown gte 1>>
+			<<if $face is "covered">>
+				"그 자지로 가버리면서 계속 <<pher_yi>> 얼굴을 가리고 있네. 귀여워라!"
+			<<else>>
+				"<<pher_yi>> 정액이 뿌려지는 것 좀 봐, 그게 저 자지를 뒤덮고 있어!"
+			<</if>>
+		<<else>>
+			<<if $face is "covered">>
+				"그래, 그 <<penises>> 서로 힘껏 치라고!"
+			<<else>>
+				"<<phim_i>> 저 자지 위로 사정하는 멋진 사진을 찍었으면 좋겠어!"
 			<</if>>
 		<</if>>
 	<<elseif $anusstate is "othermouth">>
@@ -1761,25 +1922,25 @@
 
 <<if $face isnot "covered">>
 	<<if $exposed is 1>>
-		<<fameexhibitionism 1>>
+		<<fameexhibitionism 1 pic>>
 	<<elseif $exposed gte 2>>
-		<<fameexhibitionism 2>>
+		<<fameexhibitionism 2 pic>>
 	<</if>>
 	<<if $sexavoid is 0 or $rapeavoid is 0>>
 		<<if $consensual is 1>>
-			<<famesex 1>>
+			<<famesex 1 pic>>
 		<<else>>
-			<<famerape 1>>
+			<<famerape 1 pic>>
 		<</if>>
 		<<if $enemytype is "beast">>
-			<<famebestiality 1>>
+			<<famebestiality 1 pic>>
 		<</if>>
 	<</if>>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "ahis">><<nobr>>
+<<widget "ahis">>
 
 <<if $audiencecamera is "man">>
 	그의
@@ -1791,23 +1952,23 @@
 	그녀의
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "ahe">><<nobr>>
+<<widget "ahe">>
 
 <<if $audiencecamera is "man">>
-	그
+	<<set _trResult to "그">><<trPost 1 $args[0] $args[1]>><<print _trResult>>
 <<elseif $audiencecamera is "boy">>
-	그
+	<<set _trResult to "그">><<trPost 1 $args[0] $args[1]>><<print _trResult>>
 <<elseif $audiencecamera is "woman">>
-	그녀
+	<<set _trResult to "그녀">><<trPost 1 $args[0] $args[1]>><<print _trResult>>
 <<elseif $audiencecamera is "girl">>
-	그녀
+	<<set _trResult to "그녀">><<trPost 1 $args[0] $args[1]>><<print _trResult>>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "audiencespeech">><<nobr>>
+<<widget "audiencespeech">>
 <<set $audiencemember to 0>>
 <<set $rng to random(1, 100)>>
 <<if $audienceforceboy is 1>>
@@ -2248,14 +2409,14 @@
 	<</if>>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "audience">><<nobr>>
+<<widget "audience">>
 <div @class="($debugLines ? 'debugLines-audience' : '')">
 <<set $audiencepresent to 1>>
 <<if $enemyanger gte 100>>
 	<<if $enemyarousal gte (($enemyarousalmax / 10) * 8)>>
-		군중들은 당신이 희귀하고 위험한 동물인 것처럼 겁내면서도 주위로 몰려든다.
+		군중들은 당신이 희귀하고 위험한 짐승인 것처럼 겁내면서도 주위로 몰려든다.
 	<<elseif $enemyarousal gte (($enemyarousalmax / 10) * 4)>>
 		대부분의 군중들은 당신이 해칠 것을 두려워하며 거리를 둔다.
 	<<else>>
@@ -2291,77 +2452,79 @@
 	<br>
 <</if>>
 
-<<if $audiencecamera1 isnot 0>>
-	<<set $audienceselector to 1>>
-	<<audiencecamera>>
-	<br>
-<</if>>
+<<if $location isnot "prison">>
+	<<if $audiencecamera1 isnot 0>>
+		<<set $audienceselector to 1>>
+		<<audiencecamera>>
+		<br>
+	<</if>>
 
-<<if $audiencecamera2 isnot 0>>
-	<<set $audienceselector to 2>>
-	<<audiencecamera>>
-	<br>
-<</if>>
+	<<if $audiencecamera2 isnot 0>>
+		<<set $audienceselector to 2>>
+		<<audiencecamera>>
+		<br>
+	<</if>>
 
-<<if $audiencecamera3 isnot 0>>
-	<<set $audienceselector to 3>>
-	<<audiencecamera>>
-	<br>
-<</if>>
+	<<if $audiencecamera3 isnot 0>>
+		<<set $audienceselector to 3>>
+		<<audiencecamera>>
+		<br>
+	<</if>>
 
-<<if $audiencecamera4 isnot 0>>
-	<<set $audienceselector to 4>>
-	<<audiencecamera>>
-	<br>
-<</if>>
+	<<if $audiencecamera4 isnot 0>>
+		<<set $audienceselector to 4>>
+		<<audiencecamera>>
+		<br>
+	<</if>>
 
-<<if $audiencecamera5 isnot 0>>
-	<<set $audienceselector to 5>>
-	<<audiencecamera>>
-	<br>
-<</if>>
+	<<if $audiencecamera5 isnot 0>>
+		<<set $audienceselector to 5>>
+		<<audiencecamera>>
+		<br>
+	<</if>>
 
-<<if $audiencecamera6 isnot 0>>
-	<<set $audienceselector to 6>>
-	<<audiencecamera>>
-	<br>
-<</if>>
+	<<if $audiencecamera6 isnot 0>>
+		<<set $audienceselector to 6>>
+		<<audiencecamera>>
+		<br>
+	<</if>>
 
-<<set $facepic to 0>>
-<<set $breastpic to 0>>
-<<set $bottompic to 0>>
-<<set $genitalpic to 0>>
-<<set $bodypic to 0>>
+	<<set $facepic to 0>>
+	<<set $breastpic to 0>>
+	<<set $bottompic to 0>>
+	<<set $genitalpic to 0>>
+	<<set $bodypic to 0>>
 
-<<if $audiencecamera1 isnot 0 and $face is "covered">>
-	<span class="teal">적어도 당신의 얼굴은 가려졌다.</span>
-	<br>
-<</if>>
+	<<if $audiencecamera1 isnot 0 and $face is "covered">>
+		<span class="teal">적어도 당신의 얼굴은 가려졌다.</span>
+		<br>
+	<</if>>
 
-<<audiencespeech>>
-/*<br> commented out due to excess space they caused*/
-<<if $rng - $enemyanger + (($enemyarousalmax / $enemyarousal) * 100) gte 0>>
 	<<audiencespeech>>
-	/*<br>*/
-<</if>>
-<<if $rng - $enemyanger + (($enemyarousalmax / $enemyarousal) * 100) gte 20>>
-	<<audiencespeech>>
-	/*<br>*/
-<</if>>
-<<if $rng - $enemyanger + (($enemyarousalmax / $enemyarousal) * 100) gte 40>>
-	<<audiencespeech>>
-	/*<br>*/
-<</if>>
-<<if $rng - $enemyanger + (($enemyarousalmax / $enemyarousal) * 100) gte 60>>
-	<<audiencespeech>>
-	/*<br>*/
-<</if>>
-<<if $rng - $enemyanger + (($enemyarousalmax / $enemyarousal) * 100) gte 80>>
-	<<audiencespeech>>
-	/*<br>*/
+	/*<br> commented out due to excess space they caused*/
+	<<if $rng - $enemyanger + (($enemyarousalmax / $enemyarousal) * 100) gte 0>>
+		<<audiencespeech>>
+		/*<br>*/
+	<</if>>
+	<<if $rng - $enemyanger + (($enemyarousalmax / $enemyarousal) * 100) gte 20>>
+		<<audiencespeech>>
+		/*<br>*/
+	<</if>>
+	<<if $rng - $enemyanger + (($enemyarousalmax / $enemyarousal) * 100) gte 40>>
+		<<audiencespeech>>
+		/*<br>*/
+	<</if>>
+	<<if $rng - $enemyanger + (($enemyarousalmax / $enemyarousal) * 100) gte 60>>
+		<<audiencespeech>>
+		/*<br>*/
+	<</if>>
+	<<if $rng - $enemyanger + (($enemyarousalmax / $enemyarousal) * 100) gte 80>>
+		<<audiencespeech>>
+		/*<br>*/
+	<</if>>
 <</if>>
 </div>
-<</nobr>><</widget>>
+<</widget>>
 
 <<set $audienceselector to 0>>
 <<set $audiencecamera to 0>>

@@ -1,6 +1,6 @@
-:: Industrial alleyways [nobr]
+:: Industrial alleyways
 
-<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "industrial">>
+<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "industrial">><<getTarget true>>
 당신은 공업 지구의 골목길에 있다.
 <<if $daystate is "day">>
 	주변 건물에서 기계가 작동하는 소리가 들려온다.
@@ -14,14 +14,14 @@
 <<if $exposed gte 1>>
 	<<exhibitionism "alley">>
 <</if>>
-<<if $arousal gte 10000>>
+<<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutalley>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
 		<<if $map.top is true>>
@@ -38,14 +38,14 @@
 		<br><br>
 		<<if $exposed gte 1 and $daystate isnot "night">>
 		<<else>>
-			<<add_link "Travel<br>">><<hideDisplay>>
+			<<add_link "이동<br>">><<hideDisplay>>
 			<<oxford>>
 			<<mer>>
 			<<elk>>
 			<<harvest>>
 			<<loiter>>
 		<</if>>
-		<<add_link "<br>Alternate routes<br>">><<hideDisplay>>
+		<<add_link "<br>다른 경로<br>">><<hideDisplay>>
 		<<if $exposed gte 1 and $daystate isnot "night">>
 		<<else>>
 			<<park>>

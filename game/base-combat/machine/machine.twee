@@ -1,5 +1,5 @@
 :: Widgets Machine [widget]
-<<widget "machine_init">><<nobr>>
+<<widget "machine_init">>
 <<combatinit>>
 <<set $enemytype to "machine">>
 <<set $machine to {}>>
@@ -18,9 +18,9 @@
 <<set $leftactiondefault to "rest">>
 <<set $rightactiondefault to "rest">>
 <<set $feetactiondefault to "rest">>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "machine_damage">><<nobr>>
+<<widget "machine_damage">>
 <<if $machine[$args[0]].health gte $machine_health>>
 `	<span class="red">튼튼한</span>
 <<elseif $machine[$args[0]].health gte ($machine_health * 0.8)>>
@@ -34,21 +34,21 @@
 <<elseif $machine[$args[0]].health gte ($machine_health * 0.1)>>
 	<span class="teal">금이 간</span>
 <<else>>
-	<span class="green">부셔진</span>
+	<span class="green">부서진</span>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "machine_end">><<nobr>>
+<<widget "machine_end">>
 	<<unset $machine>>
 	<<unset $machine_health>>
 	<<unset $machine_ammo>>
 	<<endcombat>>
-<</nobr>><</widget>>
+<</widget>>
 
 
 
 
-<<widget "machine_combat">><<nobr>>
+<<widget "machine_combat">>
 <<if $machine.tattoo>>
 	<<switch $machine.tattoo.state>>
 	<<case "ready">>
@@ -139,7 +139,7 @@
 			<<set $machine_stat += 1>>
 		<</if>>
 	<<case "foam">>
-		<span class="pink"><<machine_damage tattoo>> 타투건이 당신의 <<trBodypart $machine.tattoo.use>>_trResult에 분홍색 거품을 뿌린다.</span> 당신의 <<tattoo $machine.tattoo.use>>에 있던 잉크는 사라지고, <span class="blue">피부를 깨끗하게 한다.</span>
+		<span class="pink"><<machine_damage tattoo>> 타투건이 당신의 <<trBodypart $machine.tattoo.use>>_trResult에 분홍색 거품을 뿌린다.</span> 당신의 <<tattooPost $machine.tattoo.use>>에 있던 잉크는 사라지고, <span class="blue">피부를 깨끗하게 한다.</span>
 		<<bodywriting_clear $machine.tattoo.use>>
 		<br><br>
 		<<machine_damage tattoo>> 타투건이 당신의 <<trBodypart $machine.tattoo.use>>_trResult에 가까이 붙는다. <span class="pink">그릴 준비가 되면서 위윙거리는 소리가 점점 더 심해진다.</span>
@@ -169,15 +169,15 @@
 		<<case "entrance">>
 			<<if $worn.over_lower.exposed lte 1>>
 				<<if $machine.vaginal.armed is 1>>
-					A canister atop the <<machine_damage vaginal>> phallic machine opens, and sprays a pink foam over your $worn.over_lower.name, <span class="purple">dissolving it.</span>
+					<<machine_damage vaginal>> 남근 기계 위에 있는 통이 열린다. 당신의 <<trClothes "over_lower" $worn.over_lower.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
 					<<set $worn.over_lower.integrity -= 100>>
 				<<else>>
-					The <<machine_damage vaginal>> phallic machine tries to push through your $worn.over_lower.name, tearing the fabric.
+					<<machine_damage vaginal>> 남근 기계는 당신의 <<trClothes "over_lower" $worn.over_lower.name "name" "을">>_trResult 밀어내려고 하고, 천을 찢는다.
 					<<set $worn.over_lower.integrity -= 20>>
 				<</if>>
 			<<elseif $worn.lower.exposed lte 1>>
 				<<if $machine.vaginal.armed is 1>>
-					A canister atop the <<machine_damage vaginal>> phallic machine opens, and sprays a pink foam over your $worn.lower.name, <span class="purple">dissolving it.</span>
+					<<machine_damage vaginal>> 남근 기계 위에 있는 통이 열린다. 당신의 <<trClothes "lower" $worn.lower.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
 					<<set $worn.lower.integrity -= 100>>
 				<<else>>
 					<<machine_damage vaginal>> 남근 기계는 당신의 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 밀어내려고 하고, 천을 찢는다.
@@ -185,7 +185,7 @@
 				<</if>>
 			<<elseif $worn.under_lower.exposed lte 0>>
 				<<if $machine.vaginal.armed is 1>>
-					<<machine_damage vaginal>> 남근 기계 위에있는 통이 열린다. 당신의 <<trClothes "under_lower" $worn.under_lower.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
+					<<machine_damage vaginal>> 남근 기계 위에 있는 통이 열린다. 당신의 <<trClothes "under_lower" $worn.under_lower.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
 					<<set $worn.under_lower.integrity -= 100>>
 				<<else>>
 					<<machine_damage vaginal>> 남근 기계는 당신의 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 밀어내려고 하고, 천을 찢는다.
@@ -193,7 +193,7 @@
 				<</if>>
 			<<elseif $worn.genitals.type.includes("chastity")>>
 				<<if $machine.vaginal.armed is 1>>
-					<<machine_damage vaginal>> 남근 기계 위에있는 통이 열리다. 당신의 <<trClothes "genitals" $worn.genitals.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
+					<<machine_damage vaginal>> 남근 기계 위에 있는 통이 열리다. 당신의 <<trClothes "genitals" $worn.genitals.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
 					<<set $worn.genitals.integrity -= 100>>
 				<<else>>
 					<<machine_damage vaginal>> 남근 기계는 <<trClothes "genitals" $worn.genitals.name "name" "을">>_trResult 밀어내려고 하고, 천을 찢는다.
@@ -212,11 +212,17 @@
 				<span class="pink"><<machine_damage vaginal>> 남근 기계는 당신의 <<pussyPost "을">> 찌른다.</span>
 			<<else>>
 				<<sex 100>>
-				<<violence 25>>
-				<<takeVirginity "sex machine" "vaginal">><<bruise vagina>><<vaginalstat>><<raped>><<vaginaraped>>
+				<<bruise vagina>><<vaginalstat>><<raped>><<vaginaraped>>
 				<<set $vaginastate to "penetrated">><<set $machine.vaginal.state to "penetrated">>
-				<span class="red"><<machine_damage vaginal>> 남근 기계는 당신의 처녀를 찌르고, 당신의 처녀막을 부셔, 당신의 순결을 영원히 앗아가 버린다.</span>
+				<span class="red"><<machine_damage vaginal>> 남근 기계는 당신의 처녀 보지를 찌르고,
+					<<if $sexStats.vagina.pregnancy.totalBirthEvents gt 0>>
+						당신은 처녀막이 없음에도 불구하고, 당신의 처녀와 순결을 뺏겨 당신 안의 무언가가 바뀐 것 같은 기분이 든다.<<violence 10>>
+					<<else>>
+						당신의 처녀막을 찢어, 영원히 당신의 순결을 빼앗겨 버린다.<<violence 25>>
+					<</if>>
+				</span>
 			<</if>>
+			<<takeVirginity "sex machine" "vaginal">>
 		<<case "penetrated">>
 
 			<<set $rng to random(1, 5)>>
@@ -264,15 +270,15 @@
 		<<case "entrance">>
 			<<if $worn.over_lower.exposed lte 1>>
 				<<if $machine.anal.armed is 1>>
-					A canister atop the <<machine_damage anal>> small phallic machine opens, and sprays a pink foam over your $worn.over_lower.name, <span class="purple">dissolving it.</span>
+					<<machine_damage anal>> 작은 남근 기계 위에 있는 통이 열린다. 당신의 <<trClothes "over_lower" $worn.over_lower.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
 					<<set $worn.over_lower.integrity -= 100>>
 				<<else>>
-					The <<machine_damage anal>> small phallic machine tries to push through your $worn.over_lower.name, tearing the fabric.
+					<<machine_damage anal>> 작은 남근 기계는 당신의 <<trClothes "over_lower" $worn.over_lower.name "name" "을">>_trResult 밀어내려고 하고, 천을 찢는다.
 					<<set $worn.over_lower.integrity -= 20>>
 				<</if>>
 			<<elseif $worn.lower.exposed lte 1>>
 				<<if $machine.anal.armed is 1>>
-					A canister atop the <<machine_damage anal>> small phallic machine opens, and sprays a pink foam over your $worn.lower.name, <span class="purple">dissolving it.</span>
+					<<machine_damage anal>> 작은 남근 기계 위에 있는 통이 열린다. 당신의 <<trClothes "lower" $worn.lower.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
 					<<set $worn.lower.integrity -= 100>>
 				<<else>>
 					<<machine_damage anal>> 작은 남근 기계는 당신의 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 밀어내려고 하고, 천을 찢는다.
@@ -280,14 +286,14 @@
 				<</if>>
 			<<elseif $worn.under_lower.exposed lte 0>>
 				<<if $machine.anal.armed is 1>>
-					<<machine_damage anal>> 작은 남근 기계 위에있는 통이 열린다. 당신의 <<trClothes "under_lower" $worn.under_lower.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
+					<<machine_damage anal>> 작은 남근 기계 위에 있는 통이 열린다. 당신의 <<trClothes "under_lower" $worn.under_lower.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
 					<<set $worn.under_lower.integrity -= 100>>
 				<<else>>
 					<<machine_damage anal>> 작은 남근 기계는 당신의 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 밀어내려고 하고, 천을 찢는다.<<set $worn.under_lower.integrity -= 20>>
 				<</if>>
 			<<elseif $worn.genitals.type.includes("chastity") and $worn.genitals.anal_shield is 1>>
 				<<if $machine.anal.armed is 1>>
-					<<machine_damage anal>> 작은 남근 기계 위에있는 통이 열리다. 당신의 <<trClothes "genitals" $worn.genitals.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
+					<<machine_damage anal>> 작은 남근 기계 위에 있는 통이 열리다. 당신의 <<trClothes "genitals" $worn.genitals.name>>_trResult 위에 분홍색 거품을 흩뿌리고, <span class="purple">천을 녹인다.</span>
 					<<set $worn.genitals.integrity -= 100>>
 				<<else>>
 					<<machine_damage anal>> 작은 남근 기계는 <<trClothes "genitals" $worn.genitals.name "name" "을">>_trResult 밀어내려고 하고, 천을 찢는다.
@@ -316,7 +322,7 @@
 			<<if $rng gte 5>>
 				<<machine_damage anal>> 작은 남근 기계는 기계적인 리듬으로 당신의 <<bottomPost "을">> 따먹는다.
 			<<elseif $rng is 4>>
-				<<machine_damage anal>> 작은 남근 기계는 당신의 <<bottomPost "에">> 찌를 때마다, 당신의 <<prostate>> 가까이에서 진동한다. <span class="purple">당신에게 얼얼한 충격을 준다.</span>
+				<<machine_damage anal>> 작은 남근 기계는 당신의 <<bottomPost "에">> 찌를 때마다, 당신의 <<prostate>>에서 진동한다. <span class="purple">당신에게 얼얼한 충격을 준다.</span>
 				<<sex 30>>
 			<<elseif $rng is 3>>
 				<<machine_damage anal>> 작은 남근 계기는 살아있는 그 무엇보다도 빠르게, 희미하게 보일 정도로 당신의 <<bottomPost "을">> 친다.
@@ -343,10 +349,10 @@
 			<<set $machine.arm_chains.use to "grapple">>
 			<<set $machine.arm_chains.state to "grapple">>
 			<<if $leftarm isnot "bound">>
-				<<set $leftarm to "grappled">>
+				<<set $leftarm to "mechgrappled">><<set $lefttarget to "machine">>
 			<</if>>
 			<<if $rightarm isnot "bound">>
-				<<set $rightarm to "grappled">>
+				<<set $rightarm to "mechgrappled">><<set $righttarget to "machine">>
 			<</if>>
 		<<else>>
 			<<machine_damage arm_chains>> 팔을 잡고 있는 체인은 당신의 움직임에 저항하지만, <span class="lblue">느슨한 상태를 유지한다.</span>
@@ -365,14 +371,14 @@
 		<<if _machine_legs is 1>>
 			<<machine_damage leg_chains>> 당신의 족쇄에 부착된 체인은, <span class="pink">당신의 다리를 잡아당겨 움직이지 못하게 만든다.</span>
 			<<set $feetactiondefault to "chain_struggle">>
-			<<set $feetuse to "grappled">>
+			<<set $feetuse to "mechgrappled">><<set $feettarget to "machine">>
 			<<set $machine.leg_chains.use to "grapple">>
 			<<set $machine.leg_chains.state to "grapple">>
 			<<if $leftleg isnot "bound">>
-				<<set $leftleg to "grappled">>
+				<<set $leftleg to "mechgrappled">>
 			<</if>>
 			<<if $rightleg isnot "bound">>
-				<<set $rightleg to "grappled">>
+				<<set $rightleg to "mechgrappled">>
 			<</if>>
 		<<else>>
 			<<machine_damage leg_chains>> 다리를 잡고 있는 체인은 당신의 움직임에 저항하지만, <span class="lblue">느슨한 상태를 유지한다.</span>
@@ -390,23 +396,23 @@
 
 
 
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "machine_vaginal_disable">><<nobr>>
+<<widget "machine_vaginal_disable">>
 <<if $vaginause is "machine">>
 	<<set $vaginause to 0>>
 	<<set $vaginastate to 0>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "machine_anal_disable">><<nobr>>
+<<widget "machine_anal_disable">>
 <<if $anususe is "machine">>
 	<<set $anususe to 0>>
 	<<set $anusstate to 0>>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "machine_arm_chains_disable">><<nobr>>
+<<widget "machine_arm_chains_disable">>
 <<if $leftarm isnot "bound">>
 	<<set $leftarm to 0>>
 	<<set $leftactiondefault to "rest">>
@@ -415,9 +421,9 @@
 	<<set $rightarm to 0>>
 	<<set $rightactiondefault to "rest">>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 
-<<widget "machine_leg_chains_disable">><<nobr>>
+<<widget "machine_leg_chains_disable">>
 <<if $leftleg isnot "bound">>
 	<<set $leftleg to 0>>
 	<<set $feetuse to 0>>
@@ -428,5 +434,5 @@
 	<<set $feetuse to 0>>
 	<<set $feetactiondefault to "rest">>
 <</if>>
-<</nobr>><</widget>>
+<</widget>>
 

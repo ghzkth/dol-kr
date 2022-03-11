@@ -60,9 +60,17 @@ Mousetrap.bind(["z", "n", "enter"], function () {
 	$("#passages #next a.macro-link").trigger("click");
 });
 
+Mousetrap.bind(["f"], function () {
+	if (document.activeElement.tagName === "INPUT" && document.activeElement.type !== "radio"
+		&& document.activeElement.type !== "checkbox")
+		return;
+
+	fixStuckAnimations();
+});
+
 Macro.add('time', {
 	handler: function () {
-		var time = State.variables.time;
+		var time = V.time;
 		var hour, daystate; // Never checked and always overwritten - no need to init with old value
 		// Sanity check
 		if (time < 0) time = 0;
@@ -79,30 +87,138 @@ Macro.add('time', {
 		} else {
 			daystate = "night";
 		}
-		State.variables.hour = hour;
-		State.variables.daystate = daystate;
+		V.hour = hour;
+		V.daystate = daystate;
 	}
 });
 
-window.ensureIsArray = function (x) {
+window.ensureIsArray = function(x, check = false) {
+	if (check) x = ensure(x, []);
 	if (Array.isArray(x)) return x;
-
 	return [x];
 }
 
+window.ensure = function(x, y) {
+	/* lazy comparison to include null. */
+	return (x == undefined) ? y : x;
+}
+
+/**
+ * Copies to targets keys from source that are not present there.
+ * Shallow.
+ * @param {object} target Object to extend
+ * @param {object} source Default properties
+ * @return {object} target
+ */
+function assignDefaults(target, source) {
+	for (let k in source) {
+		if (!source.hasOwnProperty(k)) continue;
+		if (!(k in target)) target[k] = source[k];
+	}
+	return target;
+}
+
+/*
+ * Similar to <<script>>, but preprocesses the contents, so $variables are accessible.
+ * The variable "output" is also exposed (unlike <<run>>, <<set>>)
+ *
+ * Example:
+ * <<twinescript>>
+ *     output.textContent = $text
+ * <</twinescript>>
+ */
+Macro.add('twinescript', {
+	skipArgs : true,
+	tags     : null,
+
+	handler() {
+		const output = document.createDocumentFragment();
+
+		try {
+			Scripting.evalTwineScript(this.payload[0].contents, output);
+		}
+		catch (ex) {
+			return this.error(`bad evaluation: ${typeof ex === 'object' ? ex.message : ex}`);
+		}
+
+		// Custom debug view setup.
+		if (Config.debug) {
+			this.createDebugView();
+		}
+
+		if (output.hasChildNodes()) {
+			this.output.appendChild(output);
+		}
+	}
+});
+
+/**
+ * JS version of SugarCube's <<for _index, _value range _array>>.
+ * Can iterate over
+ *
+ * Copied from SugarCube sources.
+ * @param range
+ * @param {function(key,value):void} handler
+ */
+function rangeIterate(range, handler) {
+	let list;
+	switch (typeof range) {
+		case 'string':
+			list = [];
+			for (let i = 0; i < range.length; /* empty */) {
+				const obj = Util.charAndPosAt(range, i);
+				list.push([i, obj.char]);
+				i = 1 + obj.end;
+			}
+			break;
+		case 'object':
+			if (Array.isArray(range)) {
+				list = range.map((val, i) => [i, val]);
+			}
+			else if (range instanceof Set) {
+				list = Array.from(range).map((val, i) => [i, val]);
+			}
+			else if (range instanceof Map) {
+				list = Array.from(range);
+			}
+			else if (Util.toStringTag(range) === 'Object') {
+				list = Object.keys(range).map(key => [key, range[key]]);
+			}
+			else {
+				throw new Error(`unsupported range expression type: ${Util.toStringTag(range)}`);
+			}
+			break;
+		default:
+			throw new Error(`unsupported range expression type: ${typeof range}`);
+	}
+	for (let i = 0; i < list.length; i++) {
+		let entry = list[i];
+		handler(entry[0], entry[1]);
+	}
+}
+window.rangeIterate = rangeIterate;
+
+/**
+ * Define macro, passing arguments to function and store them in $args, preserving & restoring previous $args
+ */
 function DefineMacro(macroName, macroFunction, tags, skipArgs) {
 	Macro.add(macroName, {
-		isWidget: true, 
+		isWidget: true,
 		tags: tags,
 		skipArgs: skipArgs,
-		handler: function (args) {
-			var oldArgs = State.variables.args;
-			State.variables.args = this.args.slice();
-			macroFunction.apply(this, this.args);
-			if (typeof oldArgs === 'undefined') {
-				delete State.variables.args;
-			} else {
-				State.variables.args = oldArgs;
+		handler: function () {
+			DOL.Perflog.logWidgetStart(macroName);
+			try {
+				var oldArgs = State.variables.args;
+				State.variables.args = this.args.slice();
+				macroFunction.apply(this, this.args);
+				if (typeof oldArgs === 'undefined') {
+					delete State.variables.args;
+				} else {
+					State.variables.args = oldArgs;
+				}
+			} finally {
+				DOL.Perflog.logWidgetEnd(macroName);
 			}
 		}
 	});
@@ -117,124 +233,122 @@ function DefineMacroS(macroName, macroFunction, tags, skipArgs, maintainContext)
 	}, tags, skipArgs);
 }
 
-function underlowerintegrity() {
-	var output = '';
-	var V = State.variables.worn.under_lower;
-	if (V.integrity_max !== 0) {
-		if (V.integrity <= (V.integrity_max / 10) * 2) {
-			output += "tattered \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 5) {
-			output += "torn \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 9) {
-			output += "frayed \t";
-		} else {
-		}
+/**
+ * @param worn clothing article, State.variables.worn.XXXX
+ * @param slot clothing article slot used
+ * @return {string} condition key word ("tattered"|"torn|"frayed"|"full")
+ */
+window.integrityKeyword = function(worn, slot) {
+	const i = worn.integrity/clothingData(slot,worn,'integrity_max');
+	if (i <= 0.2) {
+		return "tattered"
+	} else if (i <= 0.5) {
+		return "torn"
+	} else if (i <= 0.9) {
+		return "frayed"
+	} else {
+		return "full"
 	}
-	return output;
+}
+
+/**
+ * @param worn clothing article, State.variables.worn.XXXX
+ * @param slot clothing article, State.variables.worn.XXXX
+ * @return {string} printable integrity prefix
+ */
+window.integrityWord = function(worn, slot) {
+	const kw = trIntegrityKeyword(worn, slot);
+	switch (kw) {
+		case "너덜너덜한":
+		case "찢긴":
+		case "해어진":
+			T.text_output = kw+" ";
+			break;
+		case "full":
+		default:
+			T.text_output = "";
+	}
+	return T.text_output;
+}
+DefineMacroS("integrityWord", integrityWord);
+
+function underlowerintegrity() {
+	return integrityWord(V.worn.under_lower,'under_lower');
 }
 DefineMacroS("underlowerintegrity", underlowerintegrity);
 
 function underupperintegrity() {
-	var output = '';
-	var V = State.variables.worn.under_upper;
-	if (V.integrity_max !== 0) {
-		if (V.integrity <= (V.integrity_max / 10) * 2) {
-			output += "tattered \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 5) {
-			output += "torn \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 9) {
-			output += "frayed \t";
-		} else {
-		}
-	}
-	return output;
+	return integrityWord(V.worn.under_upper,'under_upper');
 }
 DefineMacroS("underupperintegrity", underupperintegrity);
 
 function overlowerintegrity() {
-	var output = '';
-	var V = State.variables.worn.over_lower;
-	if (V.integrity_max !== 0) {
-		if (V.integrity <= (V.integrity_max / 10) * 2) {
-			output += "tattered \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 5) {
-			output += "torn \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 9) {
-			output += "frayed \t";
-		} else {
-		}
-	}
-	return output;
+	return integrityWord(V.worn.over_lower,'over_lower');
 }
 DefineMacroS("overlowerintegrity", overlowerintegrity);
 
 function lowerintegrity() {
-	var output = '';
-	var V = State.variables.worn.lower;
-	if (V.integrity_max !== 0) {
-		if (V.integrity <= (V.integrity_max / 10) * 2) {
-			output += "tattered \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 5) {
-			output += "torn \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 9) {
-			output += "frayed \t";
-		} else {
-		}
-	}
-	return output;
+	return integrityWord(V.worn.lower,'lower');
 }
 DefineMacroS("lowerintegrity", lowerintegrity);
 
 function overupperintegrity() {
-	var output = '';
-	var V = State.variables.worn.over_upper;
-	if (V.integrity_max !== 0) {
-		if (V.integrity <= (V.integrity_max / 10) * 2) {
-			output += "tattered \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 5) {
-			output += "torn \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 9) {
-			output += "frayed \t";
-		} else {
-		}
-	}
-	return output;
+	return integrityWord(V.worn.over_upper,'over_upper');
 }
 DefineMacroS("overupperintegrity", overupperintegrity);
 
 function upperintegrity() {
-	var output = '';
-	var V = State.variables.worn.upper;
-	if (V.integrity_max !== 0) {
-		if (V.integrity <= (V.integrity_max / 10) * 2) {
-			output += "tattered \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 5) {
-			output += "torn \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 9) {
-			output += "frayed \t";
-		} else {
-		}
-	}
-	return output;
+	return integrityWord(V.worn.upper,'upper');
 }
 DefineMacroS("upperintegrity", upperintegrity);
 
 function genitalsintegrity() {
-	var output = '';
-	var V = State.variables.worn.genitals;
-	if (V.integrity_max !== 0) {
-		if (V.integrity <= (V.integrity_max / 10) * 2) {
-			output += "tattered \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 5) {
-			output += "torn \t";
-		} else if (V.integrity <= (V.integrity_max / 10) * 9) {
-			output += "frayed \t";
-		} else {
-		}
-	}
-	return output;
+	return integrityWord(V.worn.genitals,'genitals');
 }
 DefineMacroS("genitalsintegrity", genitalsintegrity);
+
+/**
+ * @param worn clothing article, State.variables.worn.XXXX
+ * @return {string} printable clothing colour
+ */
+window.clothesColour = function(worn){
+	if (!worn.colour) return T.text_output = "";
+	if (worn.colour.startsWith("wet")){ //this might not be used anymore
+		return T.text_output = worn.colour.slice(3); 
+	}
+	if (worn.colour_sidebar){
+		if (worn.colour == "custom") return T.text_output = getCustomColourName(worn.colourCustom);
+		return T.text_output = worn.colour;
+	}
+	return T.text_output = "";
+}
+
+/**
+ * @return {void} 
+ */
+window.outfitChecks = function(){
+	T.underOutfit = ((V.worn.under_lower.outfitSecondary) && V.worn.under_lower.outfitSecondary[1] === V.worn.under_upper.name);
+	T.middleOutfit = ((V.worn.lower.outfitSecondary) && V.worn.lower.outfitSecondary[1] === V.worn.upper.name);
+	T.overOutfit = ((V.worn.over_lower.outfitSecondary) && V.worn.over_lower.outfitSecondary[1] === V.worn.over_upper.name);
+
+	T.underNaked = (V.worn.under_lower.name === "naked" && V.worn.under_upper.name === "naked");
+	T.middleNaked = (V.worn.lower.name === "naked" && V.worn.upper.name === "naked");
+	T.overNaked = (V.worn.over_lower.name === "naked" && V.worn.over_upper.name === "naked");
+	T.topless = (V.worn.over_upper.name === "naked" && V.worn.upper.name === "naked" && V.worn.under_upper.name === "naked");
+	T.bottomless = (V.worn.over_lower.name === "naked" && V.worn.lower.name === "naked" && V.worn.under_lower.name === "naked");
+	T.fullyNaked = (T.topless && T.bottomless);
+	return;
+}
+
+/**
+ * @return {boolean} whether or not any main-body clothing is out of place or wet
+ */
+ window.checkForExposedClothing = function(){
+	return ["over_upper", "upper", "under_upper", "over_lower", "lower", "under_lower"].some( clothingLayer => {
+		let wetstage = V[clothingLayer.replace("_","") + "wetstage"];
+		return (V.worn[clothingLayer].state !== setup.clothes[clothingLayer][clothesIndex(clothingLayer, V.worn[clothingLayer])].state_base || wetstage >= 3);
+	})
+}
 
 function processedSvg(width, height) {
 	let svgElem = jQuery(document.createElementNS("http://www.w3.org/2000/svg", "svg"))
@@ -246,7 +360,7 @@ function processedSvg(width, height) {
 		let supportedChildElements = ['img', 'image', 'a', 'rect'];
 		let commonAttributes = ['class', 'x', 'y', 'width', 'height', 'style', 'onclick'];
 
-		//Some browsers really don't like working with svg elements unless you specify their namespace upon creation, raw insertion won't render. 
+		//Some browsers really don't like working with svg elements unless you specify their namespace upon creation, raw insertion won't render.
 		let fixSVGNameSpace = function(type, elem, newParent = null) {
 			if(type == 'img')
 				type = 'image';
@@ -288,7 +402,7 @@ function processedSvg(width, height) {
 				});
 			}
 		}
-		
+
 		//Because the payload got processed as HTML, fix the namespacing and rendering issues to make it a proper SVG again
 		jQuery(document).one(':passagerender', function (ev) {
 			for(let htmlElem of supportedChildElements) {
@@ -318,7 +432,7 @@ window.AvsAn = (function () {
 			aCount: n[0],
 			anCount: n[1],
 			prefix: prefix,
-			article: n[0] >= n[1] ? "a" : "an"
+			article: n[0] >= n[1] ? "" : ""
 		}
 		dict = dict.substr(1 + a.join(';').length);
 		for (var i = 0; i < n[2]; i++)
@@ -352,3 +466,71 @@ window.AvsAn = (function () {
 		}
 	};
 })();
+
+function numberify(selector) {
+	$(() => Links.generateLinkNumbers($(selector)))
+	return "";
+}
+DefineMacroS("numberify", numberify);
+
+// blink entire page to fix a bug in Chrome where animation on images doesn't start
+window.fixStuckAnimations = function() {
+	let scrollX = window.scrollX;
+	let scrollY = window.scrollY;
+	let imgs = $('#story').add($('#ui-bar'));
+	imgs.toggleClass('hidden');
+	window.setTimeout(() => {
+		imgs.toggleClass('hidden');
+		window.scroll(scrollX, scrollY);
+	}, 5);
+}
+
+// attaches event listeners to combat images
+window.initTouchToFixAnimations = function() {
+	$(document).on('click', "#divsex img", fixStuckAnimations);
+}
+
+$(document).on(':passagedisplay', function (ev) {
+	if (V.combat) {
+		initTouchToFixAnimations();
+	}
+	function checkFadingSpans() {
+		let spans = $(".fading");
+	  if (spans.length > 0) {
+		  let span = spans[Math.floor(Math.random()*spans.length)];
+		setTimeout(()=>{
+			$(span).removeClass("fading").addClass("faded");
+		  checkFadingSpans();
+		}, Math.random()*1000 + 500);
+	  }
+	}
+	
+	setTimeout(checkFadingSpans, 1000);
+});
+
+window.saveDataCompare = function(save1, save2){
+	var result = {};
+	var keys = Object.keys(save1)
+	keys.forEach(key =>{
+		let save1Json = JSON.stringify(save1[key])
+		let save2Json = JSON.stringify(save2[key])
+		if(save1Json !== save2Json){
+			result[key] = [save1[key],save2[key]];
+		}
+	})
+	return result;
+}
+
+/*For the optional numpad to the right of the screen*/
+window.mobclick = function mobclick(index){
+	console.log('input：'.index)
+	$(Links.currentLinks[index-1]).click();
+}
+window.mobBtnHide = function mobBtnHide(){
+	$('.mob-btn').hide()
+	$('.mob-btn-h').show()
+}
+window.mobBtnShow = function mobBtnShow(){
+	$('.mob-btn').show()
+	$('.mob-btn-h').hide()
+}

@@ -1,12 +1,12 @@
-:: School Front Playground [nobr]
+:: School Front Playground
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>><<set $bus to "schoolfrontplayground">>
 
-<<if $schoolstate isnot "early" and $schoolstate isnot "late" and $schoolstate isnot "earlynoschool" and $schoolstate isnot "latenoschool" and $schoolstate isnot "daynoschool">>
+<<if !["early", "late", "earlynoschool", "latenoschool", "daynoschool"].includes($schoolstate)>>
 	<<if $schoolstate is "morning">>
-	당신은 정문쪽 놀이터에 있다. 아직 학교가 공식적으로 시작한 것은 아니지만, 어린 학생들이 이미 와서 놀고 있다.
-	<br><br>
+		당신은 정문쪽 놀이터에 있다. 아직 학교가 공식적으로 시작한 것은 아니지만, 어린 학생들이 이미 와서 놀고 있다.
+		<br><br>
 	<<elseif $schoolstate is "afternoon">>
-	당신은 정문쪽 놀이터에 있다. 앞으로 몇 시간은 더 시설이 열려있을 것이기에 몇몇 학생들이 돌아다니며 놀고 있다.
+		당신은 정문쪽 놀이터에 있다. 앞으로 몇 시간은 더 시설이 열려있을 것이기에 몇몇 학생들이 돌아다니며 놀고 있다.
 		<<if $weekday eq 6 and $framed is "whitney" and $pillory_tenant.special.name isnot "Whitney">>
 			<br>
 			누군가 고함을 지르는 소리가 들려온다. 그쪽으로 가보니 마침 <span class="gold">휘트니가 수갑을 찬 채로 경찰 몇 명에 의해 끌려나가는 광경</span>이 눈에 들어온다.<<imprison_whitney>>
@@ -18,39 +18,39 @@
 		<<elseif $bullytimer gte 1 and $bullytimeroutside gte 1 and $bullygate is 0 and $NPCName[$NPCNameList.indexOf("Whitney")].init is 1 and $NPCName[$NPCNameList.indexOf("Whitney")].state isnot "dungeon" and $pillory_tenant.special.name isnot "Whitney">>
 			<span class="purple">정문쪽에 휘트니가 있는 것이 보인다.</span>
 		<</if>>
-	<br><br>
+		<br><br>
 	<<elseif $schoolstate is "lunch">>
-	당신은 정문쪽 놀이터에 있다. 점심 시간인지라 학생들로 가득하다.
-	<br><br>
+		당신은 정문쪽 놀이터에 있다. 점심 시간인지라 학생들로 가득하다.
+		<br><br>
 	<<else>>
-	당신은 정문쪽 놀이터에 있다. 수업 시간이라 사람이 딱히 보이진 않는다.
-	<br><br>
+		당신은 정문쪽 놀이터에 있다. 수업 시간이라 사람이 딱히 보이진 않는다.
+		<br><br>
 	<</if>>
 	<<if $exposed gte 1>>
-	당신은 <<lewdnessPost "을">> 가리기 위해 창고 뒤에 숨는다.
-	<br><br>
+		당신은 <<lewdnessPost "을">> 가리기 위해 창고 뒤에 숨는다.
+		<br><br>
 	<</if>>
 <<else>>
-정문쪽 놀이터는 비어있다.
-<br><br>
+	정문쪽 놀이터는 비어있다.
+	<br><br>
 <</if>>
 
 <<schoolperiodtext>>
 
-<<if $stress gte 10000>>
-<<link [[모든 것이 암흑 속으로 사라져간다...|School Passout]]>><</link>>
+<<if $stress gte $stressmax>>
+	<<link [[모든 것이 암흑 속으로 사라져간다...|School Passout]]>><</link>>
 <<else>>
-<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
 <<if $danger gte (9900 - $allure) and $eventskip is 0>>
-<<eventsplayground>>
+	<<eventsplayground>>
 <<else>>
-	<<if $schoolstate isnot "early" and $schoolstate isnot "late" and $schoolstate isnot "earlynoschool" and $schoolstate isnot "latenoschool" and $schoolstate isnot "daynoschool" and $exposed gte 1>>
+	<<if !["early", "late", "earlynoschool", "latenoschool", "daynoschool"].includes($schoolstate) and $exposed gte 1>>
 		<<link [[학교 뒤쪽으로 숨어든다 (0:05)|School Rear Playground]]>><<pass 5>><</link>>
 		<br>
 	<<else>>
-		<<link [[학교 안으로 들어간다 (0:01)|Hallways]]>><<pass 1>><</link>>
+		<<entranceicon>><<link [[학교 안으로 들어간다 (0:01)|Hallways]]>><<pass 1>><</link>>
 		<br>
-		<<link [[뒤쪽 놀이터 (0:02)|School Rear Playground]]>><<pass 2>><</link>>
+		<<playgroundicon>><<link [[뒤쪽 놀이터 (0:02)|School Rear Playground]]>><<pass 2>><</link>>
 		<br><br>
 		<<if $schoolstate is "afternoon" and $detention gte 1 and $detentionattended isnot 1 and $headnodetention isnot 1 and $pillory_tenant.special.name isnot "Leighton">>
 			<<link [[학교를 나온다|School Leave Stop]]>><</link>>
@@ -59,10 +59,10 @@
 			<<link [[학교를 나온다|School Leave Whitney]]>><</link>>
 			<br>
 		<<elseif $schoolday is 1 and $hour gte 7 and $hour lte 16>>
-			<<link [[학교를 나온다 (0:01)|Oxford Street]]>><<pass 1>><</link>>
+			<<ind>><<link [[학교를 나온다 (0:01)|Oxford Street]]>><<pass 1>><</link>>
 			<br>
 		<<else>>
-			<<link [[학교를 나온다|School Gate Exit]]>><</link>>
+			<<ind>><<link [[학교를 나온다|School Gate Exit]]>><</link>>
 			<br>
 		<</if>>
 	<</if>>
@@ -72,26 +72,26 @@
 
 <<set $eventskip to 0>>
 
-:: School Rear Playground [nobr]
+:: School Rear Playground
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>><<set $bus to "schoolrearplayground">>
 
-<<if $schoolstate isnot "early" and $schoolstate isnot "late" and $schoolstate isnot "earlynoschool" and $schoolstate isnot "latenoschool" and $schoolstate isnot "daynoschool">>
+<<if !["early", "late", "earlynoschool", "latenoschool", "daynoschool"].includes($schoolstate)>>
 	<<if $schoolstate is "morning">>
-	당신은 학교 뒤쪽의 놀이터에 있다. 아직 학교가 공식적으로 시작한 것은 아니지만, 어린 학생들이 이미 와서 놀고 있다.
-	<br><br>
+		당신은 학교 뒤쪽의 놀이터에 있다. 아직 학교가 공식적으로 시작한 것은 아니지만, 어린 학생들이 이미 와서 놀고 있다.
+		<br><br>
 	<<elseif $schoolstate is "afternoon">>
-	당신은 학교 뒤쪽의 놀이터에 있다. 앞으로 몇 시간은 더 시설이 열려있을 것이기에 몇몇 학생들이 돌아다니며 놀고 있다.
-	<br><br>
+		당신은 학교 뒤쪽의 놀이터에 있다. 앞으로 몇 시간은 더 시설이 열려있을 것이기에 몇몇 학생들이 돌아다니며 놀고 있다.
+		<br><br>
 	<<elseif $schoolstate is "lunch">>
-	당신은 학교 뒤쪽의 놀이터에 있다. 점심 시간인지라 학생들로 가득하다.
-	<br><br>
+		당신은 학교 뒤쪽의 놀이터에 있다. 점심 시간인지라 학생들로 가득하다.
+		<br><br>
 	<<else>>
-	당신은 학교 뒤쪽의 놀이터에 있다. 수업 시간이라 사람이 딱히 보이진 않는다.
-	<br><br>
+		당신은 학교 뒤쪽의 놀이터에 있다. 수업 시간이라 사람이 딱히 보이진 않는다.
+		<br><br>
 	<</if>>
 	<<if $exposed gte 1>>
-	당신은 <<lewdnessPost "을">> 가리기 위해 창고 뒤에 숨는다.
-	<br><br>
+		당신은 <<lewdnessPost "을">> 가리기 위해 창고 뒤에 숨는다.
+		<br><br>
 	<</if>>
 <<else>>
 	학교 뒤쪽 놀이터는 비어있다.
@@ -100,27 +100,23 @@
 
 <<schoolperiodtext>>
 
-<<if $stress gte 10000>>
+<<if $stress gte $stressmax>>
 	<<link [[모든 것이 암흑 속으로 사라져간다...|School Passout]]>><</link>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
 	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
 		<<eventsplayground>>
 	<<else>>
-
-		<<if $schoolstate isnot "early" and $schoolstate isnot "late" and $schoolstate isnot "earlynoschool" and $schoolstate isnot "latenoschool" and $schoolstate isnot "daynoschool" and $exposed gte 1>>
-
+		<<if !["early", "late", "earlynoschool", "latenoschool", "daynoschool"].includes($schoolstate) and $exposed gte 1>>
 			<<link [[학교로 숨어든다 (0:03)|Hallways]]>><<pass 3>><</link>>
 			<br>
 			<<link [[정문쪽으로 숨어든다 (0:05)|School Front Playground]]>><<pass 5>><</link>>
 			<br><br>
 			<<link [[울타리를 넘어 공업 지구로 간다 (0:02)|School Rear Fence Exit]]>><<pass 2>><</link>>
 			<br>
-
 		<<else>>
-
 			<<if $exposed lte 0 and $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and $weather isnot "rain" and $weather isnot "snow" and $schoolstate is "lunch">>
-			카일라가 나무 그루터기에 앉아 땅바닥을 쳐다보고 있다.
+				카일라가 나무 그루터기에 앉아 땅바닥을 쳐다보고 있다.
 				<br>
 				<<link [[다가간다|Kylar Playground]]>><<set $kylar_text_trigger to true>><</link>>
 				<br><br>
@@ -129,13 +125,16 @@
 				<<link [[그루터기에 앉아 쉰다 (0:10)|School Stump]]>><<stress -1>><<pass 10>><<tiredness -1>><</link>><<ltiredness>><<lstress>>
 				<br>
 			<</if>>
-			<<link [[학교 안으로 들어간다 (0:01)|Hallways]]>><<pass 1>><</link>>
+			<<if $schoolstate is "lunch" and $panty_thief gte 1>>
+				<<link [[속옷 도둑을 찾는다 (0:10)|School Panty]]>><<pass 10>><</link>>
+				<br>
+			<</if>>
+			<<entranceicon>><<link [[학교 안으로 들어간다 (0:01)|Hallways]]>><<pass 1>><</link>>
 			<br>
-			<<link [[정문쪽 놀이터 (0:02)|School Front Playground]]>><<pass 2>><</link>>
+			<<playgroundicon>><<link [[정문쪽 놀이터 (0:02)|School Front Playground]]>><<pass 2>><</link>>
 			<br><br>
-			<<link [[울타리를 넘어 공업 지구로 간다 (0:02)|School Rear Fence Exit]]>><<pass 2>><</link>>
+			<<ind>><<link [[울타리를 넘어 공업 지구로 간다 (0:02)|School Rear Fence Exit]]>><<pass 2>><</link>>
 			<br>
-
 		<</if>>
 
 		<<if $historytrait gte 1>>
@@ -152,12 +151,12 @@
 
 <<set $eventskip to 0>>
 
-:: School Locked [nobr]
+:: School Locked
 
 <<set $outside to 0>><<effects>><<set $lock to 200>>
 학교 정문은 닫힌 채로 단단한 자물쇠가 잠겨 있다.
 <br><br>
-<<if $skulduggery gte $lock>>
+<<if currentSkillValue('skulduggery') gte $lock>>
 	<span class="green">이 자물쇠는 아주 따기 쉬워 보인다.</span>
 	<br><br>
 	<<link [[자물쇠를 딴다 (0:10)|School Front Playground]]>><<pass 10>><<crimeup 1>><</link>><<crime>>
@@ -169,46 +168,68 @@
 <<link [[떠난다|Oxford Street]]>><</link>>
 <br>
 
-:: School Pool Entrance [nobr]
+:: School Pool Entrance
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
-당신은 학교 탈의실 바깥에 있다. 수영장에 들어가려면 탈의실을 지나야 한다.
-<br><br>
+
+<<if $changingroomstate is "empty">>
+	당신은 학교 탈의실 바깥에 있다. 수영장에 들어가려면 탈의실을 지나야 한다.
+	<br><br>
+<<else>>
+	You are outside the school changing rooms. You need to pass through them to access the pool. You hear chatters on both side of the changing rooms.
+	<br><br>
+<</if>>
 
 <<if $exposed gte 1>>
-
 	문 옆에 놓인 카트에는 수건이 잔뜩 쌓여있다.
 	<br><br>
 	<<link [[수건 몇 장을 집는다|School Pool Entrance]]>><<towelup>><</link>>
 	<br><br>
-
 <</if>>
 
-<<maleicon>><<link [[남학생 탈의실|School Boy Changing Room]]>><</link>>
-<br>
+<<if $player.gender is "f" and $changingroomstate is "empty">>
+	<<maleicon>><<link [[남학생 탈의실|School Boy Changing Room]]>><<arousal 300>><</link>><<garousal>>
+	<br>
+<<elseif $player.gender is "f" and  $schoolrep.crossdress gte 3>>
+	<<maleicon>><<link [[남학생 탈의실|School Boy Changing Room]]>><<arousal 600>><<stress 12>><</link>><<ggarousal>>
+	<br>
+<<elseif $player.gender is "f">>
+	<<maleicon>><<link [[남학생 탈의실|School Boy Changing Room]]>><<arousal 600>><</link>><<ggarousal>>
+	<br>
+<<else>>
+	<<maleicon>><<link [[남학생 탈의실|School Boy Changing Room]]>><</link>>
+	<br>
+<</if>>
 
-<<femaleicon>><<link [[여학생 탈의실|School Girl Changing Room]]>><</link>>
-<br><br>
+<<if $player.gender is "m" and $changingroomstate is "empty">>
+	<<femaleicon>><<link [[여학생 탈의실|School Girl Changing Room]]>><<arousal 300>><</link>><<garousal>>
+	<br><br>
+<<elseif $player.gender is "m" and  $schoolrep.crossdress gte 3>>
+	<<femaleicon>><<link [[여학생 탈의실|School Girl Changing Room]]>><<arousal 600>><<stress 12>><</link>><<ggarousal>>
+	<br><br>
+<<elseif $player.gender is "m">>
+	<<femaleicon>><<link [[여학생 탈의실|School Girl Changing Room]]>><<arousal 600>><</link>><<ggarousal>>
+	<br><br>
+<<else>>
+	<<femaleicon>><<link [[여학생 탈의실|School Girl Changing Room]]>><</link>>
+	<br><br>
+<</if>>
 
-<<if $schoolstate isnot 0 and $schoollesson is 1>>
-	<<if $time gte ($hour * 60 + 5) and $time lte ($hour * 60 + 57)>>
-	<<else>>
-		<<if $player.gender_appearance is "m">>
-		<<link [[여학생들이 나오기를 기다린다 (0:05)|School Pool Entrance]]>><<pass 5>><</link>>
+<<if $changingroomstate isnot "empty" and $player.gender_appearance isnot $player.gender>>
+	<<if $player.gender_appearance is "m">>
+		<<link [[여학생들이 나오기를 기다린다 (0:06)|School Pool Entrance]]>><<pass 6>><</link>>
 		<br><br>
-		<</if>>
-		<<if $player.gender_appearance is "f">>
-		<<link [[남학생들이 나오기를 기다린다 (0:05)|School Pool Entrance]]>><<pass 5>><</link>>
+	<<elseif $player.gender_appearance is "f">>
+		<<link [[남학생들이 나오기를 기다린다 (0:06)|School Pool Entrance]]>><<pass 6>><</link>>
 		<br><br>
-		<</if>>
 	<</if>>
 <</if>>
 
-<<link [[떠난다|Hallways]]>><</link>>
+<<link [[떠난다 (0:01)|Hallways]]>><<pass 1>><</link>>
 <br>
 
-:: School Rear Fence [nobr]
+:: School Rear Fence
 <<set $outside to 1>><<set $location to "town">><<effects>>
 
 당신은 울타리를 넘어 반대편에 착지한다.
@@ -254,7 +275,7 @@
 <<link [[다음|School Rear Playground]]>><</link>>
 <br><br>
 
-:: School Rear Fence Exit [nobr]
+:: School Rear Fence Exit
 <<set $outside to 1>><<set $location to "town">><<effects>>
 
 당신은 울타리를 넘어 반대편에 착지한다.
@@ -300,13 +321,13 @@
 <<link [[다음|Industrial alleyways]]>><</link>>
 <br><br>
 
-:: Head's Office [nobr]
+:: Head's Office
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 <<if $schoolday is 1 and $schoolstate isnot "early" and $schoolstate isnot "late" and $pillory_tenant.special.name isnot "Leighton">>
 
 	<<npc Leighton>><<person1>>
-	당신은 교장실 문을 두드린다. 반대편에서 레이턴의 목소리가 들려온다. "들어와."
+	당신은 <<nnpc_title_yi "Leighton">> 사무실 문을 두드린다. 반대편에서 <<his_yi>> 목소리가 들려온다. "들어와."
 	<br><br>
 
 	<<if $worn.upper.type.includes("school") and $worn.lower.type.includes("school") and $rightarm isnot "bound" or $hour gte 14>>
@@ -317,21 +338,21 @@
 			<<link [[교장실에서 나온다 (0:01)|Hallways]]>><<endevent>><<pass 1>><<set $headinterrupted to 1>><</link>>
 			<br>
 			<<if $headdrive is 1 and $headnodetention isnot 1 and $headmoney isnot 1>>
-				<<link [[협박한다|Head's Office Blackmail]]>>/*'>>*/<</link>><<crime>>
+				<<link [[협박한다|Head's Office Blackmail]]>><</link>><<crime>>
 				<br>
 			<</if>>
 			<<if $schoolfameblackmail gte 1>>
 				<<if $schoolfameboard is 1>>
 					<<if $schoolfameconsensual is 1>>
-					<<link [[사진을 찍는다 (0:20)|Head's Office Photoshoot]]>>/*'>>*/<<set $schoolfameblackmail to 0>><</link>>
-					<br>
+						<<link [[사진을 찍는다 (0:20)|Head's Office Photoshoot]]>><<set $schoolfameblackmail to 0>><</link>>
+						<br>
 					<<elseif $exhibitionism gte 55 and $schoolfameblackmail gte 3>>
-					<<link [[돈을 위해 사진을 찍겠다 한다|Head's Office Photoshoot Offer]]>>/*'>>*/<<set $schoolfameblackmail to 0>><<set $schoolfameconsensual to 1>><</link>><<exhibitionist4>>
-					<br>
+						<<link [[돈을 위해 사진을 찍겠다 한다|Head's Office Photoshoot Offer]]>><<set $schoolfameblackmail to 0>><<set $schoolfameconsensual to 1>><</link>><<exhibitionist4>>
+						<br>
 					<</if>>
 				<<else>>
-				<<link [[사진을 찍는다 (0:20)|Head's Office Photoshoot Blackmail]]>>/*'>>*/<<set $schoolfameblackmail to 0>><<trauma 6>><<stress 6>><<npcincr Leighton dom 1>><</link>><<gtrauma>><<gstress>>
-				<br>
+					<<link [[사진을 찍는다 (0:20)|Head's Office Photoshoot Blackmail]]>><<set $schoolfameblackmail to 0>><<trauma 6>><<stress 6>><<npcincr Leighton dom 1>><</link>><<gtrauma>><<gstress>>
+					<br>
 				<</if>>
 			<</if>>
 
@@ -348,24 +369,24 @@
 				<br><br>
 			<</if>>
 
-		<<link [[교장실에서 나온다 (0:01)|Hallways]]>><<endevent>><<pass 1>><<detention 1>><</link>><<gdelinquency>>
-		<br>
-			<<if $headdrive is 1 and $headnodetention isnot 1 and $headmoney isnot 1>>
-			<<link [[협박한다|Head's Office Blackmail]]>>/*'>>*/<</link>><<crime>>
+			<<link [[교장실에서 나온다 (0:01)|Hallways]]>><<endevent>><<pass 1>><<detention 1>><</link>><<gdelinquency>>
 			<br>
+			<<if $headdrive is 1 and $headnodetention isnot 1 and $headmoney isnot 1>>
+				<<link [[협박한다|Head's Office Blackmail]]>><</link>><<crime>>
+				<br>
 			<</if>>
 			<<if $schoolfameblackmail gte 1>>
 				<<if $schoolfameboard is 1>>
 					<<if $schoolfameconsensual is 1>>
-					<<link [[사진을 찍는다 (0:20)|Head's Office Photoshoot]]>>/*'>>*/<<set $schoolfameblackmail to 0>><</link>>
-					<br>
+						<<link [[사진을 찍는다 (0:20)|Head's Office Photoshoot]]>><<set $schoolfameblackmail to 0>><</link>>
+						<br>
 					<<elseif $exhibitionism gte 55 and $schoolfameblackmail gte 3>>
-					<<link [[돈을 위해 사진을 찍겠다 한다|Head's Office Photoshoot Offer]]>>/*'>>*/<<set $schoolfameblackmail to 0>><<set $schoolfameconsensual to 1>><</link>><<exhibitionist4>>
-					<br>
+						<<link [[돈을 위해 사진을 찍겠다 한다|Head's Office Photoshoot Offer]]>><<set $schoolfameblackmail to 0>><<set $schoolfameconsensual to 1>><</link>><<exhibitionist4>>
+						<br>
 					<</if>>
 				<<else>>
-				<<link [[사진을 찍는다 (0:20)|Head's Office Photoshoot Blackmail]]>>/*'>>*/<<set $schoolfameblackmail to 0>><<trauma 6>><<stress 6>><<npcincr Leighton dom 1>><</link>><<gtrauma>><<gstress>>
-				<br>
+					<<link [[사진을 찍는다 (0:20)|Head's Office Photoshoot Blackmail]]>><<set $schoolfameblackmail to 0>><<trauma 6>><<stress 6>><<npcincr Leighton dom 1>><</link>><<gtrauma>><<gstress>>
+					<br>
 				<</if>>
 			<</if>>
 		<</if>>
@@ -389,13 +410,15 @@
 			<br><br>
 		<</if>>
 		<<if !$worn.upper.type.includes("school") and !$worn.lower.type.includes("school") and $schoolstate isnot "fifth">>
-			<<if $player.gender is "m">>
+			<<if $player.gender_appearance is "m">>
 				<<if $rng gte 51>>
 					<<set $clothingselector to "m">>
 					<<HePost "은">> 낡은 교복 셔츠와 반바지를 건네준다. "창고에서 갈아입도록 해. 입고 있던 옷은 방과후에 수영장에서 가져가고." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
 					<br><br>
 
 					<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
+					<br>
+					<<link [[남자 교복을 입는 것을 거부한다 |Head's Office Refusal]]>><<detention 1>><</link>><<gdelinquency>><<if !$genderknown.includes("Leighton") and $statdisable is "f">> | <span class="pink">Leighton will be suspicious</span><</if>>
 					<br>
 				<<else>>
 					<<set $clothingselector to "f">>
@@ -404,16 +427,18 @@
 
 					<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
 					<br>
-					<<link [["이런 걸 어떻게 입어요!" |Head's Office Refusal]]>>/*'>>*/<<detention 1>><</link>><<gdelinquency>>
+					<<link [[여자 교복을 입는 것을 거부한다 |Head's Office Refusal]]>><<detention 1>><</link>><<gdelinquency>>
 					<br>
 				<</if>>
-			<<elseif $player.gender is "f">>
+			<<else>>
 				<<if $rng gte 51>>
 					<<set $clothingselector to "f">>
 					<<HePost "은">> 낡은 교복 셔츠와 치마를 건네준다. "창고에서 갈아입도록 해. 입고 있던 옷은 방과후에 수영장에서 가져가고." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
 					<br><br>
 
 					<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
+					<br>
+					<<link [[여자 교복을 입는 것을 거부한다 |Head's Office Refusal]]>><<detention 1>><</link>><<gdelinquency>><<if !$genderknown.includes("Leighton") and $statdisable is "f">> | <span class="pink">Leighton will be suspicious</span><</if>>
 					<br>
 				<<else>>
 					<<set $clothingselector to "m">>
@@ -422,73 +447,47 @@
 
 					<<link [[옷을 갈아입고 나간다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
 					<br>
-					<<link [["이런 걸 어떻게 입어요!" |Head's Office Refusal]]>>/*'>>*/<<detention 1>><</link>><<gdelinquency>>
-					<br>
-				<</if>>
-			<<else>>
-				<<if $rng gte 51>>
-					<<set $clothingselector to "f">>
-					<<HePost "은">> 당신에게 낡은듯한 교복 셔츠와 치마를 건네주며 말한다. "창고에서 갈아입도록 해. 입고 있던 옷은 방과후에 수영장에서 가져가고." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
-					<br><br>
-
-					<<link [[옷을 갈아입고 나간다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
-					<br>
-				<<else>>
-					<<set $clothingselector to "m">>
-					<<HePost "은">> 당신에게 낡은듯한 교복 셔츠와 반바지를 건네주며 말한다. "창고에서 갈아입도록 해. 입고 있던 옷은 방과후에 수영장에서 가져가고." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
-					<br><br>
-
-					<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
+					<<link [[남자 교복을 입는 것을 거부한다 |Head's Office Refusal]]>><<detention 1>><</link>><<gdelinquency>>
 					<br>
 				<</if>>
 			<</if>>
 		<<elseif !$worn.lower.type.includes("school") and $schoolstate isnot "fifth">>
-			<<if $player.gender is "m">>
-				<<if $rng gte 51>>
-				<<set $clothingselector to "m">>
-				<<HePost "은">> 낡은 교복 반바지를 건네준다. "창고에서 갈아입도록 해. 입고 있던 옷은 방과후에 수영장에서 가져가고." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
-				<br><br>
-				<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
-				<br>
-				<<else>>
-				<<set $clothingselector to "f">>
-				<<HePost "은">> 낡은 교복 치마를 건네준다. 당신이 뭐라 말을 하기도 전에 <<hePost "이">> 입을 연다. "여학생용 교복인 건 나도 알지만, 지금은 이것밖에 없어. 이런 일을 또 겪고 싶지 않다면 앞으로는 네 교복을 입고 오도록 해." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
-				<br><br>
-
-				<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
-				<br>
-				<<link [["이런 걸 어떻게 입어요!" |Head's Office Refusal]]>>/*'>>*/<<detention 1>><</link>><<gdelinquency>>
-				<br>
-				<</if>>
-			<<elseif $player.gender is "f">>
-				<<if $rng gte 51>>
-				<<set $clothingselector to "f">>
-				<<HePost "은">> 낡은 교복 치마를 건네준다. "창고에서 갈아입도록 해. 입고 있던 옷은 방과후에 수영장에서 가져가고." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
-				<br><br>
-				<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
-				<br>
-				<<else>>
-				<<set $clothingselector to "m">>
-				<<HePost "은">> 낡은 교복 반바지를 건네준다. 당신이 뭐라 말을 하기도 전에 <<hePost "이">> 입을 연다. "남학생용 교복인 건 나도 알지만, 지금은 이것밖에 없어. 이런 일을 또 겪고 싶지 않다면 앞으로는 네 교복을 입고 오도록 해." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
-				<br><br>
-
-				<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
-				<br>
-				<<link [["이런 걸 어떻게 입어요!" |Head's Office Refusal]]>>/*'>>*/<<detention 1>><</link>><<gdelinquency>>
-				<br>
-				<</if>>
-			<<else>>
+			<<if $player.gender_appearance is "m">>
 				<<if $rng gte 51>>
 					<<set $clothingselector to "m">>
 					<<HePost "은">> 낡은 교복 반바지를 건네준다. "창고에서 갈아입도록 해. 입고 있던 옷은 방과후에 수영장에서 가져가고." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
 					<br><br>
 					<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
 					<br>
+					<<link [[남자 교복을 입는 것을 거부한다 |Head's Office Refusal]]>><<detention 1>><</link>><<gdelinquency>><<if !$genderknown.includes("Leighton") and $statdisable is "f">> | <span class="pink">Leighton will be suspicious</span><</if>>
+					<br>
 				<<else>>
+					<<set $clothingselector to "f">>
+					<<HePost "은">> 낡은 교복 치마를 건네준다. 당신이 뭐라 말을 하기도 전에 <<hePost "이">> 입을 연다. "여학생용 교복인 건 나도 알지만, 지금은 이것밖에 없어. 이런 일을 또 겪고 싶지 않다면 앞으로는 네 교복을 입고 오도록 해." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
+					<br><br>
+
+					<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
+					<br>
+					<<link [[여자 교복을 입는 것을 거부한다 |Head's Office Refusal]]>><<detention 1>><</link>><<gdelinquency>>
+					<br>
+				<</if>>
+			<<else>>
+				<<if $rng gte 51>>
 					<<set $clothingselector to "f">>
 					<<HePost "은">> 낡은 교복 치마를 건네준다. "창고에서 갈아입도록 해. 입고 있던 옷은 방과후에 수영장에서 가져가고." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
 					<br><br>
 					<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
+					<br>
+					<<link [[여자 교복을 입는 것을 거부한다 |Head's Office Refusal]]>><<detention 1>><</link>><<gdelinquency>><<if !$genderknown.includes("Leighton") and $statdisable is "f">> | <span class="pink">Leighton will be suspicious</span><</if>>
+					<br>
+				<<else>>
+					<<set $clothingselector to "m">>
+					<<HePost "은">> 낡은 교복 반바지를 건네준다. 당신이 뭐라 말을 하기도 전에 <<hePost "이">> 입을 연다. "남학생용 교복인 건 나도 알지만, 지금은 이것밖에 없어. 이런 일을 또 겪고 싶지 않다면 앞으로는 네 교복을 입고 오도록 해." <<HePost "은">> 알아서 옷을 갈아입으라는듯이 시선을 컴퓨터로 돌린다.
+					<br><br>
+
+					<<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<endevent>><<pass 1>><</link>>
+					<br>
+					<<link [[남자 교복을 입는 것을 거부한다 |Head's Office Refusal]]>><<detention 1>><</link>><<gdelinquency>>
 					<br>
 				<</if>>
 			<</if>>
@@ -502,25 +501,52 @@
 	<</if>>
 
 <<else>>
-교장실은 비어있다.
-<br><br>
+	교장실은 비어있다.
+	<br><br>
 
 	<<if $headpasswordknown is 1 and $headdrive isnot 1>>
-	<<link [[몰래 컴퓨터에 접근한다|Head's Computer]]>>/*'>>*/<</link>>
-	<br>
+		<<link [[몰래 컴퓨터에 접근한다|Head's Computer]]>><</link>>
+		<br>
 	<</if>>
 	<<if $pub_hack_job is 3 and not $hacker_tasks.includes("leighton")>>
-		<<link [[몰래 금고에 다가간다|Head's Stash]]>>/*'>>*/<</link>>
-	<br>
+		<<link [[몰래 금고에 다가간다|Head's Stash]]>><</link>>
+		<br>
 	<</if>>
-<<link [[교장실에서 나온다 (0:01)|Hallways]]>><<pass 1>><</link>>
-<br>
+	<<link [[교장실에서 나온다 (0:01)|Hallways]]>><<pass 1>><</link>>
+	<br>
 <</if>>
 
-:: Head's Office Refusal [nobr]
+:: Head's Office Refusal
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
-
-<<HePost "은">> 근엄하게 쳐다본다. "말대답 하지마. 내가 옷 갈아입으라 했으면 어서 갈아입어."
+<<set _offeredclothing to ($clothingselector is "m" ? "the boys' uniform" : "the girls' uniform")>>
+<<if $submissive gte 1150>>
+	"B-But this is _offeredclothing," you say.
+<<elseif $submissive lte 850>>
+	"I won't wear _offeredclothing!" you say.
+<<else>>
+	<<if $player.gender is $clothingselector and !$backgroundTraits.includes("crossdresser")>><!-- Crossdresser trait makes PC distressed by not crossdressing and so goes to "I can't" -->
+		"Are you sure you don't have a <<print ($clothingselector is "f" ? "pair of shorts" : "skirt")>>?" you ask.
+	<<else>>
+		"But I can't wear _offeredclothing!" you say.
+	<</if>>
+<</if>>
+<br><br>
+<<if ($player.gender_appearance is $clothingselector) and !$genderknown.includes("Leighton")>> <!-- Leighton didn't expect this and checks the PC's records for their sex -->
+	<<He>> looks slightly confused for a moment, before turning back to <<his>> computer to look something up. <<He>> skims briefly before 
+		<<if $player.gender is "h">><!-- implication: PC's ambiguous sex is recorded as medical information -->
+			gasping at what <<he>> finds.
+		<<elseif $backgroundTraits.includes("crossdresser")>><!-- deliberately ambiguous implication: PC has been crossdressing for long enough for it to be on file -->
+			smirking at what <<he>> finds.
+		<<else>>
+			quirking a brow at what <<he>> finds and typing something in.
+		<</if>>
+		 <<He>> looks back up and says, "I'm sorry, but this uniform is all I have. Now, get dressed."
+	<<set $genderknown.pushUnique("Leighton")>><<if $player.gender is "h">><<detention -1>><</if>> <!-- Leighton is too surprised to be angry at herm PC right now -->
+<<elseif $player.gender is $clothingselector and $genderknown.includes("Leighton")>>
+	<<He>> looks at you sternly and scoffs. "If you want to dress as a <<print ($clothingselector is "m" ? "girl" : "boy")>>, that's your prerogative, but perhaps you should come dressed like it next time. Now, get dressed."
+<<else>>
+	<<HePost "은">> 근엄하게 쳐다본다. "말대답 하지마. 내가 옷 갈아입으라 했으면 어서 갈아입어."
+<</if>>
 <br><br>
 
 <<link [[옷을 갈아입고 나온다 (0:01)|Hallways]]>><<schoolspareclothes>><<pass 1>><<endevent>><</link>>
@@ -528,35 +554,46 @@
 <<link [[나온다|Hallways]]>><<detention 3>><<endevent>><</link>><<gdelinquency>>
 <br>
 
-:: School Passout [nobr]
-당신은 잠시 정신을 잃고 있었다.
-<br><br>
-
-<<pass 1 hour>>
-
-<<set $danger to random(1, 10000)>>
-
-<<if $danger gte (9900 - $allure)>>
-	<<if $schoolday is 1 and $schoolstate isnot "early" and $schoolstate isnot "late">>
-		<<if $rng gte 81>>
-		<<link [[다음|School Passout Exhibit]]>><<upperruined>><<lowerruined>><<underruined>><</link>>
-		<<elseif $rng gte 1>>
-		<<link [[다음|School Passout Rape]]>><<set $molestationstart to 1>><</link>>
-		<</if>>
-	<<else>>
-		<<if $rng gte 51>>
-		<<link [[다음|School Passout Gang Rape]]>><<set $molestationstart to 1>><</link>>
-		<<elseif $rng gte 1>>
-		<<link [[다음|School Passout Gang Rape]]>><<set $molestationstart to 1>><</link>>
-		<</if>>
-	<</if>>
+:: School Passout
+/*ToDo: Pregnancy, remove $pregnancyTesting to properly enable*/
+<<sydneySchedule>>
+<<if $sexStats.vagina.pregnancy.waterBreaking is true and $pregnancyTesting>>
+	<<pregnancyWatersBrokenPassout "school">>
+<<elseif _sydney_location is "library" and ($NPCName[$NPCNameList.indexOf("Sydney")].init isnot 1 or ($sydneySeen and !$sydneySeen.includes("libRescue")) or $rng gte 20)>>
+	<<pass 1 hour>>
+	당신은 잠시 정신을 잃고 있었다. 당신은 짧은 헉 소리를 들었고, 다시 미끄러져 정신을 잃기 전에 당신이 일으켜 세워지는 듯한 느낌을 받는다.
+	<br><br>
+	<<trauma 6>><<set $stress -= 2000>>
+	<<link [[다음|Sydney Library Rescue]]>><</link>>
 <<else>>
-<<ambulance>>
+	<<pass 1 hour>>
+	당신은 잠시 정신을 잃고 있었다.
+	<br><br>
+	<<set $danger to random(1, 10000)>>
+
+	<<if $danger gte (9900 - $allure)>>
+		<<if $schoolday is 1 and $schoolstate isnot "early" and $schoolstate isnot "late">>
+			<<if $rng gte 81>>
+				<<link [[다음|School Passout Exhibit]]>><<upperruined>><<lowerruined>><<underruined>><</link>>
+			<<elseif $rng gte 1>>
+				<<link [[다음|School Passout Rape]]>><<set $molestationstart to 1>><</link>>
+			<</if>>
+		<<else>>
+			<<if $rng gte 51>>
+				<<link [[다음|School Passout Gang Rape]]>><<set $molestationstart to 1>><</link>>
+			<<elseif $rng gte 1>>
+				<<link [[다음|School Passout Gang Rape]]>><<set $molestationstart to 1>><</link>>
+			<</if>>
+		<</if>>
+		<<trauma 6>><<set $stress -= 2000>>
+	<<else>>
+		<<link [[다음|School Passout Infirmary]]>><</link>>
+		<br>
+		<<trauma 6>><<set $stress -= 2000>>
+	<</if>>
 <</if>>
 
-<<set $trauma +=10>><<set $stress -= 2000>>
-
-:: School Passout Exhibit [nobr]
+:: School Passout Exhibit
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 <<if $phase is 0>>
@@ -598,15 +635,15 @@
 	<br><br>
 
 	<<arousal 2000>>
-		<<if $arousal gte 10000>>
-		<<orgasmpassage>><<exhibitorgasm>>
+		<<if $arousal gte $arousalmax>>
+		<<orgasm>><<exhibitorgasm>>
 		<</if>>
 
 	진동소리가 느닷없이 멈춘다. 마음 한 구석의 부끄러운 일면은 그 사실에 실망스러움을 느끼나, <<person2>><<personPost "이">> 다시 버튼을 누른다. 이번에는 장치가 몸이 준비될 시간을 주지 않고, 곧바로 격렬한 충격이 온몸을 진동시킨다. 당신은 통제할 수 없이 몸을 떨며, <<person1>><<personPost "과">> <<person2>><<personPost "을">> 즐겁게 한다.
 	<br><br>
 
 	<<arousal 2000>>
-		<<if $arousal gte 10000>><<orgasmpassage>><<exhibitorgasm>>
+		<<if $arousal gte $arousalmax>><<orgasm>><<exhibitorgasm>>
 		<</if>>
 
 	제 할일을 다 했다는듯, 구속구가 풀린다. 당신은 바닥에 엎드린 자세로 떨어지고, 그 바람에 엉덩이에 꽂혀있던 물건이 빠져나온다. 둘은 걱정스러운 시선을 교환하고는, 발가벗은 당신을 바닥에 내버려두고 복도를 뛰어내려간다.
@@ -624,15 +661,15 @@
 	<br><br>
 
 	<<arousal 2000>>
-		<<if $arousal gte 10000>>
-		<<orgasmpassage>><<exhibitorgasm>>
+		<<if $arousal gte $arousalmax>>
+		<<orgasm>><<exhibitorgasm>>
 		<</if>>
 
 	진동소리가 느닷없이 멈춘다. 마음 한 구석의 부끄러운 일면은 그 사실에 실망스러움을 느끼나, <<person2>><<personPost "이">> 다시 버튼을 누른다. 이번에는 장치가 몸이 준비될 시간을 주지 않고, 곧바로 격렬한 충격이 온몸을 진동시킨다. 당신은 통제할 수 없이 몸을 떨며, <<person1>><<personPost "과">> <<person2>><<personPost "을">> 즐겁게 한다.
 	<br><br>
 
 	<<arousal 2000>>
-		<<if $arousal gte 10000>><<orgasmpassage>><<exhibitorgasm>>
+		<<if $arousal gte $arousalmax>><<orgasm>><<exhibitorgasm>>
 		<</if>>
 
 	제 할일을 다 했다는듯, 구속구가 풀린다. 당신은 바닥에 엎드린 자세로 떨어지고, 그 바람에 엉덩이에 꽂혀있던 물건이 빠져나온다. 둘은 걱정스러운 시선을 교환하고는, 발가벗은 당신을 바닥에 내버려두고 복도를 뛰어내려간다.
@@ -643,7 +680,7 @@
 
 <</if>>
 
-:: School Passout Rape [nobr]
+:: School Passout Rape
 <<if $molestationstart is 1>>
 <<set $molestationstart to 0>>
 	<<controlloss>>
@@ -668,33 +705,33 @@
 			<<else>>
 				lifting <<his>> skirt
 			<</if>>,
-			revealing <<his>> erection. <<He>> lowers it towards your face as <<he>> removes his hand from your mouth, as <<he>> lowers onto you.
+			revealing <<his>> erection. <<He>> lowers it towards your face as <<he>> removes <<his>> hand from your mouth, as <<he>> lowers onto you.
 			<br><br>
 
 			Before you can move to do anything about this, the <<person2>><<person>> drops onto your midriff, knocking the wind from you, and grabbing onto your hands to stop you from fighting.
-			<<He>> <<if $pronoun is "f">>giggles mischievously<<else>>chuckles softly<</if>>. 
+			<<He>> <<if $pronoun is "f">>giggles mischievously<<else>>chuckles softly<</if>>.
 			"You're not going anywhere, <<girl>>".
 			<br><br>
 
 			This leaves you powerless to stop the <<person1>><<person>>'s penis from pressing insistently against your mouth.
 			<<set $NPCList[0].penis to "mouthentrance">><<set $NPCList[0].location.genitals = "head">>
-			<<set $mouthuse to "penis">><<set $mouthstate to "entrance">>
+			<<set $mouthuse to "penis">><<set $mouthstate to "entrance">><<set $mouthtarget to 0>>
 		<<else>>
 			The <<person>> bends down, covering your mouth with <<his>> hand. <<He>> straddles your face, and begins lowering <<himself>>, so that <<he>> is kneeling above your face,
 			with <<his>> knees holding your face upwards, looking up under <<his>> skirt. <<He>> lifts up <<his>> skirt, revealing <<his>> moist pussy. You know what's coming.
 			<br><br>
 
 			Before you can move to do anything about this, the <<person2>><<person>> drops onto your midriff, knocking the wind from you, and grabbing onto your hands to stop you from fighting.
-			<<He>> <<if $pronoun is "f">>giggles mischievously<<else>>chuckles softly<</if>>. 
+			<<He>> <<if $pronoun is "f">>giggles mischievously<<else>>chuckles softly<</if>>.
 			"You're not going anywhere, <<girl>>".
 			<br><br>
 
 			You are powerless to stop the <<person1>><<person>>. You watch as <<his>> pussy draws closer and closer.
 			<<He>> removes <<his>> hand from over your mouth, only for it to be replaced by <<his>> wet pussy as <<he>> sits on your face.
 			<<set $NPCList[0].vagina to "facesit">><<set $NPCList[_n].location.genitals = "head">>
-			<<set $mouthuse to "facesit">><<set $mouthstate to "facesit">>
+			<<set $mouthuse to "facesit">><<set $mouthstate to "vagina">><<set $mouthtarget to 0>>
 		<</if>>
-		
+
 		<<if random(1) is 0>>
 			<<set $NPCList[1].lefthand to "arms">>
 		<<else>>
@@ -705,13 +742,12 @@
 		<<set $position to "missionary">>
 	<</if>>
 	<br><br>
-<<if $pillory_tenant.special.name isnot "Leighton">><<set $rescue to 1>><</if>>
+	<<if $pillory_tenant.special.name isnot "Leighton">><<enable_rescue>><</if>>
 <</if>>
 
 <<effects>>
 
 <<effectsman>><<man>>
-<<if $enemyhealth gt 0>><<npcdamage>><</if>>
 <<stateman>>
 <br><br>
 <<actionsman>>
@@ -726,7 +762,7 @@
 	<span id="next"><<link [[다음|School Passout Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: School Passout Gang Rape [nobr]
+:: School Passout Gang Rape
 <<if $molestationstart is 1>>
 <<set $molestationstart to 0>>
 <<controlloss>>
@@ -742,7 +778,6 @@
 <<effects>>
 
 <<effectsman>><<man>>
-<<if $enemyhealth gt 0>><<npcdamage>><</if>>
 <<stateman>>
 <br><br>
 <<actionsman>>
@@ -755,7 +790,7 @@
 	<span id="next"><<link [[다음|School Passout Gang Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: School Passout Rape Finish [nobr]
+:: School Passout Rape Finish
 <<effects>><<set $stress -= 500>>
 <<if $enemyarousal gte $enemyarousalmax>>
 <<ejaculation>>
@@ -769,7 +804,7 @@
 <<link [[다음|School Rear Playground]]>><</link>>
 
 <<elseif $enemyhealth lte 0>>
-공격자들은 고통에 몸을 움찔거린다. <<tearful>> 당신은 기회를 놓치지 않고 창고에서 도망간다.
+<<group_un>> 고통에 몸을 움찔거린다. <<tearful>> 당신은 기회를 놓치지 않고 창고에서 도망간다.
 <br><br>
 
 <<clotheson>>
@@ -779,7 +814,7 @@
 
 <<elseif $rescue is 1 and $alarm is 1>><<set $rescued += 1>>
 <<endevent>>
-<<npc Leighton>>레이턴이 창고 안으로 불쑥 들어온다. 공격자들은 당황하여 눈을 크게 뜨고는, 횡설수설하며 어떻게든 변명을 하려 한다. 레이턴은 귓등으로도 듣지 않고는 둘의 목덜미를 잡고 창고 바깥으로 질질 끌고 나간다. <<tearful>> 당신은 몸을 추스른다.
+<<npc Leighton>>레이턴이 창고 안으로 불쑥 들어온다. <<group_un>> 당황하여 눈을 크게 뜨고는, 횡설수설하며 어떻게든 변명을 하려 한다. 레이턴은 귓등으로도 듣지 않고는 둘의 목덜미를 잡고 창고 바깥으로 질질 끌고 나간다. <<tearful>> 당신은 몸을 추스른다.
 <br><br>
 
 <<clotheson>>
@@ -788,7 +823,7 @@
 <<link [[다음|School Rear Playground]]>><</link>>
 <</if>>
 
-:: School Passout Gang Rape Finish [nobr]
+:: School Passout Gang Rape Finish
 <<effects>><<set $feetuse to 0>><<set $stress -= 500>>
 <<if $enemyarousal gte $enemyarousalmax>>
 <<ejaculation>>
@@ -810,7 +845,7 @@
 <<link [[다음|Science Classroom]]>><</link>>
 <</if>>
 
-:: Hallways Sneak [nobr]
+:: Hallways Sneak
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 <<nervously>> 바깥을 살펴본다. 주변에는 아무도 없다. 당신은 상대적으로 안전한 화장실에서 나와, <<lewdnessPost "을">> 내보인다.
@@ -827,13 +862,13 @@
 
 <<set $eventskip to 0>>
 
-:: School Gate Exit [nobr]
+:: School Gate Exit
 <<set $outside to 0>><<effects>><<set $lock to 200>>
 
 학교 정문은 닫힌 채로 단단한 자물쇠가 잠겨 있다.
 <br><br>
 
-	<<if $skulduggery gte $lock>>
+	<<if currentSkillValue('skulduggery') gte $lock>>
 	<span class="green">이 자물쇠는 아주 따기 쉬워 보인다.</span>
 	<br><br>
 
@@ -847,7 +882,7 @@
 <<link [[떠난다|School Front Playground]]>><</link>>
 <br>
 
-:: Rear Playground Dog [nobr]
+:: Rear Playground Dog
 <<if $molestationstart is 1>>
 <<set $molestationstart to 0>>
 <<controlloss>>
@@ -876,7 +911,7 @@
 	<span id="next"><<link [[다음|Rear Playground Dog]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Rear Playground Dog Finish [nobr]
+:: Rear Playground Dog Finish
 <<set $outside to 0>><<set $location to "school">><<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
@@ -907,7 +942,7 @@
 
 <</if>>
 
-:: Park Tunnel [nobr]
+:: Park Tunnel
 <<effects>><<set $outside to 0>>
 
 <<set $parktunnelintro to 1>>
@@ -917,7 +952,7 @@
 
 <<parkquick>>
 
-:: School Drain [nobr]
+:: School Drain
 <<effects>><<set $outside to 0>>
 
 <<set $schooldrainintro to 1>>
@@ -928,22 +963,22 @@
 <<link [[다음|Commercial Drain]]>><</link>>
 <br>
 
-:: Head's Computer [nobr]
+:: Head's Computer
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 메모장에서 발견한 사용자 명과 비밀번호를 입력해 레이턴의 컴퓨터에 로그인한다. 처음에는 지루한 스프레드시트 뿐, 아무 것도 찾지 못하나, 곧 단순히 "D"라고만 이름이 붙은 폴더를 발견한다.
 <br><br>
 
-<<npc Darryl>><<person1>>검은 머리에 알몸 상태인 <<if $pronoun is "m">>소년<<else>>소녀<</if>>의 사진이 수천 장 들어있다. 몇몇 사진에서는 괴로워하는 표정을 짓고 있으나, 다른 사진에서는 공허한 표정을 짓고 있다. 사진은 날짜순으로 배열되어있고 몇 년전부터 찍힌 것으로 보인다. 무슨 일이 있었는지는 몰라도 몇달간 일어난 일이다.
+거기에는 검은 머리에 다양하게 옷을 벗은 상태인 <<nnpc_gendery_yi "Darryl">> 사진이 수천 장 들어있다. 몇몇 사진에서는 <<nnpc_He_ga "Darryl">> 괴로워하는 표정을 짓고 있으나 다른 사진에서는 <<nnpc_he_nun "Darryl">> 공허한 표정을 짓고 있다. 사진은 날짜순으로 배열되어있고 수 년 전에 찍힌 것으로 보인다. 무슨 일이 있었든 몇 달 동안 일어났었던 것 같다.
 <br><br>
 
-레이턴은 더 나중에 찍힌 사진에부터 나오기 시작하며, 이따금 <<hePost "과">> 포즈를 취하고 있으나 대부분에서는 몸을 더듬거나 애무하고 있다. 복장으로 미루어 보았을 때, 이 학교의 학생이었던 것으로 보인다.
+레이턴은 더 나중에 찍힌 사진에부터 나오기 시작하며, 이따금 <<nnpc_him_gwa "Darryl">> 포즈를 취하고 있으나, 대부분 몸을 더듬거나 애무하고 있다. <<nnpc_his_yi "Darryl">> 복장으로 미루어 보았을 때, <<nnpc_he_nun "Darryl">> 이 학교의 학생이었던 것으로 보인다.
 <br><br>
 
-<<link [[플래시 드라이브에 복사한다|Head's Computer Flash]]>>/*'>>*/<</link>>
+<<link [[플래시 드라이브에 복사한다|Head's Computer Flash]]>><</link>>
 <br>
 
-:: Head's Computer Flash [nobr]
+:: Head's Computer Flash
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 파일들을 복사한다. 이제 이걸 가지고 어떻게 할지가 관건이다.
@@ -952,7 +987,7 @@
 <<link [[다음|Hallways]]>><<endevent>><</link>>
 <br>
 
-:: Head's Stash [nobr]
+:: Head's Stash
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 교장의 책상 아래를 살펴보자 문이 달린 작고 단단한 서랍이 있다. 금고라고 해도 무방할 것 같다. 문을 당겨보나, 움직이지 않는다. 잠겨있다. 자물쇠가 매우 견고한 것 같다.
@@ -960,12 +995,12 @@
 <br><br>
 <<set $skulduggerydifficulty to 1000>>
 
-<<link [[자물쇠를 딴다 (0:30)|Head's Stash 2]]>>/*'>>*/<<pass 30>><</link>><<skulduggerydifficulty>>
+<<link [[자물쇠를 딴다 (0:30)|Head's Stash 2]]>><<pass 30>><</link>><<skulduggerydifficulty>>
 <br>
-<<link [[내버려둔다|Head's Office]]>>/*'>>*/<<endevent>><</link>>
+<<link [[내버려둔다|Head's Office]]>><<endevent>><</link>>
 <br>
 
-:: Head's Stash 2 [nobr]
+:: Head's Stash 2
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 책상 밑에 앉아 자물쇠에 열중한다.
@@ -980,18 +1015,13 @@
 	당신은 가방에 메모리 카드를 퍼넣는다.
 	<br><br>
 
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-		<<else>>
-		<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
-		<br><br>
-		<</if>>
+	<<skulduggeryuse>>
 
 	<<if $hacker_tasks.length gte 2>>
 	<span class="green">당신은 해커가 준 임무를 완수했다. 이제 랜드리와 이야기를 나눠야 한다.</span>
 	<br><br>
 	<</if>>
-	<<link [[다음|Head's Office]]>>/*'>>*/<<endevent>><</link>>
+	<<link [[다음|Head's Office]]>><<endevent>><</link>>
 	<br>
 
 <<else>>
@@ -999,21 +1029,16 @@
 	<span class="teal">이제 자물쇠에 대해 감각을 좀 익혔으니, 다시 한 번 시도해보자.</span>
 	<br><br>
 
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-		<<else>>
-		<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
-		<br><br>
-		<</if>>
+	<<skulduggeryuse>>
 
 	<<set $skulduggerydifficulty -= 200>>
-	<<link [[다시 시도한다 (0:30)|Head's Stash 2]]>>/*'>>*/<<pass 30>><</link>><<skulduggerydifficulty>>
+	<<link [[다시 시도한다 (0:30)|Head's Stash 2]]>><<pass 30>><</link>><<skulduggerydifficulty>>
 	<br>
-	<<link [[포기한다|Head's Office]]>>/*'>>*/<<endevent>><</link>>
+	<<link [[포기한다|Head's Office]]>><<endevent>><</link>>
 	<br>
 <</if>>
 
-:: Head's Office Blackmail [nobr]
+:: Head's Office Blackmail
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 <<if $phase is 1>>
@@ -1031,25 +1056,25 @@
 <</if>>
 <br><br>
 <<crimeup 1000>>
-<<HePost "은">> 미동조차 없이 당신을 바라본다. 그러고는 문을 쳐다보더니, 상황을 판단하는 것처럼 보인다. 곧 생각하고 있던 계획을 재고하는 것 같더니 한숨을 내쉰다. "원하는게 뭐야?"
+<<HePost "은">> 미동조차 없이 당신을 바라본다. 그러고는 문을 쳐다보더니, 상황을 판단하는 것처럼 보인다. <<He_nun>> 곧 생각하고 있던 계획을 재고하는 것 같더니 한숨을 내쉰다. "원하는게 뭐야?"
 <br><br>
 <<npcincr Leighton dom -10>>
 <<npcincr Leighton love -10>>
-<<link [[당신의 시계|Head's Office Money]]>>/*'>>*/<</link>>
+<<link [[당신의 시계|Head's Office Money]]>><</link>>
 <br>
-<<link [[징계 면제|Head's Office No Detention]]>>/*'>>*/<</link>>
+<<link [[징계 면제|Head's Office No Detention]]>><</link>>
 <br>
 <<if $schoolfameboard isnot 1 and $schoolfameblackmail isnot undefined>>
-<<link [[사진 촬영은 그만|Head's Office No Photoshoots]]>>/*'>>*/<</link>>
+<<link [[사진 촬영은 그만|Head's Office No Photoshoots]]>><</link>>
 <br>
 
 	<<if $exhibitionism gte 55>>
-	<<link [[사진 촬영할 때마다 대가 요구|Head's Office Pay Photoshoots]]>>/*'>>*/<</link>><<exhibitionist4>>
+	<<link [[사진 촬영할 때마다 대가 요구|Head's Office Pay Photoshoots]]>><</link>><<exhibitionist4>>
 	<br>
 	<</if>>
 <</if>>
 
-:: Head's Office Money [nobr]
+:: Head's Office Money
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 "내 시계?" <<hePost "이">> 말한다. "그치만 이건 진품... 젠장." <<HePost "은">> 시계를 풀고는 당신에게 던져준다. "이딴 짓에 어울려주는 것도 이번이 마지막이야. 다음 번에는 비싼 대가를 치르게 될 거다. 이제 꺼져."
@@ -1065,7 +1090,7 @@
 <<link [[다음|Hallways]]>><</link>>
 <br>
 
-:: Head's Office No Detention [nobr]
+:: Head's Office No Detention
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 "그게 전부냐?" <<hePost "이">> 말한다. "좋아. 그렇게 되면 내 일도 줄어드는 거니까. 이딴 짓에 어울려주는 것도 이번이 마지막이야. 다음 번에는 비싼 대가를 치르게 될 거다."
@@ -1081,10 +1106,10 @@
 <<link [[다음|Hallways]]>><</link>>
 <br>
 
-:: Events Shades Hand [nobr]
+:: Events Shades Hand
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
-당신은 리버에게 선글라스를 건네준다. "좋아. 나중에 돌려주마. 학교 밖에서 어떻게 차려입고 있는지는 네 부모님의 소관이니까 말이야. 하지만 이곳에서는 규칙을 준수해야 해." <<HePost "은">> 당신에게서 멀어져간다.
+당신은 리버에게 선글라스를 건네준다. "좋아. 나중에 돌려주마. 학교 밖에서 어떻게 차려입고 있는지는 네 부모-" <<He_nun>> <<himself_yi>> 말을 중간에서 끊는다. "이곳에서는, 너는 규칙을 준수해야 해." <<HePost "은">> 당신에게서 멀어져간다.
 <br><br>
 
 <<generatey2>><<person2>>"쟤 저것보다는 더 쿨한 녀석인줄 알았는데." <<personPost "이">> 친구에게 말하는 것이 들려온다.
@@ -1094,7 +1119,7 @@
 
 <<playground>>
 
-:: Events Shades Flip [nobr]
+:: Events Shades Flip
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 리버에게서 몸을 돌려서는 가운데 손가락을 들어올린다. 지켜보던 학생들이 환호성을 날린다. 리버는 할 말을 잃은 것 같다. "네-네가 감히... 이 일에 대해서는 징계를 받을 거야. 한 일주일 동안은 앉을 수도 없게 해주마!" <<HePost "은">> 당신에게서 멀어져간다.
@@ -1104,7 +1129,7 @@
 
 <<playground>>
 
-:: Glasses No Underwear [nobr]
+:: Glasses No Underwear
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 <<if $submissive gte 1150>>
@@ -1124,7 +1149,7 @@
 
 <<playground>>
 
-:: Glasses Underwear [nobr]
+:: Glasses Underwear
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult <<pulldown>>, <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 드러낸다.
@@ -1163,7 +1188,7 @@
 
 <<playground>>
 
-:: Glasses Refuse [nobr]
+:: Glasses Refuse
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 <<if $submissive gte 1150>>
@@ -1184,28 +1209,28 @@
 
 <<playground>>
 
-:: School Stump [nobr]
+:: School Stump
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 <<if $schoolstate is "lunch" or $schoolstate is "morning" or $schoolstate is "afternoon">>
-당신은 그루터기에 등을 기댄다. 그러고는 눈을 감고 놀이터에서 학생들이 말하는 소리를 듣는다.
+	당신은 그루터기에 등을 기댄다. 그러고는 눈을 감고 놀이터에서 학생들이 말하는 소리를 듣는다.
 <<else>>
-당신은 그루터기에 등을 기댄다. 그러고는 눈을 감고 새들이 지저귀는 소리를 듣는다.
+	당신은 그루터기에 등을 기댄다. 그러고는 눈을 감고 새들이 지저귀는 소리를 듣는다.
 <</if>>
 <br><br>
 
 <<if $danger gte (9900 - $allure)>>
-<<eventsschoolstump>>
+	<<eventsschoolstump>>
 <<else>>
 	<<if $schoolstate isnot "late">>
-	<<link [[계속 쉰다 (0:10)|School Stump]]>><<pass 10>><<stress -1>><<tiredness -1>><</link>><<ltiredness>><<lstress>>
-	<br>
+		<<link [[계속 쉰다 (0:10)|School Stump]]>><<pass 10>><<stress -1>><<tiredness -1>><</link>><<ltiredness>><<lstress>>
+		<br>
 	<</if>>
-<<link [[그만한다|School Rear Playground]]>><</link>>
-<br>
+	<<link [[그만한다|School Rear Playground]]>><</link>>
+	<br>
 <</if>>
 
-:: School Stump Ignore [nobr]
+:: School Stump Ignore
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 변태에게서 몸을 돌리고는 눈을 감는다. "재미없는 녀석이네." <<hePost "이">> 말한다. 잠시 후에 눈을 살며시 떠보니 <<hisPost "의">> 모습은 보이지 않는다.
@@ -1213,20 +1238,20 @@
 
 <<endevent>>
 
-	<<if $schoolstate isnot "late">>
+<<if $schoolstate isnot "late">>
 	<<link [[계속 쉰다 (0:10)|School Stump]]>><<pass 10>><<stress -1>><<tiredness -1>><</link>><<ltiredness>><<lstress>>
 	<br>
-	<</if>>
+<</if>>
 <<link [[그만한다|School Rear Playground]]>><</link>>
 <br>
 
-:: School Stump Flash [nobr]
+:: School Stump Flash
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
-<<if $worn.lower.skirt is 1>>
-당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 들춰, <<undiesPost "을">> 노출시킨다. <<HePost "은">> 휘파람을 불며 울타리 너머로 몸을 숙여 더 가까이서 본다.
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+	당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 들춰, <<undiesPost "을">> 노출시킨다. <<HePost "은">> 휘파람을 불며 울타리 너머로 몸을 숙여 더 가까이서 본다.
 <<else>>
-당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 내려, <<undiesPost "을">> 노출시킨다. <<HePost "은">> 휘파람을 불며 울타리 너머로 몸을 숙여 더 가까이서 본다.
+	당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 내려, <<undiesPost "을">> 노출시킨다. <<HePost "은">> 휘파람을 불며 울타리 너머로 몸을 숙여 더 가까이서 본다.
 <</if>>
 
 당신은 <<hePost "에게">> 윙크를 한 뒤 다른 사람이 보기 전에 다시 가린다. <<HePost "은">> 얼굴에 미소를 짓고는 떠나간다.<<fameexhibitionism 1>>
@@ -1234,20 +1259,20 @@
 <<exhibitionism2>>
 
 <<endevent>>
-	<<if $schoolstate isnot "late">>
+<<if $schoolstate isnot "late">>
 <<link [[계속 쉰다 (0:10)|School Stump]]>><<pass 10>><<stress -1>><<tiredness -1>><</link>><<ltiredness>><<lstress>>
 	<br>
 <</if>>
 <<link [[그만한다|School Rear Playground]]>><</link>>
 <br>
 
-:: School Stump Genital Flash [nobr]
+:: School Stump Genital Flash
 
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
-<<if $worn.lower.skirt is 1>>
-당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 들춰, <<undiesPost "을">> 노출시킨다. <<HePost "은">> 휘파람을 불며 울타리 너머로 몸을 숙여 더 가까이서 본다.
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+	당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 들춰, <<undiesPost "을">> 노출시킨다. <<HePost "은">> 휘파람을 불며 울타리 너머로 몸을 숙여 더 가까이서 본다.
 <<else>>
-당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 내려, <<undiesPost "을">> 노출시킨다. <<HePost "은">> 휘파람을 불며 울타리 너머로 몸을 숙여 더 가까이서 본다.
+	당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 내려, <<undiesPost "을">> 노출시킨다. <<HePost "은">> 휘파람을 불며 울타리 너머로 몸을 숙여 더 가까이서 본다.
 <</if>>
 <<flaunting>> 당신은 <<hePost "에게">> 윙크를 한 뒤 다른 사람이 보기 전에 다시 가린다. <<HePost "은">> 얼굴에 미소를 짓고는 떠나간다.
 <<fameexhibitionism 1>>
@@ -1260,7 +1285,7 @@
 <<link [[그만한다|School Rear Playground]]>><</link>>
 <br>
 
-:: Bra Strap Quiet [nobr]
+:: Bra Strap Quiet
 
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 당신은 별채 뒤에서 숨겨진 장소를 찾는다. 아무도 뒤따라오지 않았는지 확인한 뒤, 당신은 <<trClothes "upper" $worn.upper.name "name" "을">>_trResult <<if $worn.upper.set is $worn.lower.set>>내리고는<<elseif !$worn.upper.type.includes("naked")>>들추고는<<else>>벗고는<</if>> <<trClothes "under_upper" $worn.under_upper.name "name" "을">>_trResult 매만진다.
@@ -1268,7 +1293,7 @@
 <<endevent>>
 <<playground>>
 
-:: Bra Strap Exhibitionism [nobr]
+:: Bra Strap Exhibitionism
 
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
@@ -1279,7 +1304,7 @@
 <<endevent>>
 <<playground>>
 
-:: Bra Strap Turn [nobr]
+:: Bra Strap Turn
 
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 당신은 최선을 다해서 <<personPost "과">> <<hisPost "의">> 친구들을 무시하려 한다.
@@ -1287,7 +1312,7 @@
 <<endevent>>
 <<playground>>
 
-:: Bra Strap Angry [nobr]
+:: Bra Strap Angry
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 <<personPost "에게">> 성큼성큼 다가간다. <<HePost "이">> 당신을 향해 고개를 돌리려는 찰나에 당신은 <<hePost "을">> 밀어버린다. <<HePost "은">> 휘청거리며 벽에 부딪힌다. 친구들이 <<hePost "을">> 보고 웃음을 터트린다.
@@ -1296,7 +1321,7 @@
 <<endevent>>
 <<playground>>
 
-:: Playground Crush Flirt [nobr]
+:: Playground Crush Flirt
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 <<person1>><<personPost "에게">>로 걸어가 그 옆에 앉는다.
@@ -1345,7 +1370,7 @@
 <<endevent>>
 <<playground>>
 
-:: Playground Crush Ignore [nobr]
+:: Playground Crush Ignore
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 둘을 무시하고는 갈 길을 간다.
@@ -1354,7 +1379,7 @@
 <<endevent>>
 <<playground>>
 
-:: Playground Crush Robin Angry [nobr]
+:: Playground Crush Robin Angry
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 이쪽을 바라보는 둘에게 다가간다. 둘의 놀란 표정으로 보았을 때, 당신은 아마 화난 표정을 하고 있을 것이다.
@@ -1404,7 +1429,7 @@
 	<br>
 <</if>>
 
-:: Playground Crush Robin Ignore [nobr]
+:: Playground Crush Robin Ignore
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 둘을 무시한다. 로빈은 이런 식으로 당신이 다른 사람을 적대하는 걸 좋아하지 않을 것이다.
@@ -1413,7 +1438,7 @@
 <<endevent>>
 <<playground>>
 
-:: Playground Crush Robin Walk [nobr]
+:: Playground Crush Robin Walk
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 물러난다. 둘은 당신을 비웃지만, 당신은 로빈이 싸우는 걸 좋아하지 않는다는 걸 알고 있다.
@@ -1422,7 +1447,7 @@
 <<endevent>>
 <<playground>>
 
-:: Playground Crush Whitney Angry [nobr]
+:: Playground Crush Whitney Angry
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 이쪽을 바라보는 둘에게 다가간다. 둘의 놀란 표정으로 보았을 때, 당신은 아마 화난 표정을 하고 있을 것이다.
@@ -1472,7 +1497,7 @@
 	<br>
 <</if>>
 
-:: Playground Crush Whitney Ignore [nobr]
+:: Playground Crush Whitney Ignore
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 둘을 무시한다. 어쨌거나 <<person1>><<personPost "이">> 휘트니와 잘될 일은 없다.
@@ -1481,7 +1506,7 @@
 <<endevent>>
 <<playground>>
 
-:: Playground Crush Whitney Walk [nobr]
+:: Playground Crush Whitney Walk
 <<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
 
 당신은 물러난다. 둘은 당신을 비웃지만, 당신은 둘 중 누구도 휘트니와 잘될 일이 없다는 걸 알고 있다.
@@ -1490,7 +1515,75 @@
 <<endevent>>
 <<playground>>
 
-:: Playground Crush Fight [nobr]
+:: Playground Crush Sydney Angry
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
+
+당신은 이쪽을 바라보는 둘에게 다가간다. 둘의 놀란 표정으로 보았을 때, 당신은 아마 화난 표정을 하고 있을 것이다.
+<br><br>
+
+<<if $submissive gte 1150>>
+"I-I'm Sydney's," you say. "St-stay away!"
+<<elseif $submissive lte 850>>
+"Sydney's mine," you say, clutching the <<person1>><<persons>> collar. "Forget it at your peril." You release and shove <<him>> away.
+<<else>>
+"Sydney's not available," you say. "Don't you forget it."
+<</if>>
+<br><br>
+"그냥 농담하는 거였어." <<person2>><<personPost "이">> 친구를 변호하며 말한다.
+
+<<if $cool gte 240>>
+	"We know Sydney's your territory. We're not gonna mess with you." The <<person1>><<person>> nods. They seem sincere.
+	<<gcool>><<status 1>>
+	<br><br>
+
+	<<endevent>>
+	<<playground>>
+<<elseif $cool gte 120>>
+	<<if $cool gte random(1, 240)>>
+		"We know Sydney's your territory. We're not gonna mess with you." The <<person1>><<person>> nods. They seem sincere.
+		<<gcool>><<status 1>>
+		<br><br>
+
+		<<endevent>>
+		<<playground>>
+	<<else>>
+		"뭐 한 판 해보자는 거야?"
+		<br><br>
+
+		<<link [[둘 다와 싸운다|Playground Crush Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+		<<link [[물러난다|Playground Crush Robin Walk]]>><<stress 6>><</link>><<lstress>>
+		<br>
+	<</if>>
+<<else>>
+	"완전히 미쳤구나. 좆되기 전에 저리 꺼져."
+	<br><br>
+
+	<<link [[둘 다와 싸운다|Playground Crush Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[물러난다|Playground Crush Robin Walk]]>><<stress 6>><</link>><<lstress>>
+	<br>
+<</if>>
+
+:: Playground Crush Sydney Ignore
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
+
+You ignore them. You know Sydney would want you to forgive them.
+
+<br><br>
+<<endevent>>
+<<playground>>
+
+:: Playground Crush Sydney Walk
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
+
+You walk away. The pair jeer at you, but you know Sydney would want you to forgive them.
+<br><br>
+
+<<endevent>>
+<<playground>>
+
+:: Playground Crush Fight
 <<if $fightstart is 1>>
 <<set $fightstart to 0>>
 
@@ -1501,7 +1594,7 @@
 <<set $enemyanger += 200>>
 <<npcidlegenitals>>
 
-<<if $pillory_tenant.special.name isnot "Leighton">><<set $rescue to 1>><</if>>
+<<if $pillory_tenant.special.name isnot "Leighton">><<enable_rescue>><</if>>
 
 당신은 <<person1>><<personPost "에게">> 달려들어 바닥에 함께 나동그라진다. <<person2>><<personPost "도">> 거기에 낀다.<<person1>>
 <br><br>
@@ -1532,7 +1625,7 @@
 	<span id="next"><<link [[다음|Playground Crush Fight]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Playground Crush Fight Finish [nobr]
+:: Playground Crush Fight Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
@@ -1593,7 +1686,7 @@
 
 <</if>>
 
-:: Playground Flyover Walk [nobr]
+:: Playground Flyover Walk
 <<effects>>
 
 당신은 더욱 얼굴을 빨갛게 붉히고는, 뒤로 돌아 달아난다. 비웃는 웃음소리가 뒤를 따른다.
@@ -1602,7 +1695,7 @@
 <<endevent>>
 <<playground>>
 
-:: Playground Flyover Own [nobr]
+:: Playground Flyover Own
 <<effects>>
 
 당신은 당당하게 버티고 선다.
@@ -1623,7 +1716,7 @@
 
 
 
-:: Playground Herm Resist [nobr]
+:: Playground Herm Resist
 <<effects>>
 
 <<person2>><<personPost "이">> 다시 당신을 붙잡으려 하나, 당신은 <<hisPost "의">> 팔을 쳐낸다. 다른 학생들이 가까이 다가온다.
@@ -1635,7 +1728,7 @@
 
 
 
-:: Playground Herm Fight [nobr]
+:: Playground Herm Fight
 <<if $fightstart is 1>>
 <<set $fightstart to 0>>
 
@@ -1645,7 +1738,7 @@
 <<set $enemytrust -= 100>>
 <<set $enemyanger += 200>>
 <<npcidlegenitals>>
-<<set $rescue to 1>>
+<<enable_rescue>>
 <</if>>
 
 <<effects>>
@@ -1667,7 +1760,7 @@
 <span id="next"><<link [[다음|Playground Herm Fight]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Playground Herm Fight Finish [nobr]
+:: Playground Herm Fight Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
@@ -1735,7 +1828,7 @@
 		<br><br>
 		만족하자, 세 명은 으스대며 떠나간다.
 	<<else>>
-		<<if $worn.lower.skirt is 1>>
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 			<<if $worn.under_lower.type.includes("naked")>>
 				<<person1>><<personPost "은">> 당신의 옆에 웅크리고 앉아, 치마 밑단을 붙잡고는 들춘다. <span class="pink">당신의 <<genitalsPost 1 "이">> 드러난다.</span>
 			<<else>>
@@ -1780,11 +1873,11 @@
 
 
 
-:: Playground Herm Call [nobr]
+:: Playground Herm Call
 <<effects>>
 
 <<if $submissive gte 1150>>
-	당신은 머리를 뒤로 젖히고는 비명을 지른다. 세 명은 당신에게서 물러난다.Y
+	당신은 머리를 뒤로 젖히고는 비명을 지른다. 세 명은 당신에게서 물러난다.
 <<elseif $submissive lte 850>>
 	"거기, 선생님들!" 당신이 외친다. "여기 좀 도와주실래요."
 <<else>>
@@ -1820,11 +1913,11 @@
 <<playground>>
 
 
-:: Playground Herm Show [nobr]
+:: Playground Herm Show
 <<effects>>
 <<fameexhibitionism 3>>
 수치심에 얼굴을 붉히며, 
-<<if $worn.lower.skirt is 1>>
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 	<<if $worn.under_lower.type.includes("naked")>>
 		당신은 치마를 들춰, <span class="pink"><<genitalsPost 1 "을">> 드러낸다</span>.
 	<<else>>
@@ -1866,11 +1959,11 @@
 
 
 
-:: Playground Herm Flaunt [nobr]
+:: Playground Herm Flaunt
 <<effects>>
 <<fameexhibitionism 3>>
 <<flaunting>> 
-<<if $worn.lower.skirt is 1>>
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 	<<if $worn.under_lower.type.includes("naked")>>
 		당신은 치마를 들춰, <span class="pink"><<genitalsPost 1 "을">> 드러낸다</span>.
 	<<else>>
@@ -1928,3 +2021,305 @@
 <<endevent>>
 <<playground>>
 
+:: Playground Hypnosis Offer
+<<effects>>
+
+"I was wondering," you say, the words forming on their own. "Could I-" you bite your lip. "Could we have some private time?" You nod at the bike shed.
+<br><br>
+
+The <<person>> stammers an incoherent response, so you take <<his>> hand and pull <<him>> behind the shed.
+<br><br>
+
+<<link [[다음|Playground Hypnosis Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+:: Playground Hypnosis Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust += 100>>
+	<<enable_rescue>>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $finish is 1>>
+	<span id="next"><<link [[다음|Playground Hypnosis Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[다음|Playground Hypnosis Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[다음|Playground Hypnosis Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<span id="next"><<link [[다음|Playground Hypnosis Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Playground Hypnosis Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Playground Hypnosis Sex Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	The <<person>> leans against the wall, and slumps to the ground.
+	<br><br>
+	<<tearful>> you saunter away. You're not quite sure what happened, but you feel better.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<playground>>
+<<elseif $enemyhealth lte 0>>
+	You shove the <<person>> away from you. <<He>> hits the wall, and slumps to the ground.
+	<br><br>
+	<<tearful>> you run. You're not quite sure what happened.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<playground>>
+<<elseif $alarm is 1 and $rescue is 1>><<set $rescued += 1>>
+	<<generatey2>><<generatey3>><<person2>>
+	A <<person>> and <<person3>><<person>> arrive to investigate. They gawk when they see you and the <<person1>><<person>>, and it's enough to send <<him>> running.
+	<br><br>
+
+	<<covered>> <<tearful>> you run to safety. You're not quite sure what happened.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<playground>>
+<<else>>
+	The <<person>> backs away from you. "D-did I do something wrong?" <<he>> asks. <<tearful>> you run. You're not quite sure what happened yourself.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<playground>>
+<</if>>
+
+:: Playground Hypnosis Resist
+<<effects>>
+
+<<if $willpowerSuccess>>
+	You ignore the urging voice.
+	<<if $submissive gte 1150>>
+		"S-sorry to bother you," you say. "I was daydreaming."
+	<<elseif $submissive lte 850>>
+		"What you looking at?" you ask.
+	<<else>>
+		"Sorry to bother you," you say. "I was daydreaming."
+	<</if>>
+	You walk away from the <<person>> before <<he>> responds.
+	<br><br>	
+<<else>>
+	You try to ignore the urging voice, <span class="red">but it's a struggle.</span> You manage to tear yourself away from the <<person>> before you say anything, and almost stumble as you escape.
+	<br><br>
+
+	You hide around the corner, and the coercive feelings dissipate. Your strange behaviour was noticed by others.<<lcool>><<status -10>><<gtrauma>><<trauma 6>><<gstress>><<stress 6>>
+	<br><br>
+<</if>>
+
+<<endevent>>
+<<playground>>
+
+
+:: Playground Footage Ignore
+<<effects>>
+
+You ignore them. Whatever it is, you don't want to know.
+<br><br>
+
+<<endevent>>
+<<playground>>
+
+:: Playground Nude Footage Investigate
+<<effects>>
+
+You approach the pair.
+
+<<if $submissive gte 1150>>
+	"P-people keep looking at me funny," you say. "Why?"
+<<elseif $submissive lte 850>>
+	"What's so funny?" you ask.
+<<else>>
+	"Why are people looking at me funny?" you ask.
+<</if>>
+<br><br>
+
+The <<person2>><<person>> and <<person3>><<person>> look at each other, then the <<person2>><<person>> shows you <<his>> phone. A short clip plays. <span class="pink">Of you, naked,</span> in what looks like Niki's studio.
+<br><br>
+
+You're aware of all the other students looking at their phones. How many of them are watching you?
+<br><br>
+
+<<link [[Walk away|Playground Footage Walk]]>><<status -10>><</link>><<lcool>>
+<br>
+<<if $exhibitionism gte 75>>
+	<<link [[Own it|Playground Nude Footage Own]]>><</link>><<exhibitionist5>>
+	<br>
+<</if>>
+
+:: Playground Assault Footage Investigate
+<<effects>>
+
+You approach the pair.
+
+<<if $submissive gte 1150>>
+	"P-people keep looking at me funny," you say. "Why?"
+<<elseif $submissive lte 850>>
+	"What's so funny?" you ask.
+<<else>>
+	"Why are people looking at me funny?" you ask.
+<</if>>
+<br><br>
+
+The <<person2>><<person>> and <<person3>><<person>> look at each other, then the <<person2>><<person>> shows you <<his>> phone. A short clip plays. <span class="pink">Of you, getting gangbanged,</span> in what looks like Niki's studio.
+<br><br>
+
+You're aware of all the other students looking at their phones. How many of them are watching you?
+<br><br>
+
+<<link [[Walk away|Playground Footage Walk]]>><<status -20>><</link>><<llcool>>
+<br>
+<<if $promiscuity gte 75>>
+	<<link [[Own it|Playground Assault Footage Own]]>><</link>><<promiscuous5>>
+	<br>
+<</if>>
+
+
+:: Playground Nude Footage Own
+<<effects>>
+
+You snatch the phone away, and climb atop a nearby table. "Hey!" you shout. "Everyone!" Heads turn. Some look surprised or bemused, but others bear knowing looks.
+<br><br>
+
+"You wanna see me naked? You let the sentence hang a moment. "You can." You look down at the phone, and read the website address aloud.
+<<famemodel 20>>
+<<fameexhibitionism 20>>
+<<exhibitionism5>>
+
+You feel cathartic as you step down from the table.
+<<if $pain gte 20>>
+	Though you're still crying.
+<</if>>
+<br><br>
+
+<<endevent>>
+<<playground>>
+
+:: Playground Assault Footage Own
+<<effects>>
+
+You snatch the phone away, and climb atop a nearby table. "Hey!" you shout. "Everyone!" Heads turn. Some look surprised or bemused, but others bear knowing looks.
+<br><br>
+
+"You wanna see me getting fucked from all sides?" You let the sentence hang a moment. "You can." You look down at the phone, and read the website address aloud.
+<<famemodel 20>>
+<<famerape 20>>
+<<promiscuity5>>
+
+You feel cathartic as you step down from the table.
+<<if $pain gte 20>>
+	Though you're still crying.
+<</if>>
+<br><br>
+
+<<endevent>>
+<<playground>>
+
+
+:: Playground Footage Walk
+<<effects>>
+
+You try to ignore the sinking feeling in your chest as you walk away.
+<<if $pain gte 20>>
+	You can't help but cry.
+<<else>>
+	You feel like crying.
+<</if>>
+<br><br>
+
+<<endevent>>
+<<playground>>
+
+
+:: Events Panty Accept
+<<effects>>
+
+You nod. "Great!" the <<person>> says. "I'll wait behind the school during lunch break. Bring me as many as you can!"
+<br><br>
+
+<<set $panty_thief to 1>>
+<<saveNPC 0 "panty_thief">>
+<<endevent>>
+<<playground>>
+
+
+:: Events Panty Refuse
+<<effects>>
+
+You turn away. "Shit," the <<person>> says. "I'll be behind the school during lunch break if you change your mind."
+<br><br>
+<<set $panty_thief to 1>>
+<<saveNPC 0 "panty_thief">>
+<<endevent>>
+<<playground>>
+
+:: School Panty
+<<effects>>
+
+<<loadNPC 0 "panty_thief">><<person1>>
+
+You walk along the fence, searching for the underwear-obsessed <<person>>. You find <<him>> lurking in an adjacent alley, near some bins. <<He>> leans against the fence. "Got anything for me?"
+<br><br>
+
+<<if $panties_held gte 2>>
+	You have $panties_held pairs of stolen underwear.
+<<elseif $panties_held gte 1>>
+	You have a pair of stolen underwear.
+<<else>>
+	You aren't carrying any stolen underwear.
+<</if>>
+<br><br>
+
+<<if $panties_held gte 1>>
+	<<link [[Sell|School Panty Sell]]>><</link>>
+	(<span class="gold">£<<print ($panties_held * 10)>></span>)
+	<br>
+<</if>>
+
+<<link [[떠난다|School Rear Playground]]>><<endevent>><</link>>
+<br>
+
+
+:: School Panty Sell
+<<effects>>
+
+<<if $panties_held gte 100>>
+	It'll take too long to push all this underwear through the fence, so you hurl it over the top in bundles. The <<person>> faces up as the clothing rains on <<him>>, eyes shut in contentment.
+	<br><br>
+	"Thank you," <<he>> says. "Here."
+<<elseif $panties_held gte 20>>
+	It'll take too long to push all this underwear through the fence, so you hurl it over the top in bundles. The <<person>> catches most of them, but doesn't seem to mind picking the rest off the floor. "I'm in bliss," <<he>> says. "Here."
+<<elseif $panties_held gte 5>>
+	You push the underwear through the gap in the fence. The <<person>> puts one on <<his>> head, and gathers the rest in <<his>> arms. "A good haul," <<he>> says. "Here."
+<<elseif $panties_held gte 2>>
+	You push the underwear through the gap in the fence. The <<person>> gathers them in <<his>> arms. "Excellent. Here."
+<<else>>
+	You push the underwear through the gap in the fence. The <<person>> snatches and unfurls it. "Nice. Here."
+<</if>>
+<br><br>
+
+You've made <<moneyGain `$panties_held * 10`>>.
+<<set $panties_held to 0>>
+<br><br>
+
+"I'll be here during your lunch break if you get your hands on more."
+<br><br>
+
+<<link [[다음|School Rear Playground]]>><<endevent>><</link>>
+<br>

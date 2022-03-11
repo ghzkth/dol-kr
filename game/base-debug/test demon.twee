@@ -1,7 +1,7 @@
-:: Demon Start [nobr]
+:: Demon Start
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <!-- Generate Demon -->
-<<generateNPC 1 a f h 20>><<person1>>
+<<generateDemon 1>><<person1>>
 You investigate the noise coming from the school's hallway.
 
 Suddenly, with a HERMMMMM-POP a portal swirls open in front out you. From the portal <span class="blue">a <<person>> strides out,</span> <<his>> red eyes never leaving contact with yours.
@@ -28,7 +28,7 @@ You consider your options...
 <<link [[Stay and see what happens...|Demon Sex]]>><<set $sexstart to 1>><</link>>
 <br>
 
-:: Demon Sex [nobr]
+:: Demon Sex
 <<effects>><<person1>>
 <<if $sexstart is 1>>
 	<span class="pink">Prepare yourself, mortal.</span>
@@ -66,7 +66,7 @@ You consider your options...
 	<span id="next"><<link [[Next|Demon Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Demon Sex Finish [nobr]
+:: Demon Sex Finish
 <<schooleffects>><<effects>>
 <<unset $o>><<unset $ostart>><<unset $oindex>>
 <<person1>>
@@ -89,7 +89,7 @@ You consider your options...
 <</if>>
 
 :: Ejaculation Demon [widget]
-<<widget "ejaculation-demon">><<nobr>>
+<<widget "ejaculation-demon">>
 
 <<famesex 1>>
 
@@ -107,4 +107,4 @@ You pass out from exertion, completely spent, <span class="blue">while the <<per
 <br>
 <</if>>
 
-<</nobr>><</widget>>
+<</widget>>

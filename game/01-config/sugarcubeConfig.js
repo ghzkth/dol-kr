@@ -5,14 +5,15 @@ Config.history.maxStates = 1;
 State.prng.init()
 
 window.versionUpdateCheck = true;
-window.saveUpdateCheck = true;
+window.onLoadUpdateCheck = false;
 
 Config.saves.onLoad = function (save) {
-	window.versionUpdateCheck = true;
+	window.onLoadUpdateCheck = true;
 }
 
 Config.saves.onSave = function (save) {
 	new Wikifier(null, '<<updateFeats>>');
+	prepareSaveDetails();
 }
 
 /*LinkNumberify and images will enable or disable the feature completely*/
@@ -21,13 +22,17 @@ window.StartConfig = {
 	"debug": false,
 	"enableImages": true,
 	"enableLinkNumberify": true,
-	"version": "0.2.23.2",
+	"version": "0.3.7.4",
 }
+
+/* convert version string to numeric value */
+let tmpver = StartConfig.version.replace(/[^0-9.]+/g, "").split(".");
+window.StartConfig.version_numeric = tmpver[0]*1000000 + tmpver[1]*10000 + tmpver[2]*100 + tmpver[3]*1;
 
 config.saves.autosave = "autosave";
 
 Config.saves.isAllowed = function () {
-	if (tags().contains("nosave")) {
+	if (tags().includes("nosave")) {
 		return false;
 	}
 	return true;
@@ -44,6 +49,7 @@ importStyles("style.css")
 console.log("Game Version:", StartConfig.version);
 
 l10nStrings.errorTitle = StartConfig.version + " Error";
+
 
 /**
  * Not a configuration, but we are overriding a basic part of sugarcube
@@ -87,12 +93,14 @@ function widgetHandler(widgetName, contents) {
 	let argsCache;
 	trace('declaring fn', widgetName);
 	return function () {
+		DOL.Stack.push(widgetName);
 		const context = devOptions.invocationId
 			? `${State.passage}:${widgetName}:${uniqueInvocation++}`
 			: `${State.passage}:${widgetName}`;
 		trace('invoking', context);
 		vContext.push(context);
 		// Custom code
+		DOL.Perflog.logWidgetStart(widgetName);
 		const newFrame = {};
 		State.variables[VIRTUAL_CURRENT] = newFrame;
 		vStack.push(newFrame);
@@ -131,8 +139,8 @@ function widgetHandler(widgetName, contents) {
 			const resFrag = document.createDocumentFragment();
 			const errList = [];
 
-			// Wikify the widget contents.
-			new Wikifier(resFrag, contents);
+			// Wikify the widget contents. add nobr behavior -ng
+			new Wikifier(resFrag, contents.replace(/^\n+|\n+$/g, '').replace(/\n+/g, ' '));
 
 			// Carry over the output, unless there were errors.
 			Array.from(resFrag.querySelectorAll('.error')).forEach(errEl => {
@@ -144,14 +152,15 @@ function widgetHandler(widgetName, contents) {
 			}
 			else {
 				console.error(`Error rendering widget ${widgetName}`, errList);
-				return this.error(`error${errList.length > 1 ? 's' : ''} within widget contents (${errList.join('; ')})`);
+				return this.error(`${V.args.length > 0 ? '($args=[' + V.args.full + ']): ' : ''}error${errList.length > 1 ? 's' : ''} within widget contents (${errList.join('; ')})`);
 			}
 		}
 		catch (ex) {
-			console.error(`Error executing widget ${widgetName}`, ex); return this.error(`cannot execute widget: ${ex.message}`);
+			console.error(`Error executing widget ${widgetName} ${V.args.length > 0 ? 'with arguments "'+ V.args.full +'"' : ''}`, ex); return this.error(`cannot execute widget: ${ex.message}`);
 		}
 		finally {
 			// Custom code
+			DOL.Stack.pop();
 			vStack.pop();
 			vContext.pop();
 			State.variables[VIRTUAL_CURRENT] = priorFrame
@@ -168,6 +177,7 @@ function widgetHandler(widgetName, contents) {
 				// restore prior frame
 				Object.assign(State.variables, priorFrame)
 			}
+			DOL.Perflog.logWidgetEnd(widgetName);
 			// End custom code
 			if (typeof argsCache !== 'undefined') {
 				State.variables.args = argsCache;
@@ -217,17 +227,19 @@ Macro.add('widget', {
 		}
 	}
 });
+// delete parser that adds unneeded line breaks -ng
+Wikifier.Parser.delete("lineBreak");
 
-/* ToDo: imprement the dolls system, uncomment during and when its setup
+/* ToDo: implement the dolls system, uncomment during and when its setup
 importScripts([
-    "img/dolls/NameValueMaps.js",
-    "img/dolls/dollUpdater.js",
-    "img/dolls/dollLoader.js",
-    "img/dolls/DollHouse.js",
-    "img/dolls/FDoll.js",
+	"img/dolls/NameValueMaps.js",
+	"img/dolls/dollUpdater.js",
+	"img/dolls/dollLoader.js",
+	"img/dolls/DollHouse.js",
+	"img/dolls/FDoll.js",
 ]).then(function () {
-    console.log("Dolls scripts running");
+	console.log("Dolls scripts running");
 })
 .catch(function (err) {
-    console.log(err);
+	console.log(err);
 });*/
