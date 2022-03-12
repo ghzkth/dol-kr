@@ -3,9 +3,10 @@
 <br><br>
 = custom test widget =
 <br>
-	<<print "upper.nameindex[sundress]: " + setup.trClothes.upper.nameIndex["sundress"].name_ko>><br>
-	<<print "upper.varindex[pjs]: " + setup.trClothes.upper.varIndex["pjs"].name_ko>><br>
-	<<print "nameindex[sundress]: " + setup.trClothes.nameIndex["sundress"].name_ko>><br>
+	<<print "trClothes.upper.nameindex[sundress]: " + setup.trClothes.upper.nameIndex["sundress"].name_ko>><br>
+	<<print "trClothes.upper.varindex[pjs]: " + setup.trClothes.upper.varIndex["pjs"].name_ko>><br>
+	<<print "trClothes.nameindex[sundress]: " + setup.trClothes.nameIndex["sundress"].name_ko>><br>
+	<<print "trCreatures.nameindex[eel]: " + setup.trCreatures.nameIndex["eel"].koName>><br>
 
 <br><br>
 <</widget>>
