@@ -3,9 +3,9 @@
 <br><br>
 = custom test widget =
 <br>
-<<generate1>><<person1>>
-<<simpleHePost>>
-<<endevent>>
+	<<print "upper.nameindex[sundress]: " + setup.trClothes.upper.nameIndex["sundress"].name_ko>><br>
+	<<print "upper.varindex[pjs]: " + setup.trClothes.upper.varIndex["pjs"].name_ko>><br>
+	<<print "nameindex[sundress]: " + setup.trClothes.nameIndex["sundress"].name_ko>><br>
 
 <br><br>
 <</widget>>
