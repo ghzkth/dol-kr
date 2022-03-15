@@ -38,11 +38,13 @@ function trPost(postNum, post, sep)
 			else
 				T.trPost = post;
 		}
-		else
+		else if (typeof(postNum) === "string")
 		{
 			getPostNum(T.trResult);
-			T.trPost = trPostsList[post][T.postNum];
+			T.trPost = trPostsList[postNum][T.postNum];
 		}
+		else
+			delete T.trPost;
 		
 		if (!T.trPost)
 			T.trPost = "<span class='red'>에러: trPost: postNum= "+ postNum + ", post= " + post + ", sep = " + sep + "</span>";		
