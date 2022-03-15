@@ -1,7 +1,7 @@
 :: Widgets trinit[widget nobr]
 <<widget "trinit_namedNPC">>
-    <<if _namedNPCList is undefined>>
-        <<set _namedNPCList to [
+    <<if setup.trNamedNPCList is undefined>>
+        <<set setup.trNamedNPCList to [
             {
                 name:"pc",
                 title:"player",
@@ -281,6 +281,28 @@
                 titlepost:1
             },
         ]>>
+		<<set $_trNameIndex to {}>>
+		<<set $_trTitleIndex to {}>>
+		<<set $_temp to {}>>
+		<<for $_i, $_entry range setup.trNamedNPCList>>
+			<<set $_temp.koname to $_entry.koname>>
+			<<set $_temp.post to $_entry.post>>
+			<<set $_trNameIndex[$_entry.name] to clone($_temp)>>
+			<<if Array.isArray($_entry.title)>>
+				<<set $_length to $_entry.title.length>>
+				<<for $_j to 0; $_j lt $_length; $_j++>>
+					<<set $_temp.koname to $_entry.kotitle[$_j]>>
+					<<set $_temp.post to $_entry.titlepost[$_j]>>
+					<<set $_trTitleIndex[$_entry.title[$_j]] to clone($_temp)>>
+				<</for>>
+			<<else>>
+					<<set $_temp.koname to $_entry.kotitle>>
+					<<set $_temp.post to $_entry.titlepost>>
+					<<set $_trTitleIndex[$_entry.title] to clone($_temp)>>			
+			<</if>>
+		<</for>>
+		<<set setup.trNamedNPCList.nameIndex to $_trNameIndex>>
+		<<set setup.trNamedNPCList.titleIndex to $_trTitleIndex>>
     <</if>>
 <</widget>>
 

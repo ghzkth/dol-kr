@@ -11,7 +11,7 @@
     <<if typeof $args[0] is "string">>
         <<set _tempArray to $args[0].split(' ')>>
 			/* namedNPC? */
-			<<if _namedNPCList.find(function(select){
+			<<if setup.trNamedNPCList.find(function(select){
 				if(select.name  == $args[0]){
 					return true;
 				} else if (Array.isArray(select.title)){
@@ -96,7 +96,7 @@
 	<<set $_found to _trNPCnameList[$_name]>>
 	<<if $_found is undefined>>
 		<<trinit_namedNPC>>
-		<<set $_found to _namedNPCList.find(function(select){
+		<<set $_found to setup.trNamedNPCList.find(function(select){
 			if(select.name == $_name){
 				return true;
 			}
