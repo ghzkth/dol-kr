@@ -9,7 +9,7 @@
 
     <<if _trTemp[1] isnot undefined>>
         <<set _trResult to _koPre[_trTemp[0]]>>
-        <<set _trTemp1 to _koBodyparts.find(function(select){
+        <<set _trTemp1 to setup.trBodypartsList.find(function(select){
                     if(select.part == _trTemp[1] or select.plural == _trTemp[1]){return true;
                     }})>>
         <<if _trTemp1 isnot undefined>>
@@ -19,7 +19,7 @@
             <<set _trResult to "BodypartSelectionErr: "+$args[0]>>
         <</if>>
     <<else>>
-        <<set _trTemp1 to _koBodyparts.find(function(select){
+        <<set _trTemp1 to setup.trBodypartsList.find(function(select){
                     if(select.part == _LowerCase or select.plural == _LowerCase){return true;
                     }})>>
         <<if _trTemp1 isnot undefined>>

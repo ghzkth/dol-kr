@@ -479,7 +479,7 @@
 	<<if $args[0] is undefined>>
 		<<set _trResult to "Err: handtoolPost: no toolname">>
 	<<else>>
-		<<set _tool to _handtoolList[$args[0]]>>
+		<<set _tool to setup.trHandtoolList[$args[0]]>>
 		<<if _tool is undefined>>
 			<<set _trResult to $args[0]>>
 		<<else>>

@@ -307,8 +307,8 @@
 <</widget>>
 
 <<widget "trinit_NPCname">>
-	<<if _trNPCnameList is undefined>>
-		<<set _trNPCnameList to {
+	<<if setup.trNPCnameList is undefined>>
+		<<set setup.trNPCnameList to {
 			/* normal name */
 			"Olivia": {koname: "올리비아", post: 1},
 			"Amelia": {koname: "아멜리아", post: 1},
@@ -719,8 +719,8 @@
 <</widget>>
 
 <<widget "trinit_genderNoun">>
-    <<if _genderList is undefined>>
-        <<set _genderList to {
+    <<if setup.trGenderList is undefined>>
+        <<set setup.trGenderList to {
             "girl":{
                 ko:"소녀",
                 post:1
@@ -775,8 +775,8 @@
 <</widget>>
 
 <<widget "trinit_beastsList">>
-    <<if _beasttypeList is undefined>>
-        <<set _beasttypeList to {
+    <<if setup.trBeasttypeList is undefined>>
+        <<set setup.trBeasttypeList to {
             "human":{
                 ko: "인간",
                 post:0
@@ -876,8 +876,8 @@
 <</widget>>
 
 <<widget "trinit_bodypartList">>
-    <<if _koBodyparts is undefined>>
-        <<set _koBodyparts to [
+    <<if setup.trBodypartsList is undefined>>
+        <<set setup.trBodypartsList to [
             {part:"bottom",koPart:"엉덩이",post:1},
             {part:"penis",koPart:"자지",post:1},
             {part:"clit",koPart:"클리토리스",post:1},
@@ -917,8 +917,8 @@
 <</widget>>
 
 <<widget "trinit_handtoolList">>
-	<<if _handtoolList is undefined>>
-		<<set _handtoolList to {
+	<<if setup.trHandtoolList is undefined>>
+		<<set setup.trHandtoolList to {
 			"marker" : {
 				ko: "마커펜",
 				post: 0
@@ -950,8 +950,8 @@
 <</widget>>
 
 <<widget "trinit_clothingtraitList">>
-	<<if _clothingtraitList is undefined>>
-		<<set _clothingtraitList to {
+	<<if setup.trClothingtraitList is undefined>>
+		<<set setup.trClothingtraitList to {
 			"normal":"일반",
 			"formal":"격식",
 			"school":"학교",
@@ -1001,8 +1001,8 @@
 <</widget>>
 
 <<widget "trinit_roleList">>
-	<<if _trRoleList is undefined>>
-		<<set _trRoleList to  {
+	<<if setup.trRoleList is undefined>>
+		<<set setup.trRoleList to  {
 			"normal":{ko : "일반인", post : 0}, 
 
 			/* town */
