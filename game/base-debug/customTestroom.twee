@@ -3,10 +3,16 @@
 <br><br>
 = custom test widget =
 <br>
-/*<<trinit_namedNPC>>*/
 Avery : <<trNamedNPC "Avery" "name" "은">>_trResult<br>
 monk : <<trNamedNPC "monk" "title" "은">>_trResult<br>
 unknown : <<trNamedNPC "unknown" "name" "은">>_trResult<br>
+nipple: <<trBreastsdesc "nipple" "은">>_trResult<br>
+enormous breasts: <<trBreastsdesc "enormous breasts" "은">>_trResult<br>
+use_me: <<trBodyWriting "use_me" "이라고">>_trResult<br>
+Use me: <<trBodyWriting "Use me" "이라고">>_trResult<br>
+
+left arm: <<trBodypart "left arm" "이라고">>_trResult<br>
+right hands: <<trBodypart "right hands" "이라고">>_trResult<br>
 <br><br>
 <</widget>>
 

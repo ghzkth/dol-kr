@@ -8,7 +8,7 @@
 	<<trinit_roleList>>
 
     <<unset _trResult>>
-	<<if Array.isArray($args[0]>>
+	<<if Array.isArray($args[0])>>
 		<<set $_name to $args[0][0]>>
 	<<elseif typeof $args[0] is "string">>
 		<<set $_name to $args[0]>>
