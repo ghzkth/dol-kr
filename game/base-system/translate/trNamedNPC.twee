@@ -1,6 +1,8 @@
 :: Widgets trNamedNPC [widget nobr]
 <<widget "trNamedNPC">><<silently>>
-    <<trinit_namedNPC>>
+	<<if setup.trNamedNPCList is undefined>>
+		<<trinit_namedNPC>>
+	<</if>>
     <<if $args[0] and (typeof $args[0] isnot "string")>>
 		<<set $_name to $args[0][0]>> /% NAMED-NPC:<<print $npc[0]>> %/
 	<<else>>

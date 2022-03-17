@@ -43,7 +43,9 @@
 		<<set $_mode to $args[2]>><<set $_post to $args[3]>><<set $_sep to $args[4]>>
 	<</if>>
 
-	<<trClothes_init>>
+	<<if setup.trClothes is undefined>>
+		<<trClothes_init>>
+	<</if>>
 	<<if $_name eq "piece of fabric">>
 		<<set $_trTemp to {name_ko:"옷 조각", post:0, description:"옷 조각"}>>
 	<<elseif setup.trClothes[$_part] isnot undefined>>
@@ -84,7 +86,9 @@
 	<<if $_name eq "piece of fabric">>
 		<<set $_trTemp to {name_ko:"옷 조각", post:0, description:"옷 조각"}>>
 	<<else>>
-		<<trClothes_init>>
+		<<if setup.trClothes is undefined>>
+			<<trClothes_init>>
+		<</if>>
 		
 		<<set $_trTemp to setup.trClothes.nameIndex[$_name]>>
 		<<set _trClothesIndexTemp to Object.getOwnPropertyNames(setup.trClothes)>>
@@ -118,7 +122,9 @@
 		<</if>>
 
 		<<if $_clothesName isnot undefined>>
-			<<init_trNpcClothes>>
+			<<if setup.trNpcClothes is undefined>>
+				<<init_trNpcClothes>>
+			<</if>>
 			
 			<<if $_clothesType isnot "all">>
 				<<set $_found to setup.trNpcClothes[$_clothesType].nameIndex[$_clothesName]>>

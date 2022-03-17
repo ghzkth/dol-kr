@@ -1,11 +1,21 @@
 :: Widgets trNPCdesc [widget nobr]
 <<widget "trNPCdesc">><<silently>>
-    <<trinit_NPCdescAdj>>
-    <<trinit_namedNPC>>
-    <<trinit_beastsList>>
-	<<trinit_beastAdjList>>
-	<<trinit_genderNoun>>
-	<<trinit_roleList>>
+	<<if setup.trNamedNPCList is undefined>>
+		<<trinit_namedNPC>>
+	<</if>>
+	<<if setup.trBeasttypeList is undefined>>
+		<<trinit_beastsList>>
+		<<trinit_beastAdjList>>
+	<</if>>
+	<<if setup.trNPCdescAdjList is undefined>>
+		<<trinit_NPCdescAdj>>
+	<</if>>
+	<<if setup.trGenderList is undefined>>
+		<<trinit_genderNoun>>
+	<</if>>
+	<<if setup.trRoleList is undefined>>
+		<<trinit_roleList>>
+	<</if>>
 
     <<unset _trResult>>
 	<<if Array.isArray($args[0])>>
@@ -91,13 +101,20 @@
 		<<set $_name to $args[0][0]>>
 	<</if>>
 	
-	<<trinit_NPCname>> /* 대신 trNPCdesc에 맡겨버릴까? */
+	<<if setup.trNPCnameList is undefined>>
+		<<trinit_NPCname>> /* 대신 trNPCdesc에 맡겨버릴까? */
+	<</if>>
 	<<set $_found to setup.trNPCnameList[$_name]>>
 	<<if $_found is undefined>>
+		<<if setup.trNamedNPCList is undefined>>
+			<<trinit_namedNPC>>
+		<</if>>
 		<<trNamedNPCInner $_name>>
-		<<set $_found to {}>>
-		<<set $_found.koname to _trResult>>
-		<<set $_found.post to _postNum>>
+		<<if _trResult isnot undefined>>
+			<<set $_found to {}>>
+			<<set $_found.koname to _trResult>>
+			<<set $_found.post to _postNum>>
+		<</if>>
 	<</if>>
 	<<if $_found is undefined>> /* 대신 trNPCdesc에 맡겨버릴까? */
 		<<set $_found to {}>>

@@ -28,7 +28,9 @@
 		<<set $_foundArray to []>>
 		
 		<<if $_creatureName isnot undefined>>
-			<<trinit_creature>>
+			<<if setup.trCreatures is undefined>>
+				<<trinit_creature>>
+			<</if>>
 			<<set $_creatureNameArray to $_creatureName.toLowerCase().split(" ")>>
 			
 			<<for $_i, $_value range $_creatureNameArray>>

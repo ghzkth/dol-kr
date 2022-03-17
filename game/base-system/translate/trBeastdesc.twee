@@ -1,8 +1,12 @@
 :: Widgets trBeastdesc [widget nobr]
 <<widget "trBeastdesc">><<silently>>
-    <<trinit_beastsList>>
-    <<trinit_beastAdjList>>
-    <<trinit_genderNoun>>
+	<<if setup.trBeasttypeList is undefined>>
+		<<trinit_beastsList>>
+		<<trinit_beastAdjList>>
+	<</if>>
+	<<if setup.trGenderList is undefined>>
+		<<trinit_genderNoun>>
+	<</if>>
 
 	<<set _trResult to "">>
 	<<unset _postNum>>

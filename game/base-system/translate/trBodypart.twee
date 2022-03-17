@@ -32,12 +32,14 @@
 
 <<widget "trBodysize">><<silently>>
 	<<if $args[0] is defined>>
-		<<set _trBodysize to {
-			"tiny":"조그마함",
-			"small":"작음",
-			"normal":"평범함",
-			"large":"큼",
-		}>>
+		<<if _trBodysize is undefined>>
+			<<set _trBodysize to {
+				"tiny":"조그마함",
+				"small":"작음",
+				"normal":"평범함",
+				"large":"큼",
+			}>>
+		<</if>>
 		<<set _trResult to _trBodysize[$args[0]]>>
 		<<if _trResult is undefined>>
 			<<set _trResult to "trBodysize에 지정되지 않음: " + $args[0]>>

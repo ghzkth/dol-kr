@@ -12,7 +12,8 @@
     <</if>>
 
     <<if setup.trBeasttypeList is undefined>>
-        <<trinit_beastsList>>
+		<<trinit_beastsList>>
+		<<trinit_beastAdjList>>
     <</if>>
 
     <<if setup.trBeasttypeList[_trType] is undefined>>

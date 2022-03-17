@@ -16,7 +16,9 @@
 	<<set $_tempArray to $args[0].split(" ")>>
 	<<if $_tempArray.length eq 1>>
 		/* struggle monster? */
-		<<trinit_creature>>
+		<<if setup.trCreatures is undefined>>
+			<<trinit_creature>>
+		<</if>>
 		<<set $_value to $args[0]>>
 
 		<<set $_found to setup.trCreatures.struggle.nameIndex[$_value]>>
@@ -46,7 +48,9 @@
 			<<set _trResult to $_abominationName + "의 " + $_tentacleName>>
 		<<else>>
 			/* tentacle? */
-			<<trinit_creature>>
+			<<if setup.trCreatures is undefined>>
+				<<trinit_creature>>
+			<</if>>
 			<<set $_value to $_tempArray[$_tempArray.length -1]>>
 
 			<<set $_found to setup.trCreatures.tentacle.nameIndex[$_value]>>
@@ -65,7 +69,9 @@
 
 <<widget "trVirginity">><<silently>>
 	<<if (typeof $args[0] === 'string')>>
-		<<trinit_trVirginitySpecial>>
+		<<if _trVirginitySpecialList is undefined>>
+			<<trinit_trVirginitySpecial>>
+		<</if>>
 		<<set $_found to _trVirginitySpecialList[$args[0]]>>
 		<<if $_found isnot undefined>>
 			<<set _trResult to $_found.koname>>

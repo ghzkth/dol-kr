@@ -475,7 +475,9 @@
 
 /* <<handtoolPost toolname post sep>> */
 <<widget "handtoolPost">><<silently>>
-	<<trinit_handtoolList>>
+	<<if setup.trHandtoolList is undefined>>
+		<<trinit_handtoolList>>
+	<</if>>
 	<<if $args[0] is undefined>>
 		<<set _trResult to "Err: handtoolPost: no toolname">>
 	<<else>>

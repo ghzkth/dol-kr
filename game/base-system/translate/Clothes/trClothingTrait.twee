@@ -1,7 +1,9 @@
 :: Widgets trClothingTrait [widget nobr]
 
 <<widget "trClothingTrait">><<silently>>
-    <<trinit_clothingtraitList>>
+	<<if setup.trClothingtraitList is undefined>>
+		<<trinit_clothingtraitList>>
+	<</if>>
 	<<set _trResult to setup.trClothingtraitList[$args[0]]>>
 	
 	<<if _trResult is undefined>>
