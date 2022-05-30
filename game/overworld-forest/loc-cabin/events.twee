@@ -480,24 +480,23 @@ You rest your arms on <<his>> knees and open <<his>> fly, giving you a peek of <
 /* eden is already generated on passages that lead here
 <<npc Eden>><<person1>>*/
 
-Deciding to make some lunch for Eden, you whip up
+배고플 에덴을 생각한 당신은 식사 준비를 서두릅니다
 
 	<<if $rng gte 81>>
-	a fruit salad topped with berries.
+	베리를 얹은 과일 샐러드.
 	<<elseif $rng gte 61>>
-	an egg frittata.
+	계란 프리타타
 	<<elseif $rng gte 41>>
-	some braised rabbit with a side of berries.
+	베리를 곁들인 토끼찜.
 	<<elseif $rng gte 21>>
-	a venison steak.
+	사슴고기 스테이크.
 	<<else>>
-	some roasted carrots.
+	구운 당근 몇 개.
 	<</if>>
 <br><br>
-You walk outside to see Eden skinning <<his>> catch. <<He>> seems engrossed in <<his>> work, until you tap <<him>> on the shoulder and pass <<him>> the food.
+밖으로 나오자 당신은 가죽을 벗기고 있는 에덴을 봅니다 그는 당신이 어꺠를 두드려 음식을 건네줄 때까지 자기일에 몰두한것 같습니다
 <br><br>
-<<He>> looks surprised when you do, but smiles at you in gratitude and kisses your forehead.
-<br><br>
+<<He_nun>>  당신이 준비한 점심식사에 놀란듯한 표정을 짓지만 감사한 마음에 미소를 지으며 당신의 이마에 키스를 합니다.
 <<link [[Next|Eden Cabin]]>><<endevent>><</link>>
 <br>
 
@@ -2462,33 +2461,33 @@ Eden pulls away from you, before raising <<his>> eyebrows and shooting you an in
 
 <<strip>>
 
-Sunlight shimmers on the water as leaves float down, resting gently on the surface. Reaching the edge of the spring, you undress and store your clothes away, ready to slip into the cool water.
+햇빛은 나뭇잎들이 수면 위에서 부드럽게 쉬면서 떠내려갈 때 물 위에서 반짝거립니다. 샘의 가장자리에 다다르면, 당신은 옷을 벗고 시원한 물 속으로 미끄러질 준비를 하면서 옷을 보관합니다.
 <br><br>
 
-A sound from behind catches your attention. Turning around, your eyes are drawn to Eden. <<Hes>>
+뒤에서 들려오는 소리가 시선을 사로잡는다. 뒤돌아보면, 당신의 눈은 에덴에게로 쏠린다. <<He_nun>>
 
 <<if $hour gte 9 and $hour lte 10>>
-	tending to the crops,
+	에덴은 농작물을 손질하고 있다,
 <<elseif $hour is 15>>
-	skinning <<his>> prey,
+	에덴은 사냥감의 가죽을 벗기고있다,
 <<elseif $hour is 16>>
-	chopping firewood,
+	에덴은 장작을 패고 있다,
 <</if>>
 
-a sheen of sweat lining <<his>> neck. Though <<he>> looks quite focused, you can't help but notice that <<he>> seems a little tired today. Maybe a short break would help?
+목덜미에 땀방울이 송글송글 맺힌 <<He_nun>> 꽤 몰두해있는듯 합니다만 당신은 오늘은 그가 약간 피곤해보인다는 사실을 알아차립니다 잠깐 쉬는게 좋지않을까요?
 <br><br>
 
-<<link [[Ask Eden to join you|Eden Spring Intro 2]]>><<set $edenspringintro to 1>><</link>>
+<<link [[에덴에게 같이 들어가자고 제안한다|Eden Spring Intro 2]]>><<set $edenspringintro to 1>><</link>>
 <br>
-<<link [["Let " + $NPCList[0].pronouns.him + " work"|Clearing Spring]]>><<endevent>><<set $phase to 1>><</link>>
+<<link [[ $NPCList[0].pronouns.him + " 일하게 내비두자"|Clearing Spring]]>><<endevent>><<set $phase to 1>><</link>>
 
 :: Eden Spring Intro 2
 <<effects>>
 
 <<wash>>
 
-You wave your hand in the air, calling for Eden. <<He>> turns <<his>> head to you, a questioning look in <<his>> eyes. Over the distance, you ask if <<he>>'d like to join you in the spring.
-For a second, <<his>> eyes dart down to 
+당신은 위로 손을 흔들며 에덴을 부른다. <<He_nun>> 당신에게 고개를 돌리며 의아한 표정을 짓는다. 저멀리 당신은 연못에 같이 들어가고 싶은지 묻는다.
+For a second, his eyes dart down
 
 <<if $hour gte 9 and $hour lte 10>>
 	the crops,
